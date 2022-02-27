@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e8b6d6f46e45a46a7f879dd8b16127, type: 3}
+  m_Name: Blitz
+  m_EditorClassIdentifier: 
+  name: Blitz
+  health: 100
+  character: {fileID: 0}
+  iconCharacter: {fileID: 0}
+  iconPrimary: {fileID: 0}
+  iconSecondary: {fileID: 0}
+  iconUltimate: {fileID: 0}
