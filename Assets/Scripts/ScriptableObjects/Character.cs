@@ -6,27 +6,21 @@ using UnityEngine;
 public class Character : ScriptableObject
 {
 
-    public new string name;
-    public string health;
+    public string characterName;
+    public int speed;
+    public int health;
 
     public GameObject character;
 
-    public Sprite iconCharacter;
-    public Sprite iconPrimary;
-    public Sprite iconSecondary;
-    public Sprite iconUltimate;
+    public Sprite characterIcon;
 
-    
+    public string primaryName;
+    public Sprite primaryIcon;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string secondaryName;
+    public Sprite secondaryIcon;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string ultimateName;
+    public Sprite ultimateIcon;
+
 }

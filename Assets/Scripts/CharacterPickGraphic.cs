@@ -6,21 +6,41 @@ using UnityEngine.UI;
 
 public class CharacterPickGraphic : MonoBehaviour
 {
-    public Character character;
+    public Character pickedCharacter;
 
-    public TextMeshProUGUI nameCharacter;
-    public Image iconCharacter;
+    private Toggle toggle;
+    public TextMeshProUGUI characterName;
+    public Image characterIcon;
 
 
     void Start()
     {
-        nameCharacter.text = character.name;
-        iconCharacter.sprite = character.iconCharacter;
+        toggle = gameObject.GetComponent<Toggle>();
+        if (toggle.isOn)
+        {
+            GlobalVariables.selectedCharacter = pickedCharacter;
+        }
+
+        if (pickedCharacter)
+        {
+            characterName.text = pickedCharacter.characterName;
+            characterIcon.sprite = pickedCharacter.characterIcon;
+        }
+
     }
 
     void Update()
     {
         
 
+    }
+
+    public void changeToCharacter()
+    {
+        Debug.Log(GlobalVariables.selectedCharacter );
+        if (toggle.isOn)
+        {
+            GlobalVariables.selectedCharacter = pickedCharacter;
+        }
     }
 }

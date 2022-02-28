@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e8b6d6f46e45a46a7f879dd8b16127, type: 3}
   m_Name: Blitz
   m_EditorClassIdentifier: 
-  name: Blitz
+  characterName: Blitz
+  speed: 100
   health: 100
-  character: {fileID: 0}
-  iconCharacter: {fileID: 0}
-  iconPrimary: {fileID: 0}
-  iconSecondary: {fileID: 0}
-  iconUltimate: {fileID: 0}
+  character: {fileID: 919132149155446097, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
+  characterIcon: {fileID: 21300000, guid: 7bbbdc7b9f08f5d4faebf1a8f2b4ad89, type: 3}
+  primaryName: Coil Bolts
+  primaryIcon: {fileID: 0}
+  secondaryName: Volt Blast
+  secondaryIcon: {fileID: 0}
+  ultimateName: Railgun
+  ultimateIcon: {fileID: 0}

@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e8b6d6f46e45a46a7f879dd8b16127, type: 3}
   m_Name: Flare
   m_EditorClassIdentifier: 
-  name: Flare
+  characterName: Flare
+  speed: 110
   health: 90
   character: {fileID: 919132149155446097, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
-  iconCharacter: {fileID: 21300000, guid: 527593f071b594744a4652a1b790c904, type: 3}
-  iconPrimary: {fileID: 21300000, guid: 7c9baa146e0339b43a7f1d1a0d7298ce, type: 3}
-  iconSecondary: {fileID: 21300000, guid: 69179853a2d12804491c40e491488a25, type: 3}
-  iconUltimate: {fileID: 21300000, guid: fb7366ffc14671a439c2313987959809, type: 3}
+  characterIcon: {fileID: 21300000, guid: 527593f071b594744a4652a1b790c904, type: 3}
+  primaryName: Flamethrower
+  primaryIcon: {fileID: 21300000, guid: 7c9baa146e0339b43a7f1d1a0d7298ce, type: 3}
+  secondaryName: Fire Bomb
+  secondaryIcon: {fileID: 21300000, guid: 69179853a2d12804491c40e491488a25, type: 3}
+  ultimateName: Napalm
+  ultimateIcon: {fileID: 21300000, guid: fb7366ffc14671a439c2313987959809, type: 3}
