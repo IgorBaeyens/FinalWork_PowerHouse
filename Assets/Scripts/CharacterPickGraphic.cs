@@ -41,6 +41,7 @@ public class CharacterPickGraphic : MonoBehaviour
         if (toggle.isOn)
         {
             GlobalVariables.selectedCharacter = pickedCharacter;
+            
         }
     }
 }

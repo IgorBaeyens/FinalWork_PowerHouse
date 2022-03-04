@@ -4,7 +4,11 @@ using UnityEngine.UI;
 
 public class AbilityGraphic : MonoBehaviour
 {
-    
+    Character selectedCharacter;
+
+    private string primaryDescriptionComplete;
+    private string secondaryDescriptionComplete;
+    private string ultimateDescriptionComplete;
 
     public string chosenAbilityType;
     private string[] abilityTypes = { "primary", "secondary", "ultimate" };
@@ -12,28 +16,17 @@ public class AbilityGraphic : MonoBehaviour
     public TextMeshProUGUI abilityName;
     public Image abilityIcon;
 
-    //public TextMeshProUGUI primaryName;
-    //public Image iconPrimary;
-    //public Image iconKeyPrimary;
-
-    //public TextMeshProUGUI secondaryName;
-    //public Image iconSecondary;
-    //public Image iconKeySecondary;
-
-    //public TextMeshProUGUI ultimateName;
-    //public Image iconUltimate;
-    //public Image iconKeyUltimate;
-
-
-    void Start()
+    private void Start()
     {
-
+        selectedCharacter = GlobalVariables.selectedCharacter;
+        primaryDescriptionComplete = selectedCharacter.primaryDescription.Replace("(damage)", selectedCharacter.primaryDamage.ToString());
+        secondaryDescriptionComplete = selectedCharacter.primaryDescription.Replace("(damage)", selectedCharacter.primaryDamage.ToString());
+        //completeDescription(primaryDescriptionComplete, selectedCharacter.primaryDescription, "(damage)", selectedCharacter.primaryDamage.ToString());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        Character selectedCharacter = GlobalVariables.selectedCharacter;
+        selectedCharacter = GlobalVariables.selectedCharacter;
         if (abilityTypes[0] == chosenAbilityType)
         {
             abilityName.text = selectedCharacter.primaryName;
@@ -50,9 +43,11 @@ public class AbilityGraphic : MonoBehaviour
             abilityIcon.sprite = selectedCharacter.ultimateIcon;
         }
 
-
+        Debug.Log(primaryDescriptionComplete);
     }
 
-
-
+    //void completeDescription(string descriptionComplete, string description, string willBeReplaced, string willReplace)
+    //{
+    //    descriptionComplete = description.Replace(willBeReplaced, willReplace);
+    //}
 }
