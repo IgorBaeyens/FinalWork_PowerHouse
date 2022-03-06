@@ -6,9 +6,16 @@ public class GlobalVariables : MonoBehaviour
 {
     public static Character selectedCharacter;
 
-    public static void Flamethrower()
-    {
-        Debug.Log("the flamethrower is fired");
-    }
+    //void Update()
+    //{
+        
+    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    RaycastHit hitData;
+    //    if(Physics.Raycast(ray, out hitData))
+    //    {
+    //        Debug.Log(hitData);
+    //    }
+    //    Debug.DrawRay(ray.origin, ray.direction * 10);
+    //}
 
 }

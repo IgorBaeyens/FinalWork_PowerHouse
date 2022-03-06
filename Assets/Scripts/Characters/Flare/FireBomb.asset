@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376ea6c04d0f41443ade59cd862bfd0e, type: 3}
+  m_Name: FireBomb
+  m_EditorClassIdentifier: 
+  type: 1
+  name: Fire Bomb
+  icon: {fileID: 21300000, guid: 69179853a2d12804491c40e491488a25, type: 3}
+  damage: 60
+  overtimeDamage: 0
+  description: Flare throws a fiery projectile towards the enemy. Upon landing the
+    projectile explodes for (damage)
+  updatedDescription: Flare throws a fiery projectile towards the enemy. Upon landing
+    the projectile explodes for 60

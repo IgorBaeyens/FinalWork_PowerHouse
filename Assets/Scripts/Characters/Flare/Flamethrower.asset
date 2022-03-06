@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0029f49588c37b24abfd3e1eba3a2325, type: 3}
+  m_Name: Flamethrower
+  m_EditorClassIdentifier: 
+  type: 0
+  name: Flamethrower
+  icon: {fileID: 21300000, guid: 7c9baa146e0339b43a7f1d1a0d7298ce, type: 3}
+  damage: 7
+  overtimeDamage: 0
+  description: Flare unleashes a torrent of flames dealing (damage) every 0.75 seconds
+  updatedDescription: Flare unleashes a torrent of flames dealing 7 every 0.75 seconds

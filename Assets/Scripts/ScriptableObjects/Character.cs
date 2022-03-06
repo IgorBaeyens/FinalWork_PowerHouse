@@ -7,35 +7,15 @@ using UnityEngine;
 public class Character : ScriptableObject
 {
 
-    public string characterName;
+    public new string name;
     public int speed;
     public int health;
 
-    public GameObject character;
+    public GameObject model;
+    public Sprite icon;
 
-    public Sprite characterIcon;
-
-    public string primaryName;
-    public Sprite primaryIcon;
-    public int primaryDamage;
-    [TextArea(3, 10)]
-    public string primaryDescription;
-    
     public Ability primary;
-
-    public string secondaryName;
-    public Sprite secondaryIcon;
-    public int secondaryDamage;
-    [TextArea(3, 10)]
-    public string secondaryDescription;
     public Ability secondary;
-
-    public string ultimateName;
-    public Sprite ultimateIcon;
-    public int ultimateDamage;
-    public int ultimateDamageOvertime;
-    [TextArea(3, 10)]
-    public string ultimateDescription;
     public Ability ultimate;
 
 }

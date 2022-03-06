@@ -12,10 +12,12 @@ public class Ability : ScriptableObject
     public Sprite icon;
     public int damage;
     public int overtimeDamage;
-    [TextArea(3, 10)]
+    [TextArea(5, 10)]
     public string description;
-    //public delegate void CastAbility();
-    //CastAbility castAbility;
-    public virtual void CastAbility() { }
+    [TextArea(5, 10)]
+    public string updatedDescription;
 
+
+    public virtual void CastAbility() { }
+    
 }
