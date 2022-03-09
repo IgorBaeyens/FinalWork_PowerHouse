@@ -4,15 +4,18 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
+//GRAPHIC RAYCASTER
+//https://docs.unity3d.com/2017.3/Documentation/ScriptReference/UI.GraphicRaycaster.Raycast.html
+
 public class MenuNavigation : MonoBehaviour
 {
     public GameObject startScreen;
     public GameObject mainScreen;
     public GameObject characterSelectScreen;
 
-    GraphicRaycaster raycaster;
-    PointerEventData pointerEventData;
-    EventSystem eventSystem;
+    private  GraphicRaycaster raycaster;
+    private PointerEventData pointerEventData;
+    private EventSystem eventSystem;
 
     private bool clicked = false;
 
@@ -20,7 +23,7 @@ public class MenuNavigation : MonoBehaviour
     {
         raycaster = gameObject.GetComponent<GraphicRaycaster>();
         eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-
+        
         startScreen.SetActive(true);
         mainScreen.SetActive(false);
         characterSelectScreen.SetActive(false);
@@ -28,24 +31,32 @@ public class MenuNavigation : MonoBehaviour
 
     void Update()
     {
+        pointerEventData = new PointerEventData(eventSystem);
+        pointerEventData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        raycaster.Raycast(pointerEventData, results);
+
+        
+
+        foreach (RaycastResult result in results)
+        {
+            
+            GlobalVariables.hoveredElement = result.gameObject;
+            
+        }
+        if (results.Count == 0)
+            GlobalVariables.hoveredElement = null;
+
         if (Input.GetMouseButtonDown(0))
             clicked = true;
-        clicked = false;
+        else
+            clicked = false;
 
         if(clicked)
         {
-            pointerEventData = new PointerEventData(eventSystem);
-            pointerEventData.position = Input.mousePosition;
-
-            List<RaycastResult> results = new List<RaycastResult>();
-
-            raycaster.Raycast(pointerEventData, results);
-
-            foreach (RaycastResult result in results)
-            {
-                Debug.Log("Hit " + result.gameObject.name);
-
-            }
+            
             //Debug.DrawRay(pointerEventData.position, transform.TransformDirection(Vector3.forward) * 10);
         }
         
