@@ -4,16 +4,20 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
+//This script is used for navigating through the different menus stored in the Canvas object
+
 //GRAPHIC RAYCASTER
 //https://docs.unity3d.com/2017.3/Documentation/ScriptReference/UI.GraphicRaycaster.Raycast.html
 
 public class MenuNavigation : MonoBehaviour
 {
-    public GameObject startScreen;
-    public GameObject mainScreen;
-    public GameObject characterSelectScreen;
+    List<GameObject> menus = new List<GameObject>();
 
-    private  GraphicRaycaster raycaster;
+    public GameObject startMenu;
+    public GameObject mainMenu;
+    public GameObject characterSelectMenu;
+
+    private GraphicRaycaster raycaster;
     private PointerEventData pointerEventData;
     private EventSystem eventSystem;
 
@@ -24,30 +28,41 @@ public class MenuNavigation : MonoBehaviour
         raycaster = gameObject.GetComponent<GraphicRaycaster>();
         eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         
-        startScreen.SetActive(true);
-        mainScreen.SetActive(false);
-        characterSelectScreen.SetActive(false);
+        //gets only the first generation children
+        foreach(Transform child in gameObject.transform)
+        {
+            menus.Add(child.gameObject);
+        }
+
+        foreach (GameObject menu in menus)
+        {
+            if (menu.name == "---Start Menu---")
+                menu.SetActive(true);
+            else
+                menu.SetActive(false);
+        }
+
+        //startMenu.SetActive(true);
+        //mainMenu.SetActive(false);
+        //characterSelectMenu.SetActive(false);
     }
 
     void Update()
     {
+        //The graphic raycaster for UI elements specifically. sends the UI gameobject the player is hovering over to the hoveredElement global variable
         pointerEventData = new PointerEventData(eventSystem);
         pointerEventData.position = Input.mousePosition;
-
         List<RaycastResult> results = new List<RaycastResult>();
-
         raycaster.Raycast(pointerEventData, results);
 
-        
-
         foreach (RaycastResult result in results)
-        {
-            
-            GlobalVariables.hoveredElement = result.gameObject;
-            
+        {       
+            GlobalVariables.hoveredElement = result.gameObject;   
         }
         if (results.Count == 0)
             GlobalVariables.hoveredElement = null;
+
+
 
         if (Input.GetMouseButtonDown(0))
             clicked = true;
@@ -57,23 +72,21 @@ public class MenuNavigation : MonoBehaviour
         if(clicked)
         {
             
-            //Debug.DrawRay(pointerEventData.position, transform.TransformDirection(Vector3.forward) * 10);
         }
-        
 
-        if (startScreen.activeSelf)
+        if (startMenu.activeSelf)
         {
             if(Input.anyKey)
             {
-                startScreen.SetActive(false);
-                mainScreen.SetActive(true);
+                startMenu.SetActive(false);
+                mainMenu.SetActive(true);
             }
         }
     }
 
     public void pressedPlay()
     {
-        mainScreen.SetActive(false);
-        characterSelectScreen.SetActive(true);
+        mainMenu.SetActive(false);
+        characterSelectMenu.SetActive(true);
     }
 }

@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//this script changes the ability icons and names depending on the selected character in character select
+
 public class AbilityGraphic : MonoBehaviour
 {
     

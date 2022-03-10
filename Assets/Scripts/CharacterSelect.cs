@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//this script contains the character select logic, it stores the scriptable object of the selected character inside a global variable
+//as well as updates the ability descriptions with the damage variables
+
 public class CharacterSelect : MonoBehaviour
 {
     public Character selectedCharacter;
@@ -48,16 +51,17 @@ public class CharacterSelect : MonoBehaviour
 
             UpdateDescription(primary, "(damage)", primary.damage.ToString() + " damage");
             UpdateDescription(secondary, "(damage)", secondary.damage.ToString() + " damage");
-            UpdateDescription(ultimate, "(damage)", ultimate.damage.ToString() + " damage");
-            UpdateDescription(ultimate, "(overtimeDamage)", ultimate.overtimeDamage.ToString() + " damage");
-
-            Debug.Log(GlobalVariables.selectedCharacter );
+            UpdateDescription(ultimate, "(damage)", ultimate.damage.ToString() + " damage", "(overtimeDamage)", ultimate.overtimeDamage.ToString() + " damage");
         }
     }
 
-    void UpdateDescription(Ability ability, string oldText, string newText)
+    void UpdateDescription(Ability ability, string damageText, string damage, string overtimeDamageText = "(empty)", string overtimeDamage = "")
     {
-        ability.updatedDescription = ability.description.Replace(oldText, newText);
+        ability.updatedDescription = ability.description.Replace(damageText, damage);
+        if (ability.overtimeDamage > 0)
+        {
+            ability.updatedDescription = ability.updatedDescription.Replace(overtimeDamageText, overtimeDamage);
+        }
 
     }
 }

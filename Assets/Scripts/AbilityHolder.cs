@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//this scripts is placed on the player, it contains the ability controls and collects all abilities together in one script
+
 public class AbilityHolder : MonoBehaviour
 {
     private Character character;
@@ -26,19 +28,16 @@ public class AbilityHolder : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             primary.CastAbility();
-            //Debug.Log(primary.updatedDescription);
         }
 
         if (Input.GetMouseButtonDown(1))
         {
             secondary.CastAbility();
-            //Debug.Log(secondary.updatedDescription);
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
             ultimate.CastAbility();
-            //Debug.Log(ultimate.updatedDescription);
         }
     }
 }

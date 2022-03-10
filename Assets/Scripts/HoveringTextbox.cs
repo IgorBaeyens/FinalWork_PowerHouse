@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//script for the text box that follows the mouse around
+
 public class HoveringTextbox : MonoBehaviour
 {
     public TextMeshProUGUI textboxContent;
@@ -11,32 +13,31 @@ public class HoveringTextbox : MonoBehaviour
     
     private bool isHoveringOverAbility = false;
 
-    // Start is called before the first frame update
     void Start()
     {
+        //canvas group is an easy way to make UI elements transparant
         textboxCanvas = gameObject.GetComponent<CanvasGroup>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //shorter version of "GlobalVariables.hoveredElement.gameObject"
         GameObject hoveredElement;
-
         if (GlobalVariables.hoveredElement != null)
-            hoveredElement = GlobalVariables.hoveredElement.transform.parent.gameObject;
+            hoveredElement = GlobalVariables.hoveredElement.gameObject;
         else
             hoveredElement = null;
 
+        //makes the textbox follow the mouse with easing applied
         Vector3 position = gameObject.transform.position;
         Vector3 nextPosition = Input.mousePosition;
         gameObject.transform.position = Vector3.Slerp(position, nextPosition, 20f * Time.deltaTime);
 
+        //makes the texbox visible or invisible depending on what it's hovering over
         if (isHoveringOverAbility)
-            textboxCanvas.alpha = 1;
+            textboxCanvas.alpha = Mathf.Lerp(textboxCanvas.alpha, 1, 20f * Time.deltaTime);
         else
-            textboxCanvas.alpha = 0;
-
-
+            textboxCanvas.alpha = Mathf.Lerp(textboxCanvas.alpha, 0, 20f * Time.deltaTime);
 
         if (hoveredElement != null)
         {
@@ -55,7 +56,6 @@ public class HoveringTextbox : MonoBehaviour
                     isHoveringOverAbility = true;
                     break;
                 default:
-                    //GlobalVariables.hoveredElement = null;
                     isHoveringOverAbility = false;
                     break;
             }
