@@ -17,6 +17,7 @@ public class HoveringTextbox : MonoBehaviour
     {
         //canvas group is an easy way to make UI elements transparant
         textboxCanvas = gameObject.GetComponent<CanvasGroup>();
+        textboxCanvas.alpha = 0;
     }
 
     void Update()

@@ -12,5 +12,4 @@ public class GlobalVariables : MonoBehaviour
     //whatever UI element the player is hovering over will be stored here.
     public static GameObject hoveredElement;
 
-
 }
