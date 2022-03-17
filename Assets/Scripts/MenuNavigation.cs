@@ -17,7 +17,9 @@ public class MenuNavigation : MonoBehaviour
     public GameObject mainMenu;
     public GameObject characterSelectMenu;
     public Animator camAnimator;
+    public Animator flareAnimator;
 
+    private GameObject hoveredElement;
     private GraphicRaycaster raycaster;
     private PointerEventData pointerEventData;
     private EventSystem eventSystem;
@@ -32,9 +34,7 @@ public class MenuNavigation : MonoBehaviour
         
         //gets only the first generation children
         foreach(Transform child in gameObject.transform)
-        {
             menus.Add(child.gameObject);
-        }
 
         foreach (GameObject menu in menus)
         {
@@ -53,11 +53,13 @@ public class MenuNavigation : MonoBehaviour
 
     void Update()
     {
+        //if(GlobalVariables.hoveredElement)
+            hoveredElement = GlobalVariables.hoveredElement;
+
         if (Input.GetMouseButtonDown(0))
             clicked = true;
         else
             clicked = false;
-
 
         //The graphic raycaster for UI elements specifically. sends the UI gameobject the player is hovering over to the hoveredElement global variable
         pointerEventData = new PointerEventData(eventSystem);
@@ -66,26 +68,40 @@ public class MenuNavigation : MonoBehaviour
         raycaster.Raycast(pointerEventData, results);
 
         foreach (RaycastResult result in results)
-        {       
-            GlobalVariables.hoveredElement = result.gameObject;   
-        }
+            GlobalVariables.hoveredElement = result.gameObject;
         if (results.Count == 0)
             GlobalVariables.hoveredElement = null;
-
-
-
 
         if(clicked)
         {
             
         }
-
-
-        if(Input.anyKey)
+        if (hoveredElement)
         {
-            changeMenu(startMenu, mainMenu, 1);
-            
+            switch (hoveredElement.name)
+            {
+                case "Play":
+                    changeState(1);
+                    break;
+                case "Account":
+
+                    break;
+                case "Characters":
+                    changeState(3);
+                    break;
+                case "Options":
+
+                    break;
+                case "Quit Game":
+
+                    break;
+            }
+
         }
+        
+
+        if (Input.anyKey)
+            changeMenu(startMenu, mainMenu, 1);
     
     }
 
@@ -95,9 +111,15 @@ public class MenuNavigation : MonoBehaviour
         {
             prevMenu.SetActive(false);
             newMenu.SetActive(true);
-            camAnimator.SetInteger("States", camState);
+            if (camState != -1)
+                changeState(camState);
         }
-        
+    }
+
+    void changeState(int camState)
+    {
+        camAnimator.SetInteger("States", camState);
+        flareAnimator.SetInteger("States", camState);
     }
 
     public void pressedPlay()
