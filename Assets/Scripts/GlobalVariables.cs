@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //script with important variables that are frequently needed, they can be used everywhere
+
+public enum Scene { mainMenu, lobby, characterSelect, inGame };
 
 public class GlobalVariables : MonoBehaviour
 {
@@ -12,4 +15,28 @@ public class GlobalVariables : MonoBehaviour
     //whatever UI element the player is hovering over will be stored here.
     public static GameObject hoveredElement;
 
+    //depending on which scene is selected, load that scene
+    public static void switchToScene(Scene scene)
+    {
+        switch (scene)
+        {
+            case Scene.mainMenu:
+                SceneManager.LoadSceneAsync("Main Menu");
+                break;
+            case Scene.lobby:
+                SceneManager.LoadSceneAsync("Lobby");
+                break;
+            case Scene.characterSelect:
+                SceneManager.LoadSceneAsync("Character Select");
+                break;
+            case Scene.inGame:
+                SceneManager.LoadSceneAsync("In Game");
+                break;
+        }
+    }
+
+    //private void Update()
+    //{
+    //    Debug.Log(selectedCharacter);
+    //}
 }

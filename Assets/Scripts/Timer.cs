@@ -6,7 +6,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     public float timer;
-    private bool gameStarted = false;
+    public bool timerFinished = false;
 
     private TextMeshProUGUI timerContent;
 
@@ -23,11 +23,17 @@ public class Timer : MonoBehaviour
             timerContent.text = Mathf.Round(timer).ToString();
         } else
         {
-            if(!gameStarted)
+            if(!timerFinished)
             {
-                gameStarted = true;
-                Debug.Log("start game");
+                timerFinished = true;
+                Event();
             }
         }
     }
+
+    public virtual void Event()
+    {
+        Debug.Log("play event");
+    }
 }
+

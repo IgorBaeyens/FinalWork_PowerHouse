@@ -11,71 +11,57 @@ using UnityEngine;
 
 public class MenuNavigation : MonoBehaviour
 {
-    List<GameObject> menus = new List<GameObject>();
+    private List<GameObject> menus = new List<GameObject>();
+    private GameObject startMenu, mainMenu, characterSelectMenu;
 
-    public GameObject startMenu;
-    public GameObject mainMenu;
-    public GameObject characterSelectMenu;
     public Animator camAnimator;
     public Animator flareAnimator;
 
     private GameObject hoveredElement;
-    private GraphicRaycaster raycaster;
-    private PointerEventData pointerEventData;
-    private EventSystem eventSystem;
 
     private bool clicked = false;
-    private int currentCamState;
 
     void Start()
-    {
-        raycaster = gameObject.GetComponent<GraphicRaycaster>();
-        eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
-        
+    {        
         //gets only the first generation children
         foreach(Transform child in gameObject.transform)
             menus.Add(child.gameObject);
 
+        //sets menu variables
         foreach (GameObject menu in menus)
         {
-            if (menu.name == "---Start Menu---")
-                menu.SetActive(true);
-            else
-                menu.SetActive(false);
+            menu.SetActive(false);
+            switch (menu.name)
+            {
+                case "---Start Menu---":
+                    startMenu = menu;
+                    break;
+                case "---Main Menu---":
+                    mainMenu = menu;
+                    break;
+                case "---Character Select Menu---":
+                    characterSelectMenu = menu;
+                    break;
+            }
         }
 
-        currentCamState = camAnimator.GetInteger("States");
-
-        //startMenu.SetActive(true);
-        //mainMenu.SetActive(false);
-        //characterSelectMenu.SetActive(false);
+        startMenu.SetActive(true);
     }
 
     void Update()
     {
-        //if(GlobalVariables.hoveredElement)
-            hoveredElement = GlobalVariables.hoveredElement;
+        hoveredElement = GlobalVariables.hoveredElement;
 
         if (Input.GetMouseButtonDown(0))
             clicked = true;
         else
             clicked = false;
 
-        //The graphic raycaster for UI elements specifically. sends the UI gameobject the player is hovering over to the hoveredElement global variable
-        pointerEventData = new PointerEventData(eventSystem);
-        pointerEventData.position = Input.mousePosition;
-        List<RaycastResult> results = new List<RaycastResult>();
-        raycaster.Raycast(pointerEventData, results);
-
-        foreach (RaycastResult result in results)
-            GlobalVariables.hoveredElement = result.gameObject;
-        if (results.Count == 0)
-            GlobalVariables.hoveredElement = null;
-
         if(clicked)
         {
             
         }
+
         if (hoveredElement)
         {
             switch (hoveredElement.name)
@@ -96,7 +82,6 @@ public class MenuNavigation : MonoBehaviour
 
                     break;
             }
-
         }
         
 
@@ -105,7 +90,8 @@ public class MenuNavigation : MonoBehaviour
     
     }
 
-    public void changeMenu(GameObject prevMenu, GameObject newMenu, int camState = -1)
+    //if previous menu active: turns off previous menu, turns on new menu and if a state is given change to that state
+    void changeMenu(GameObject prevMenu, GameObject newMenu, int camState = -1)
     {
         if(prevMenu.activeSelf)
         {
@@ -124,6 +110,7 @@ public class MenuNavigation : MonoBehaviour
 
     public void pressedPlay()
     {
-        changeMenu(mainMenu, characterSelectMenu);
+        //changeMenu(mainMenu, characterSelectMenu);
+        GlobalVariables.switchToScene(Scene.characterSelect);
     }
 }
