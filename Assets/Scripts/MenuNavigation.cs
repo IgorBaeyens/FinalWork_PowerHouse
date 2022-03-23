@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.UIElements.Experimental;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
 //This script is used for navigating through the different menus stored in the Canvas object
 
+//experimental animation
+//https://docs.unity3d.com/ScriptReference/UIElements.Experimental.ValueAnimation_1.html
 //GRAPHIC RAYCASTER
 //https://docs.unity3d.com/2017.3/Documentation/ScriptReference/UI.GraphicRaycaster.Raycast.html
 
@@ -13,7 +16,8 @@ public class MenuNavigation : MonoBehaviour
 {
     private List<GameObject> menus = new List<GameObject>();
     private GameObject startMenu, mainMenu, characterSelectMenu;
-
+    
+    public CanvasGroup fadeCanvas;
     public Animator camAnimator;
     public Animator flareAnimator;
 
@@ -44,12 +48,18 @@ public class MenuNavigation : MonoBehaviour
                     break;
             }
         }
-
         startMenu.SetActive(true);
+        fadeCanvas.gameObject.SetActive(true);
+        
     }
 
     void Update()
     {
+        if (fadeCanvas.alpha != 0)
+            fadeCanvas.alpha -= 0.8f * Time.deltaTime;
+        else
+            fadeCanvas.gameObject.SetActive(false);
+
         hoveredElement = GlobalVariables.hoveredElement;
 
         if (Input.GetMouseButtonDown(0))
