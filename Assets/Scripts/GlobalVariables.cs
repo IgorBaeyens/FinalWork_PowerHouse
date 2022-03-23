@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 //script with important variables that are frequently needed, they can be used everywhere
 
-public enum Scene { mainMenu, lobby, characterSelect, inGame };
+public enum Scene { mainMenu, loading, lobby, characterSelect, inGame };
 
 public class GlobalVariables : MonoBehaviour
 {
@@ -22,6 +22,9 @@ public class GlobalVariables : MonoBehaviour
         {
             case Scene.mainMenu:
                 SceneManager.LoadSceneAsync("Main Menu");
+                break;
+            case Scene.loading:
+                SceneManager.LoadSceneAsync("Loading");
                 break;
             case Scene.lobby:
                 SceneManager.LoadSceneAsync("Lobby");

@@ -121,6 +121,6 @@ public class MenuNavigation : MonoBehaviour
     public void pressedPlay()
     {
         //changeMenu(mainMenu, characterSelectMenu);
-        GlobalVariables.switchToScene(Scene.characterSelect);
+        GlobalVariables.switchToScene(Scene.loading);
     }
 }
