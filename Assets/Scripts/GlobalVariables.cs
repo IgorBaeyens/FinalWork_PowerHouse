@@ -15,6 +15,8 @@ public class GlobalVariables : MonoBehaviour
     //whatever UI element the player is hovering over will be stored here.
     public static GameObject hoveredElement;
 
+    public static bool gamePaused = false;
+
     //depending on which scene is selected, load that scene
     public static void switchToScene(Scene scene)
     {

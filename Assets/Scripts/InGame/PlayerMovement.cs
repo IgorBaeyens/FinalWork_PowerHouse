@@ -28,8 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-
         inputActions = new InputActions();
         inputActions.Player.Enable();
 
@@ -40,9 +38,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        jumped = inputActions.Player.Jump.triggered;
-        movementValue = inputActions.Player.Movement.ReadValue<Vector2>();
-        lookValue = inputActions.Player.Look.ReadValue<Vector2>();
+        if (!GlobalVariables.gamePaused)
+        {
+            jumped = inputActions.Player.Jump.triggered;
+            movementValue = inputActions.Player.Movement.ReadValue<Vector2>();
+            lookValue = inputActions.Player.Look.ReadValue<Vector2>();
+        }
 
         //movement
         float moveX = movementValue.x;
@@ -70,18 +71,5 @@ public class PlayerMovement : MonoBehaviour
 
         gameObject.transform.Rotate(Vector3.up * lookX);
         firstPersonView.transform.localRotation = Quaternion.Euler(xAxisRotation, 0, 0);
-
-        Debug.Log(velocity.y);
-    }
-
-    //private void Jump_performed(InputAction.CallbackContext context)
-    //{
-    //    Debug.Log("jumped");
-    //    if (controller.isGrounded)
-    //        velocity.y = Mathf.Sqrt(jumpHeight * -2f * -gravity);
-        
-    //}
-
-
-    
+    }  
 }

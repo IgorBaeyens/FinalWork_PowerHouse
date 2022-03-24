@@ -14,7 +14,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinLobby();
     }
-
+    
     public override void OnJoinedLobby()
     {
         GlobalVariables.switchToScene(Scene.lobby);
