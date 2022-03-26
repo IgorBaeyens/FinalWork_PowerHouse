@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CharacterScript : MonoBehaviour
 {
-    GameObject character;
+    private GameObject character;
+    private GameObject mainCamera;
     public bool useGameObjectModel;
+
+    private AudioListener audioListener;
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +16,9 @@ public class CharacterScript : MonoBehaviour
         character = GlobalVariables.selectedCharacter.model;
         if(useGameObjectModel)
             Instantiate(character, gameObject.transform);
+
+        mainCamera = transform.Find("Main Camera").gameObject;
+
     }
 
     // Update is called once per frame
