@@ -14,7 +14,10 @@ public class SpawnPlayers : MonoBehaviour
     {
         teamAPosition = gameObject.transform.Find("Team A").transform.position;
 
-        Vector2 teamASpawnpoint = new Vector2(Random.Range(teamAPosition.x - range, teamAPosition.x + range), Random.Range(teamAPosition.z - range, teamAPosition.z + range));
+        float randomX = Random.Range(teamAPosition.x - range, teamAPosition.x + range);
+        float randomZ = Random.Range(teamAPosition.z - range, teamAPosition.z + range);
+
+        Vector3 teamASpawnpoint = new Vector3(randomX, teamAPosition.y, randomZ);
 
         PhotonNetwork.Instantiate(player.name, teamASpawnpoint, Quaternion.identity);
     }

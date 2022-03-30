@@ -14,16 +14,14 @@ public class AbilityHolder : MonoBehaviour
     void Start()
     {
         character = GlobalVariables.selectedCharacter;
-        
+        primary = character.primary;
+        secondary = character.secondary;
+        ultimate = character.ultimate;
         
     }
 
     void Update()
     {
-        character = GlobalVariables.selectedCharacter;
-        primary = character.primary;
-        secondary = character.secondary;
-        ultimate = character.ultimate;
 
         if (Input.GetMouseButtonDown(0))
         {

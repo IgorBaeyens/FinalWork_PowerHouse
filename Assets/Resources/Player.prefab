@@ -329,6 +329,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 10
+  speed: 10
+  moveSpeed: 0
+  movementValue: {x: 0, y: 0}
 --- !u!114 &6784670863612506666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +538,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 259e85513d41fa547b8f3e61a2a98c03, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
 --- !u!4 &6461899420905798414 stripped

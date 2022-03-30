@@ -13,15 +13,16 @@ public class PlayerMovement : MonoBehaviour
 
     public int sensitivity = 10;
     //private int speed = GlobalVariables.selectedCharacter.speed / 10;
-    private int speed = 10;
+    public int speed = 10;
     private float jumpHeight = 0.2f;
+    public float moveSpeed;
   
     private InputActions inputActions;
     private GameObject mainCam;
     private GameObject firstPersonView;
     private CharacterController controller;
 
-    private Vector2 movementValue;
+    public Vector2 movementValue;
     private Vector2 lookValue;
     private bool jumped;
     
@@ -40,11 +41,6 @@ public class PlayerMovement : MonoBehaviour
         firstPersonView = gameObject.transform.Find("First Person View").gameObject;
 
         photonView = GetComponent<PhotonView>();
-        if (photonView.IsMine)
-        {
-            mainCam.SetActive(true);
-            firstPersonView.SetActive(true);
-        }
     }
 
     void Update()
@@ -62,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
             float moveX = movementValue.x;
             float moveZ = movementValue.y;
             Vector3 move = transform.right * moveX + transform.forward * moveZ;
+            moveSpeed = new Vector2(moveX, moveZ).magnitude;
 
             if (controller.isGrounded && velocity.y < 0)
                 velocity.y = -0.1f;
@@ -84,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
             gameObject.transform.Rotate(Vector3.up * lookX);
             firstPersonView.transform.localRotation = Quaternion.Euler(xAxisRotation, 0, 0);
+
         }
     }  
 }
