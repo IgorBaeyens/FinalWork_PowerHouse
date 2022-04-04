@@ -40,6 +40,8 @@ public class GlobalVariables : MonoBehaviour
         }
     }
 
+    public static string playerName;
+
     //private void Update()
     //{
     //    Debug.Log(selectedCharacter);

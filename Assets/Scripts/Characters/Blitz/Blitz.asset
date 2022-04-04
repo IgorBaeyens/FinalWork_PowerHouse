@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50e8b6d6f46e45a46a7f879dd8b16127, type: 3}
   m_Name: Blitz
   m_EditorClassIdentifier: 
-  name: Blitz
+  name: Box
   speed: 100
   health: 100
   model: {fileID: 919132149155446097, guid: 3f49d2f0cc37e4c4ca51fa56c985b4d3, type: 3}

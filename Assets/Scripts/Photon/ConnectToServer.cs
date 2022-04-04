@@ -7,6 +7,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 {
     void Start()
     {
+        PhotonNetwork.NickName = GlobalVariables.playerName;
         PhotonNetwork.ConnectUsingSettings();
     }
 
