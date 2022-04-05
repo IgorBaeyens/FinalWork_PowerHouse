@@ -425,6 +425,17 @@ public class @InputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""6d2df9d3-9a56-4acb-9182-5a6578a31742"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f6a37d65-eafe-4b4c-8fe1-0f4783af0731"",
                     ""path"": ""*/{Back}"",
                     ""interactions"": """",

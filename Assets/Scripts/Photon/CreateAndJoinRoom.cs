@@ -24,6 +24,11 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
 
     public MenuNavigation menuNav;
 
+    private void Start()
+    {
+        PhotonNetwork.JoinLobby();
+    }
+
     public void JoinRoom(string roomName)
     {
         PhotonNetwork.JoinRoom(roomName);
@@ -32,6 +37,11 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
+    }
+
+    public void disconnect()
+    {
+        PhotonNetwork.Disconnect();
     }
 
     //Change the room content depending on info given when the room was created
@@ -47,6 +57,7 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     //What happens when a player joins the room
     public override void OnJoinedRoom()
     {
+        cachedRoomList.Clear();
         GameObject playerNameInstance = Instantiate(playerNamePrefab, teamOnePlayers.transform);
         playerNameInstance.GetComponent<TMP_Text>().text = PhotonNetwork.NickName;
         menuNav.GoToRoom();
@@ -56,6 +67,11 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         menuNav.BackToRooms();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        GlobalVariables.switchToScene(Scene.mainMenu);
     }
 
     //What happens when a change occurs to any room in the lobby
@@ -75,8 +91,6 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         {
             if (!room.RemovedFromList)
             {
-                RoomItem newRoomItem = Instantiate(lobbyItemPrefab, rooms.transform);
-                newRoomItem.SetRoomInfo(room);
                 cachedRoomList[room.Name] = room;
             } else
             {
@@ -84,11 +98,15 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
             }
         }
 
+        foreach (KeyValuePair<string, RoomInfo> cachedRoom in cachedRoomList)
+        {
+            RoomItem newRoomItem = Instantiate(lobbyItemPrefab, rooms.transform);
+            newRoomItem.SetRoomInfo(cachedRoom.Value);
+        }
     }
 
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby();
     }
-
 }

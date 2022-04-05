@@ -19,15 +19,6 @@ public class RoomItem : MonoBehaviour
         roomScript = FindObjectOfType<CreateAndJoinRoom>();
     }
 
-    //public void SetRoomInfo(string phLobbyName, string phPlayerName, string phGameModeName, string phMapName, string currentPlayers, string maxPlayers)
-    //{
-    //    lobbyName.text = phLobbyName;
-    //    playerName.text = phPlayerName;
-    //    gameModeName.text = phGameModeName;
-    //    mapName.text = phMapName;
-    //    playerCount.text = currentPlayers + "/" + maxPlayers;
-    //}
-
     public void SetRoomInfo(RoomInfo room)
     {
         lobbyName.text = room.Name;

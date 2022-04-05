@@ -111,11 +111,21 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void pressedEnter()
     {
-        if (!nameInput.text.Contains(" ") && nameInput.text != "" && nameInput.text.Length < 12)
+        if(nameInput.placeholder.GetComponent<TMP_Text>().enabled)
+        {
+            GlobalVariables.playerName = nameInput.placeholder.GetComponent<TMP_Text>().text;
+            changeMenu(startMenu, mainMenu, 1);
+            playerNameText.text = GlobalVariables.playerName;
+        } else if (!nameInput.text.Contains(" ") && nameInput.text != "" && nameInput.text.Length < 12)
         {
             GlobalVariables.playerName = nameInput.text;
             changeMenu(startMenu, mainMenu, 1);
             playerNameText.text = GlobalVariables.playerName;
         }
+    }
+
+    public void pressedQuitGame()
+    {
+        Application.Quit();
     }
 }
