@@ -60,9 +60,4 @@ public class MenuNavigation : MonoBehaviourPunCallbacks
     {
         ChangeMenu(rooms);
     }
-
-    //public void backToMainMenu()
-    //{
-    //    GlobalVariables.switchToScene(Scene.mainMenu);
-    //}
 }

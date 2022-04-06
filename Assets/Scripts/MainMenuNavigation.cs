@@ -16,8 +16,9 @@ using TMPro;
 public class MainMenuNavigation : MonoBehaviour
 {
     private List<GameObject> menus = new List<GameObject>();
-    private GameObject startMenu, mainMenu, characterSelectMenu;
-    
+    private GameObject startMenu, mainMenu;
+    private GameObject activeMenu;
+
     public CanvasGroup fadeCanvas;
     public Animator camAnimator;
     public Animator flareAnimator;
@@ -25,8 +26,6 @@ public class MainMenuNavigation : MonoBehaviour
     private GameObject hoveredElement;
     private TMP_InputField nameInput;
     public TMP_Text playerNameText;
-
-    private bool clicked = false;
 
     void Start()
     {        
@@ -46,12 +45,10 @@ public class MainMenuNavigation : MonoBehaviour
                 case "---Main Menu---":
                     mainMenu = menu;
                     break;
-                case "---Character Select Menu---":
-                    characterSelectMenu = menu;
-                    break;
             }
         }
         startMenu.SetActive(true);
+        activeMenu = startMenu;
         fadeCanvas.gameObject.SetActive(true);
 
         nameInput = GameObject.Find("Name Input").GetComponent<TMP_InputField>();
@@ -86,16 +83,16 @@ public class MainMenuNavigation : MonoBehaviour
         }    
     }
 
-    //if previous menu active: turns off previous menu, turns on new menu and if a state is given change to that state
-    void changeMenu(GameObject prevMenu, GameObject newMenu, int camState = -1)
+    //turns off previous active menu, turns on given menu and set it as active menu. If a camera state is given, change to that state
+    void changeMenu(GameObject nextMenu, int camState = -1)
     {
-        if(prevMenu.activeSelf)
-        {
-            prevMenu.SetActive(false);
-            newMenu.SetActive(true);
-            if (camState != -1)
-                changeState(camState);
-        }
+ 
+        activeMenu.SetActive(false);
+        nextMenu.SetActive(true);
+        activeMenu = nextMenu;
+        if (camState != -1)
+             changeState(camState);
+
     }
 
     void changeState(int camState)
@@ -114,12 +111,12 @@ public class MainMenuNavigation : MonoBehaviour
         if(nameInput.placeholder.GetComponent<TMP_Text>().enabled)
         {
             GlobalVariables.playerName = nameInput.placeholder.GetComponent<TMP_Text>().text;
-            changeMenu(startMenu, mainMenu, 1);
+            changeMenu(mainMenu, 1);
             playerNameText.text = GlobalVariables.playerName;
         } else if (!nameInput.text.Contains(" ") && nameInput.text != "" && nameInput.text.Length < 12)
         {
             GlobalVariables.playerName = nameInput.text;
-            changeMenu(startMenu, mainMenu, 1);
+            changeMenu(mainMenu, 1);
             playerNameText.text = GlobalVariables.playerName;
         }
     }

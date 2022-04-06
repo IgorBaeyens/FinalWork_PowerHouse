@@ -11,7 +11,7 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     public TMP_Dropdown map;
     public TMP_Text playerCountText;
 
-    private int playerCount = 1;
+    private int playerCount = 2;
 
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
 
@@ -20,21 +20,15 @@ public class CreateRoom : MonoBehaviourPunCallbacks
         playerCountText.text = playerCount.ToString();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void DecreasePlayerCount()
     {
-        if (playerCount != 1)
+        if (playerCount != 2)
         {
             playerCount--;
             playerCountText.text = playerCount.ToString();
         }
         
     }
-
     public void IncreasePlayerCount()
     {
         if (playerCount != 10)
@@ -44,6 +38,7 @@ public class CreateRoom : MonoBehaviourPunCallbacks
         }
     }
 
+    //everytime this function is called create a room with roomname, max players and custom properties
     public void CreateTheRoom()
     {
         string roomName;

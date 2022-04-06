@@ -13,13 +13,14 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     public TMP_Text gameMode;
     public TMP_Text map;
 
-    public GameObject teamOnePlayers;
-    public GameObject teamTwoPlayers;
     public GameObject playerNamePrefab;
+    public GameObject teamOnePlayers;
+    private List<Player> teamOne = new List<Player>();
+    public GameObject teamTwoPlayers;
+    private List<Player> teamTwo = new List<Player>();
 
     public GameObject rooms;
     public RoomItem lobbyItemPrefab;
-    //private List<RoomItem> roomItemsList = new List<RoomItem>();
     private Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
 
     public MenuNavigation menuNav;
@@ -27,6 +28,33 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     private void Start()
     {
         PhotonNetwork.JoinLobby();
+    }
+
+    //updates the room info in the room itself
+    void UpdateRoomInfo()
+    {
+        lobbyTitle.text = PhotonNetwork.CurrentRoom.Name;
+        hostName.text = PhotonNetwork.CurrentRoom.CustomProperties["host"].ToString();
+        gameMode.text = PhotonNetwork.CurrentRoom.CustomProperties["gm"].ToString();
+        map.text = PhotonNetwork.CurrentRoom.CustomProperties["map"].ToString();
+    }
+
+    void InstantiatePlayerName(Player player)
+    {
+        GameObject team;
+
+        if (teamOne.Count > teamTwo.Count)
+        {
+            team = teamTwoPlayers;
+            teamTwo.Add(player);
+        } else
+        {
+            team = teamOnePlayers;
+            teamOne.Add(player);
+        }
+        
+        GameObject playerNameInstance = Instantiate(playerNamePrefab, team.transform);
+        playerNameInstance.GetComponent<PlayerNameItem>().SetUp(player);
     }
 
     public void JoinRoom(string roomName)
@@ -44,29 +72,47 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         PhotonNetwork.Disconnect();
     }
 
-    //Change the room content depending on info given when the room was created
+    //when a room is created update its info and go to that room
     public override void OnCreatedRoom()
     {
-        lobbyTitle.text = PhotonNetwork.CurrentRoom.Name;
-        hostName.text = PhotonNetwork.NickName;
-        gameMode.text = PhotonNetwork.CurrentRoom.CustomProperties["gm"].ToString();
-        map.text = PhotonNetwork.CurrentRoom.CustomProperties["map"].ToString();
         menuNav.GoToRoom();
     }
 
-    //What happens when a player joins the room
+    //when player joins a room
     public override void OnJoinedRoom()
     {
         cachedRoomList.Clear();
-        GameObject playerNameInstance = Instantiate(playerNamePrefab, teamOnePlayers.transform);
-        playerNameInstance.GetComponent<TMP_Text>().text = PhotonNetwork.NickName;
+
+        Player[] playerList = PhotonNetwork.PlayerList;
+        foreach (Player player in playerList)
+        {
+            InstantiatePlayerName(player);
+        }
+
+        UpdateRoomInfo();
         menuNav.GoToRoom();
     }
 
-    //What happens when a player leaves the room
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        InstantiatePlayerName(newPlayer);
+    }
+
+    //TODO: teams should be stored online
+    //when you specifically leave the room, go to the rooms menu
     public override void OnLeftRoom()
     {
         menuNav.BackToRooms();
+        //teamOne.Clear();
+        //teamTwo.Clear();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        if (teamOne.Contains(otherPlayer))
+            teamOne.Remove(otherPlayer);
+        else if (teamTwo.Contains(otherPlayer))
+            teamTwo.Remove(otherPlayer);
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -74,7 +120,7 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         GlobalVariables.switchToScene(Scene.mainMenu);
     }
 
-    //What happens when a change occurs to any room in the lobby
+    //When a player leaves or enters a room, or anything at all changes in the roominfo
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         UpdateRoomList(roomList);
