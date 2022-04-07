@@ -566,7 +566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &154179700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1193,9 +1193,10 @@ MonoBehaviour:
   hostName: {fileID: 554584312}
   gameMode: {fileID: 1814931567}
   map: {fileID: 1142987234}
+  beginButton: {fileID: 1844168716}
+  playerNamePrefab: {fileID: 4707758237039579764, guid: 66195ad8569a9f4459dcf1824ca5e3a2, type: 3}
   teamOnePlayers: {fileID: 6290851276416308377}
   teamTwoPlayers: {fileID: 1839528191}
-  playerNamePrefab: {fileID: 4707758237039579764, guid: 66195ad8569a9f4459dcf1824ca5e3a2, type: 3}
   rooms: {fileID: 1264374453}
   lobbyItemPrefab: {fileID: 5883255203205671895, guid: d5c92da72e57740479d546557bf2c8e2, type: 3}
   menuNav: {fileID: 360839186}
@@ -4267,7 +4268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1447484466
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6106,7 +6107,7 @@ GameObject:
   - component: {fileID: 1844168719}
   - component: {fileID: 1844168718}
   m_Layer: 5
-  m_Name: Create Button
+  m_Name: Begin Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

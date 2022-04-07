@@ -12,6 +12,7 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     public TMP_Text hostName;
     public TMP_Text gameMode;
     public TMP_Text map;
+    public GameObject beginButton;
 
     public GameObject playerNamePrefab;
     public GameObject teamOnePlayers;
@@ -24,17 +25,28 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     private Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
 
     public MenuNavigation menuNav;
+    private Player host;
 
     private void Start()
     {
         PhotonNetwork.JoinLobby();
+        beginButton.SetActive(false);
     }
 
     //updates the room info in the room itself
     void UpdateRoomInfo()
     {
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (player.IsMasterClient)
+                host = player;
+        }
+        if (PhotonNetwork.IsMasterClient)
+            beginButton.SetActive(true);
+        else
+            beginButton.SetActive(false);
         lobbyTitle.text = PhotonNetwork.CurrentRoom.Name;
-        hostName.text = PhotonNetwork.CurrentRoom.CustomProperties["host"].ToString();
+        hostName.text = host.NickName;
         gameMode.text = PhotonNetwork.CurrentRoom.CustomProperties["gm"].ToString();
         map.text = PhotonNetwork.CurrentRoom.CustomProperties["map"].ToString();
     }
@@ -55,6 +67,11 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         
         GameObject playerNameInstance = Instantiate(playerNamePrefab, team.transform);
         playerNameInstance.GetComponent<PlayerNameItem>().SetUp(player);
+    }
+
+    public void beginGame()
+    {
+        
     }
 
     public void JoinRoom(string roomName)
@@ -113,6 +130,7 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
             teamOne.Remove(otherPlayer);
         else if (teamTwo.Contains(otherPlayer))
             teamTwo.Remove(otherPlayer);
+        UpdateRoomInfo();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
