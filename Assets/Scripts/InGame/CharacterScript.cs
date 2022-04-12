@@ -4,33 +4,39 @@ using UnityEngine;
 using Photon.Pun;
 
 
-public class CharacterScript : MonoBehaviour
+public class CharacterScript : MonoBehaviourPunCallbacks
 {
-    private PhotonView photonView;
+    private int characterPhotonViewId;
 
-    private GameObject character;
+    public GameObject character;
+    private GameObject instantiatedCharacter;
     private GameObject mainCam;
     private GameObject firstPersonView;
     public bool useGameObjectModel;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        if (useGameObjectModel) { 
-            character = GlobalVariables.selectedCharacter.model;
-            Instantiate(character, gameObject.transform);
-        }
-
         mainCam = gameObject.transform.Find("Main Camera").gameObject;
         firstPersonView = gameObject.transform.Find("First Person View").gameObject;
 
-        photonView = GetComponent<PhotonView>();
+        //photonViews.Add(photonView);
+        
         if (photonView.IsMine)
         {
             mainCam.SetActive(true);
             firstPersonView.SetActive(true);
-        }
+
+            instantiatedCharacter = PhotonNetwork.Instantiate(character.name, gameObject.transform.position, Quaternion.identity);
+            characterPhotonViewId = instantiatedCharacter.GetPhotonView().ViewID;
+            photonView.RPC("ChangeParent", RpcTarget.All, characterPhotonViewId);
+        } 
+    }
+
+    [PunRPC] void ChangeParent(int characterPhotonViewId)
+    {
+
+        Transform character = PhotonView.Find(characterPhotonViewId).transform;
+        character.transform.SetParent(photonView.transform);
     }
 
     // Update is called once per frame

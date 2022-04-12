@@ -25,11 +25,12 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     private Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
 
     public MenuNavigation menuNav;
-    private Player host;
+    public string host;
 
     private void Start()
     {
         PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
         beginButton.SetActive(false);
     }
 
@@ -39,14 +40,14 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             if (player.IsMasterClient)
-                host = player;
+                host = player.NickName;
         }
         if (PhotonNetwork.IsMasterClient)
             beginButton.SetActive(true);
         else
             beginButton.SetActive(false);
         lobbyTitle.text = PhotonNetwork.CurrentRoom.Name;
-        hostName.text = host.NickName;
+        hostName.text = host;
         gameMode.text = PhotonNetwork.CurrentRoom.CustomProperties["gm"].ToString();
         map.text = PhotonNetwork.CurrentRoom.CustomProperties["map"].ToString();
     }
@@ -71,7 +72,7 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
 
     public void beginGame()
     {
-        
+        PhotonNetwork.LoadLevel("Character Select");
     }
 
     public void JoinRoom(string roomName)

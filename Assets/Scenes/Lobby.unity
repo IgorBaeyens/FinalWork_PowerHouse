@@ -1200,6 +1200,7 @@ MonoBehaviour:
   rooms: {fileID: 1264374453}
   lobbyItemPrefab: {fileID: 5883255203205671895, guid: d5c92da72e57740479d546557bf2c8e2, type: 3}
   menuNav: {fileID: 360839186}
+  host: 
 --- !u!1 &534752689
 GameObject:
   m_ObjectHideFlags: 0
@@ -6175,7 +6176,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1844168719}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 525144520}
+        m_TargetAssemblyTypeName: CreateAndJoinRoom, Assembly-CSharp
+        m_MethodName: beginGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1844168719
 MonoBehaviour:
   m_ObjectHideFlags: 0

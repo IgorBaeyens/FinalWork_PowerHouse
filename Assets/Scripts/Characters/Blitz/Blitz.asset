@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Box
   speed: 100
   health: 100
-  model: {fileID: 919132149155446097, guid: 3f49d2f0cc37e4c4ca51fa56c985b4d3, type: 3}
+  model: {fileID: 9007562381699777661, guid: af9ec8cb8e733f442a017580567cb1db, type: 3}
   icon: {fileID: 21300000, guid: 7c9baa146e0339b43a7f1d1a0d7298ce, type: 3}
   primary: {fileID: 11400000, guid: de95feefea191c345b263e58cef2db6b, type: 2}
   secondary: {fileID: 11400000, guid: de95feefea191c345b263e58cef2db6b, type: 2}

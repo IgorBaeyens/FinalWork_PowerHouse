@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fa59c80b58baf4dafd71c868761500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedCharacter: {fileID: 11400000, guid: 2863f04115b0e3b43b7ac0062581f0b6, type: 2}
+  selectedCharacter: {fileID: 0}
   characterName: {fileID: 8679356904730817153}
   characterIcon: {fileID: 8679356904913305197}
 --- !u!1 &8679356905982880541

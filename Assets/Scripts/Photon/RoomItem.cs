@@ -22,7 +22,10 @@ public class RoomItem : MonoBehaviour
     public void SetRoomInfo(RoomInfo room)
     {
         lobbyName.text = room.Name;
+        //if (roomScript.host == null)
         playerName.text = room.CustomProperties["host"].ToString();
+        //else
+        //    playerName.text = roomScript.host;
         gameModeName.text = room.CustomProperties["gm"].ToString();
         mapName.text = room.CustomProperties["map"].ToString();
         playerCount.text = room.PlayerCount + "/" + room.MaxPlayers;
