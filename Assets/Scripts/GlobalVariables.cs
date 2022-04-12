@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 //script with important variables that are frequently needed, they can be used everywhere
 
-public enum Scene { mainMenu, lobby, characterSelect, inGame };
+public enum Scene { mainMenu, loading, lobby, characterSelect, inGame };
 
 public class GlobalVariables : MonoBehaviour
 {
@@ -15,6 +15,8 @@ public class GlobalVariables : MonoBehaviour
     //whatever UI element the player is hovering over will be stored here.
     public static GameObject hoveredElement;
 
+    public static bool gamePaused = false;
+
     //depending on which scene is selected, load that scene
     public static void switchToScene(Scene scene)
     {
@@ -22,6 +24,9 @@ public class GlobalVariables : MonoBehaviour
         {
             case Scene.mainMenu:
                 SceneManager.LoadSceneAsync("Main Menu");
+                break;
+            case Scene.loading:
+                SceneManager.LoadSceneAsync("Loading");
                 break;
             case Scene.lobby:
                 SceneManager.LoadSceneAsync("Lobby");
@@ -34,6 +39,8 @@ public class GlobalVariables : MonoBehaviour
                 break;
         }
     }
+
+    public static string playerName;
 
     //private void Update()
     //{
