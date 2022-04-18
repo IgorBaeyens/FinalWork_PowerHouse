@@ -23,26 +23,14 @@ public class CharacterSelect : MonoBehaviourPunCallbacks
     void Start()
     {
         toggle = gameObject.GetComponent<Toggle>();
-        if (toggle.isOn)
-        {
-            GlobalVariables.selectedCharacter = selectedCharacter;
-        }
+
+        changeToCharacter();
 
         if (selectedCharacter)
         {
             characterName.text = selectedCharacter.name;
             characterIcon.sprite = selectedCharacter.icon;
         }
-
-    }
-
-    void Update()
-    {
-        if (PhotonNetwork.LocalPlayer.CustomProperties["chara"] != null)
-        {
-            Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["chara"]);
-        }
-
     }
 
     public void changeToCharacter()
