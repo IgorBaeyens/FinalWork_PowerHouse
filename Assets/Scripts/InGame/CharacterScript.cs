@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-//script in charge of spawning the character that the playerer chose 
+//script in charge of spawning the character that the player chose 
 
 public class CharacterScript : MonoBehaviourPunCallbacks
 {
@@ -18,6 +18,7 @@ public class CharacterScript : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        //loads a prefab with the selected character name and FP after it in the resource folder
         characterPrefabFP = (GameObject)Resources.Load(character.name + "FP", typeof(GameObject));
 
         mainCam = gameObject.transform.Find("Main Camera").gameObject;
@@ -34,6 +35,8 @@ public class CharacterScript : MonoBehaviourPunCallbacks
             photonView.RPC("ChangeCharacterParent", RpcTarget.AllBuffered, characterPhotonViewId);
 
             GameObject instantiatedCharacterFP = Instantiate(characterPrefabFP, transform.position, transform.rotation, firstPersonView.transform);
+            //GameObject instantiatedCharacterFP = Instantiate(characterPrefabFP, transform.position, transform.rotation, transform);
+
 
             foreach (Transform child in instantiatedCharacter.transform)
             {
@@ -41,24 +44,10 @@ public class CharacterScript : MonoBehaviourPunCallbacks
             }
         }
 
-
-        
     }
-
-    //public override void OnJoinedRoom()
-    //{
-    //    photonView.RPC("ChangeCharacterParent", RpcTarget.All, characterPhotonViewId);
-    //}
-
-    //public override void OnPlayerEnteredRoom(Player newPlayer)
-    //{
-    //    photonView.RPC("ChangeCharacterParent", newPlayer, characterPhotonViewId);
-    //}
 
     [PunRPC] void ChangeCharacterParent(int characterPhotonViewId)
     {
-        Debug.Log("fired");
-        Debug.Log(characterPhotonViewId);
         Transform character = PhotonView.Find(characterPhotonViewId).transform;
         character.transform.SetParent(photonView.transform);
     }

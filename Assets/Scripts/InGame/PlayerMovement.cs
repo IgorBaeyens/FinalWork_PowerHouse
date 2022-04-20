@@ -20,11 +20,13 @@ public class PlayerMovement : MonoBehaviour
     private InputActions inputActions;
     private GameObject mainCam;
     private GameObject firstPersonView;
-    private CharacterController controller;
+    public CharacterController controller;
 
     public Vector2 movementValue;
-    private Vector2 lookValue;
-    private bool jumped;
+    public Vector2 lookValue;
+    public float lookX;
+    public float lookY;
+    public bool jumped;
     
     private Vector3 velocity;
     private float xAxisRotation = 0;
@@ -73,8 +75,8 @@ public class PlayerMovement : MonoBehaviour
             //look
             lookValue *= 0.5f;
             lookValue *= 0.1f;
-            float lookX = lookValue.x * sensitivity;
-            float lookY = lookValue.y * sensitivity;
+            lookX = lookValue.x * sensitivity;
+            lookY = lookValue.y * sensitivity;
 
             xAxisRotation += lookY;
             xAxisRotation = Mathf.Clamp(xAxisRotation, -80, 70);
