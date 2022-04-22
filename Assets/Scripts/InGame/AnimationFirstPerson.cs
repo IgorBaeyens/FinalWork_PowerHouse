@@ -6,13 +6,15 @@ public class AnimationFirstPerson : MonoBehaviour
 {
     private Animator characterAnimator;
     private PlayerMovement movementScript;
+    private AbilityHolder abilityScript;
+    
 
-    private Vector2 lookValue;
 
     void Start()
     {
         characterAnimator = GetComponent<Animator>();
         movementScript = GetComponentInParent<PlayerMovement>();
+        abilityScript = GetComponentInParent<AbilityHolder>();
 
         
     }
@@ -22,11 +24,9 @@ public class AnimationFirstPerson : MonoBehaviour
         //run
         characterAnimator.SetFloat("Speed", movementScript.moveSpeed);
         
-        //
+        //roll and lead
         characterAnimator.SetFloat("X", movementScript.lookValue.x * 2f, 1f, Time.deltaTime * 4);
         characterAnimator.SetFloat("Y", movementScript.lookValue.y * 2f, 1f, Time.deltaTime * 4);
-
-        //crouch
 
         //jump
         if (movementScript.jumped)
@@ -41,10 +41,29 @@ public class AnimationFirstPerson : MonoBehaviour
             characterAnimator.SetBool("IsGrounded", false);
 
         //primary
+        if (abilityScript.primaryPressed)
+            characterAnimator.SetBool("IsPrimaryOn", true);
+        else
+            characterAnimator.SetBool("IsPrimaryOn", false);
 
         //secondary
+        if (abilityScript.secondaryPressed)
+            characterAnimator.SetBool("IsSecondaryOn", true);
+        else
+            characterAnimator.SetBool("IsSecondaryOn", false);
 
         //ultimate
+
+        
     }
 
+    public void CastPrimary()
+    {
+        abilityScript.CastPrimary();
+    }
+
+    public void CastSecondary()
+    {
+        abilityScript.CastSecondary();
+    }
 }
