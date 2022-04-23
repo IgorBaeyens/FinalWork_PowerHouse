@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//timer
+//https://answers.unity.com/questions/45676/making-a-timer-0000-minutes-and-seconds.html
+
 public class Timer : MonoBehaviour
 {
     public float timer;
@@ -19,8 +22,12 @@ public class Timer : MonoBehaviour
     {
         if(timer >= 0)
         {
+            int minutes = Mathf.FloorToInt(timer / 60F);
+            int seconds = Mathf.FloorToInt(timer - minutes * 60);
+            string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+
             timer -= Time.deltaTime;
-            timerContent.text = Mathf.Round(timer).ToString();
+            timerContent.text = niceTime;
         } else
         {
             if(!timerFinished)
