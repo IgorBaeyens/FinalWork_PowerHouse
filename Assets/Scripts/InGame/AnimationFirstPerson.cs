@@ -28,10 +28,8 @@ public class AnimationFirstPerson : MonoBehaviour
         characterAnimator.SetFloat("Speed", movementScript.moveSpeed);
         
         //roll and lead
-        characterAnimator.SetFloat("X", movementScript.lookValue.x, 1f, Time.deltaTime * 4);
-        characterAnimator.SetFloat("Y", movementScript.lookValue.y, 1f, Time.deltaTime * 4);
-
-        Debug.Log(movementScript.lookValue.x);
+        characterAnimator.SetFloat("X", movementScript.lookValue.x, 3f, Time.deltaTime * 4);
+        characterAnimator.SetFloat("Y", movementScript.lookValue.y, 3f, Time.deltaTime * 4);
 
         //jump
         if (movementScript.jumped)
@@ -46,13 +44,13 @@ public class AnimationFirstPerson : MonoBehaviour
             characterAnimator.SetBool("IsGrounded", false);
 
         //primary
-        if (abilityScript.primaryPressed)
+        if (abilityScript.primaryPressed && !GlobalVariables.gamePaused)
             characterAnimator.SetBool("IsPrimaryOn", true);
         else
             characterAnimator.SetBool("IsPrimaryOn", false);
 
         //secondary
-        if (abilityScript.secondaryPressed)
+        if (abilityScript.secondaryPressed && !GlobalVariables.gamePaused)
             characterAnimator.SetBool("IsSecondaryOn", true);
         else
             characterAnimator.SetBool("IsSecondaryOn", false);

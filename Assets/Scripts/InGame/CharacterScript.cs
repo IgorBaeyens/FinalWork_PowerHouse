@@ -30,17 +30,16 @@ public class CharacterScript : MonoBehaviourPunCallbacks
             mainCam.SetActive(true);
             firstPersonView.SetActive(true);
 
-            instantiatedCharacter = PhotonNetwork.Instantiate(character.name, gameObject.transform.position, Quaternion.identity);
+            instantiatedCharacter = PhotonNetwork.Instantiate(character.name, gameObject.transform.position + new Vector3(0, -0.05f, 0), Quaternion.identity);
             characterPhotonViewId = instantiatedCharacter.GetPhotonView().ViewID;
             photonView.RPC("ChangeCharacterParent", RpcTarget.AllBuffered, characterPhotonViewId);
 
             GameObject instantiatedCharacterFP = Instantiate(characterPrefabFP, transform.position, transform.rotation, firstPersonView.transform);
-            //GameObject instantiatedCharacterFP = Instantiate(characterPrefabFP, transform.position, transform.rotation, transform);
-
 
             foreach (Transform child in instantiatedCharacter.transform)
             {
                 child.gameObject.SetActive(false);
+                //instantiatedCharacterFP.SetActive(false);
             }
         }
 

@@ -44,6 +44,7 @@ public class GlobalVariables : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(GameObject.Find("EventSystem").gameObject);
         DontDestroyOnLoad(gameObject);
         selectedCharacter = (Character)Resources.Load("Characters/Flare/Flare", typeof(Character));
     }

@@ -64,22 +64,6 @@ public class AbilityHolder : MonoBehaviour
 
     void Update()
     {
-        if (photonView.IsMine)
-        {
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    character.primary.CastAbility();
-            //}
 
-            //if (Input.GetMouseButtonDown(1))
-            //{
-            //    character.secondary.CastAbility();
-            //}
-
-            //if (Input.GetKeyDown(KeyCode.Q))
-            //{
-            //    character.ultimate.CastAbility();
-            //}
-        }
     }
 }

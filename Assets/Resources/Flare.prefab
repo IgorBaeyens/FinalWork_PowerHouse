@@ -2289,19 +2289,30 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 1
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: Speed
+  - Type: 9
+    SynchronizeType: 1
+    Name: Blink
+  - Type: 1
+    SynchronizeType: 2
+    Name: X
+  - Type: 1
+    SynchronizeType: 2
+    Name: Y
   - Type: 4
     SynchronizeType: 0
-    Name: Backwards
-  - Type: 9
+    Name: IsGrounded
+  - Type: 4
     SynchronizeType: 0
-    Name: Blink
+    Name: PressedJump
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 2
     LayerIndex: 0
-  - SynchronizeType: 0
+  - SynchronizeType: 2
     LayerIndex: 1
+  - SynchronizeType: 0
+    LayerIndex: 2
 --- !u!1 &5400695657931019140
 GameObject:
   m_ObjectHideFlags: 0
