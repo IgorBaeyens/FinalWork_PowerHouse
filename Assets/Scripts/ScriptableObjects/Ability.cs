@@ -14,13 +14,10 @@ public class Ability : ScriptableObject
     public new string name;
     public Sprite icon;
     public int damage;
-    public int overtimeDamage;
     [TextArea(5, 10)]
     public string description;
     [TextArea(5, 10)]
     public string updatedDescription;
 
-
-    public virtual void CastAbility() { }
     
 }

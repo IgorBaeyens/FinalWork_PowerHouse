@@ -9,17 +9,19 @@ using Photon.Realtime;
 public class CharacterScript : MonoBehaviourPunCallbacks
 {
     private int characterPhotonViewId;
+    private int characterPhotonViewIdFP;
 
     public GameObject character;
-    private GameObject instantiatedCharacter;
     private GameObject characterPrefabFP;
+    private GameObject instantiatedCharacter;
+    private GameObject instantiatedCharacterFP;
     private GameObject mainCam;
     private GameObject firstPersonView;
 
     void Start()
     {
         //loads a prefab with the selected character name and FP after it in the resource folder
-        characterPrefabFP = (GameObject)Resources.Load(character.name + "FP", typeof(GameObject));
+        //characterPrefabFP = (GameObject)Resources.Load(character.name + "FP", typeof(GameObject));
 
         mainCam = gameObject.transform.Find("Main Camera").gameObject;
         firstPersonView = gameObject.transform.Find("First Person View").gameObject;
@@ -34,7 +36,10 @@ public class CharacterScript : MonoBehaviourPunCallbacks
             characterPhotonViewId = instantiatedCharacter.GetPhotonView().ViewID;
             photonView.RPC("ChangeCharacterParent", RpcTarget.AllBuffered, characterPhotonViewId);
 
-            GameObject instantiatedCharacterFP = Instantiate(characterPrefabFP, transform.position, transform.rotation, firstPersonView.transform);
+            //GameObject instantiatedCharacterFP = Instantiate(characterPrefabFP, transform.position, transform.rotation, firstPersonView.transform);
+            instantiatedCharacterFP = PhotonNetwork.Instantiate(character.name + "FP", gameObject.transform.position, Quaternion.identity);
+            characterPhotonViewIdFP = instantiatedCharacterFP.GetPhotonView().ViewID;
+            photonView.RPC("ChangeCharacterFPParent", RpcTarget.AllBuffered, characterPhotonViewIdFP);
 
             foreach (Transform child in instantiatedCharacter.transform)
             {
@@ -51,4 +56,10 @@ public class CharacterScript : MonoBehaviourPunCallbacks
         character.transform.SetParent(photonView.transform);
     }
 
+    [PunRPC]
+    void ChangeCharacterFPParent(int characterPhotonViewId)
+    {
+        Transform character = PhotonView.Find(characterPhotonViewId).transform;
+        character.transform.SetParent(photonView.transform.Find("First Person View").transform);
+    }
 }

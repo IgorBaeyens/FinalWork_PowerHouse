@@ -60,18 +60,10 @@ public class AnimationFirstPerson : MonoBehaviour
         
     }
 
-    public void CastPrimary()
-    {
-        abilityScript.CastPrimary();
-    }
 
-    public void CastSecondary()
-    {
-        abilityScript.CastSecondary();
-        LTSeq sequence = LeanTween.sequence();
-        sequence.append(LeanTween.scale(reticle.gameObject, new Vector3(1.2f, 1.2f, 1.2f), 0.05f).setEase(LeanTweenType.easeInElastic));
-        sequence.append(0.2f);
-        sequence.append(LeanTween.scale(reticle.gameObject, new Vector3(1, 1, 1), 0.2f));
-        
-    }
+        //LTSeq sequence = LeanTween.sequence();
+        //sequence.append(LeanTween.scale(reticle.gameObject, new Vector3(1.2f, 1.2f, 1.2f), 0.05f).setEase(LeanTweenType.easeInElastic));
+        //sequence.append(0.2f);
+        //sequence.append(LeanTween.scale(reticle.gameObject, new Vector3(1, 1, 1), 0.2f));
+
 }

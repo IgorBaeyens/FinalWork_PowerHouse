@@ -18,5 +18,5 @@ MonoBehaviour:
   model: {fileID: 919132149155446097, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
   icon: {fileID: 21300000, guid: 527593f071b594744a4652a1b790c904, type: 3}
   primary: {fileID: 11400000, guid: aef2af7025b4c5e4cb4954304096c917, type: 2}
-  secondary: {fileID: 11400000, guid: 3abc1849d5c2d3345884ddb263affe99, type: 2}
+  secondary: {fileID: 11400000, guid: 8672f7532fdc7bd4d88955deb330d2f9, type: 2}
   ultimate: {fileID: 11400000, guid: de95feefea191c345b263e58cef2db6b, type: 2}

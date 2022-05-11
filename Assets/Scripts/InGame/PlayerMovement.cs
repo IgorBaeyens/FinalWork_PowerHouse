@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public int sensitivity = 10;
     //private int speed = GlobalVariables.selectedCharacter.speed / 10;
     public int speed = 10;
-    private float jumpHeight = 0.2f;
+    private float jumpHeight = 1f;
     public float moveSpeed;
   
     private InputActions inputActions;
@@ -62,15 +62,19 @@ public class PlayerMovement : MonoBehaviour
             Vector3 move = transform.right * moveX + transform.forward * moveZ;
             moveSpeed = new Vector2(moveX, moveZ).magnitude;
 
-            if (controller.isGrounded && velocity.y < 0)
+            //gravity
+            if (controller.isGrounded)
+            {
                 velocity.y = -0.1f;
-
-            if (controller.isGrounded && jumped)
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * -gravity);
-
-            velocity.y -= gravity * Time.deltaTime;
+                if(jumped) 
+                    velocity.y = jumpHeight;
+            } else
+                velocity.y -= gravity * Time.deltaTime;          
             move += velocity;
+
+
             controller.Move(move * speed * Time.deltaTime);
+            Debug.Log(velocity);
 
             //look
             lookValue *= 0.5f;

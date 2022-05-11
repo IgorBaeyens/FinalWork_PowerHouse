@@ -39,6 +39,9 @@ MonoBehaviour:
   - changeParent
   - ChangeParent
   - ChangeCharacterParent
+  - AbilityLogic
+  - LogicSecondary
+  - ChangeCharacterFPParent
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

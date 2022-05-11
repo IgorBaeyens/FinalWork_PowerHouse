@@ -44,20 +44,15 @@ public class CharacterSelect : MonoBehaviourPunCallbacks
 
             UpdateDescription(primary, "(damage)", primary.damage.ToString() + " damage");
             UpdateDescription(secondary, "(damage)", secondary.damage.ToString() + " damage");
-            UpdateDescription(ultimate, "(damage)", ultimate.damage.ToString() + " damage", "(overtimeDamage)", ultimate.overtimeDamage.ToString() + " damage");
+            UpdateDescription(ultimate, "(damage)", ultimate.damage.ToString() + " damage");
 
             playerProperties["chara"] = GlobalVariables.selectedCharacter.name;
             PhotonNetwork.SetPlayerCustomProperties(playerProperties);
         }
     }
 
-    void UpdateDescription(Ability ability, string damageText, string damage, string overtimeDamageText = "(empty)", string overtimeDamage = "")
+    void UpdateDescription(Ability ability, string damageText, string damage)
     {
         ability.updatedDescription = ability.description.Replace(damageText, damage);
-        if (ability.overtimeDamage > 0)
-        {
-            ability.updatedDescription = ability.updatedDescription.Replace(overtimeDamageText, overtimeDamage);
-        }
-
     }
 }

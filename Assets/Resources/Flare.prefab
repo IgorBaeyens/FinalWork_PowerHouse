@@ -2301,17 +2301,17 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Y
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: IsGrounded
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 2
     Name: PressedJump
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
   - SynchronizeType: 2
     LayerIndex: 1
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 2
 --- !u!1 &5400695657931019140
 GameObject:
