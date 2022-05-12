@@ -2,21 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//apply gravity to gameobject
+//when gameobject enters trigger with tag GravityTrigger align to y axis of the gravity vector.
+
 public class Gravity : MonoBehaviour
 {
-    public float gravity = 2f;
-    private Vector3 velocity;
-    private CharacterController controller;
+    private new Rigidbody rigidbody;
+    private bool insideGravityTrigger = false;
+    private Transform gravityVector;
 
-    // Start is called before the first frame update
     void Start()
     {
-        controller = gameObject.GetComponent<CharacterController>();
+        rigidbody = gameObject.GetComponent<Rigidbody>();
+        rigidbody.freezeRotation = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        velocity.y -= gravity * Time.deltaTime;
+        rigidbody.AddRelativeForce(new Vector3(0, -15, 0));
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("GravityTrigger"))
+        {
+            gravityVector = other.transform.Find("Gravity Vector").transform;
+
+            if (transform.up != gravityVector.up)
+            {
+                Quaternion rotation = Quaternion.FromToRotation(transform.up, gravityVector.up) * transform.rotation;
+                
+                //TODO: mouse movement cannot interupt this, it causes jittering
+                iTween.RotateTo(gameObject, rotation.eulerAngles, 1f);
+            }
+        }
+    }
+
 }

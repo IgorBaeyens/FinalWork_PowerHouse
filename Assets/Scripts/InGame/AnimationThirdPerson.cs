@@ -34,7 +34,7 @@ public class AnimationThirdPerson : MonoBehaviour
             characterAnimator.SetBool("PressedJump", false);
 
         //land
-        if (movementScript.controller.isGrounded)
+        if (movementScript.isGrounded)
             characterAnimator.SetBool("IsGrounded", true);
         else
             characterAnimator.SetBool("IsGrounded", false);
