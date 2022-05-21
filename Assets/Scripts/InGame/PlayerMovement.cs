@@ -11,6 +11,7 @@ using Photon.Pun;
 public class PlayerMovement : MonoBehaviour
 {
     private PhotonView photonView;
+    private Gravity gravityScript;
 
     public int sensitivity = 10;
     //private int speed = GlobalVariables.selectedCharacter.speed / 10;
@@ -38,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        gravityScript = GetComponent<Gravity>();
+
         playerRigidbody = GetComponent<Rigidbody>();
 
         DistanceToTheGround = GetComponent<Collider>().bounds.extents.y;
@@ -49,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
         firstPersonView = gameObject.transform.Find("First Person View").gameObject;
 
         photonView = GetComponent<PhotonView>();
+
+        firstPersonView.transform.localRotation = Quaternion.Euler(40, 0, 0);
     }
 
     void Update()
@@ -89,11 +94,28 @@ public class PlayerMovement : MonoBehaviour
             lookX = lookValue.x * sensitivity;
             lookY = lookValue.y * sensitivity;
 
-            xAxisRotation += lookY;
-            xAxisRotation = Mathf.Clamp(xAxisRotation, -80, 70);
+            
+            //xAxisRotation += lookY;
+            //xAxisRotation = Mathf.Clamp(xAxisRotation, -90, 80);
 
             playerRigidbody.transform.Rotate(Vector3.up * lookX);
-            firstPersonView.transform.localRotation = Quaternion.Euler(xAxisRotation, 0, 0);
+            firstPersonView.transform.Rotate(Vector3.right * lookY);
+
+            //firstPersonView.transform.localEulerAngles = new Vector3(ClampAngle(firstPersonView.transform.localEulerAngles.x, 260, 80), 0, 0);
+
+            float ClampAngle(float angle, float min, float max)
+            {
+
+                if (angle < 90 || angle > 270)
+                {       // if angle in the critic region...
+                    if (angle > 180) angle -= 360;  // convert all angles to -180..+180
+                    if (max > 180) max -= 360;
+                    if (min > 180) min -= 360;
+                }
+                angle = Mathf.Clamp(angle, min, max);
+                if (angle < 0) angle += 360;  // if angle negative, convert to 0..360
+                return angle;
+            }
 
         }
     }  

@@ -24,8 +24,8 @@ public class FireBomb : MonoBehaviourPun
     [PunRPC] 
     protected virtual void LogicSecondary()
     {
-        GameObject fireBomb = Instantiate(fireBombPrefab, launchingSpot.position, gameObject.transform.rotation);
+        GameObject fireBomb = Instantiate(fireBombPrefab, launchingSpot.position, gameObject.transform.parent.parent.rotation);
         Rigidbody fireBombRigidbody = fireBomb.GetComponent<Rigidbody>();
-        fireBombRigidbody.AddForce(transform.forward * 16 + transform.up * 2, ForceMode.Impulse);
+        fireBombRigidbody.AddForce(transform.forward * 32 + transform.up * 1, ForceMode.Impulse);
     }
 }
