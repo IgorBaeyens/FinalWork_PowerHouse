@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Floor
+    second: {fileID: 2100000, guid: 44b310583793cea4db48caf2b0a17b08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Level
     second: {fileID: 2100000, guid: 51312bbb95f798f4686ad3e24b20425a, type: 2}
   - first:
@@ -14,6 +19,26 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material
     second: {fileID: 2100000, guid: ff73587b10f0ca345808673e09d82d5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Seats_And_Tables
+    second: {fileID: 2100000, guid: 3039487f0151a8b4fb38fc4dd9ac4256, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Seats_And_TablesChair-NM
+    second: {fileID: 2800000, guid: 2fc10325fe4318244ab4a4d527f8c5e3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Versailles-Wood_Color
+    second: {fileID: 2800000, guid: 1975b6be1c730d344a2a7c472df16410, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Versailles-Wood_Roughness
+    second: {fileID: 2800000, guid: 47696df563c3eea43947a499faa62980, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -72,7 +97,7 @@ ModelImporter:
     secondaryUVMarginMethod: 0
     secondaryUVMinLightmapResolution: 15
     secondaryUVMinObjectScale: 1
-    secondaryUVPackMargin: 4
+    secondaryUVPackMargin: 15
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60

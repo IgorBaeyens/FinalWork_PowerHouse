@@ -52,8 +52,6 @@ public class PlayerMovement : MonoBehaviour
         firstPersonView = gameObject.transform.Find("First Person View").gameObject;
 
         photonView = GetComponent<PhotonView>();
-
-        firstPersonView.transform.localRotation = Quaternion.Euler(40, 0, 0);
     }
 
     void Update()
@@ -82,11 +80,10 @@ public class PlayerMovement : MonoBehaviour
             }
 
             playerRigidbody.position += move * speed * Time.deltaTime;
-            
 
             //gameObject.transform.position += move * speed * Time.deltaTime;
             //controller.Move(move * speed * Time.deltaTime);
-            
+
 
             //look
             lookValue *= 0.5f;

@@ -380,6 +380,8 @@ GameObject:
   - component: {fileID: -175466845872335119}
   - component: {fileID: 6983948943595797154}
   - component: {fileID: 828803004370758375}
+  - component: {fileID: 3347720121456985296}
+  - component: {fileID: 3104941708300931829}
   m_Layer: 3
   m_Name: FlareFP
   m_TagString: Untagged
@@ -472,6 +474,67 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &3347720121456985296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790272117716450331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &3104941708300931829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790272117716450331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 1
+    SynchronizeType: 0
+    Name: Speed
+  - Type: 1
+    SynchronizeType: 0
+    Name: X
+  - Type: 1
+    SynchronizeType: 0
+    Name: Y
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsGrounded
+  - Type: 4
+    SynchronizeType: 0
+    Name: PressedJump
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsPrimaryOn
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsSecondaryOn
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
+  - SynchronizeType: 0
+    LayerIndex: 2
+  - SynchronizeType: 0
+    LayerIndex: 3
 --- !u!1 &1868154443988128135
 GameObject:
   m_ObjectHideFlags: 0

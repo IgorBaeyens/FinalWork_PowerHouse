@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 7912261279563105677}
   - component: {fileID: -672089980984580313}
   - component: {fileID: -8291123340118692377}
+  - component: {fileID: 729482973030690997}
+  - component: {fileID: 7322353262685014698}
   m_Layer: 0
   m_Name: Fire Bomb
   m_TagString: Untagged
@@ -93,7 +95,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7912261279563105676}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fa0ba5108f16804409779f8038738e5d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -107,9 +109,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7912261279563105676}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.03
+  m_Mass: 0.59
+  m_Drag: 0.84
+  m_AngularDrag: 0.24
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -235,3 +237,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b6ab1a0122233d4482286c71af67dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  insideGravityTrigger: 0
+  storedPlayerRotation: {x: 0, y: 0, z: 0}
+--- !u!114 &729482973030690997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7912261279563105676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cf9a62a76bc1b1489bcaa7224057aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &7322353262685014698
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7912261279563105676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.86
+  m_Center: {x: 0, y: 0, z: 0}

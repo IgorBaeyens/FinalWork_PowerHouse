@@ -13,8 +13,9 @@ public class Gravity : MonoBehaviour
     public bool insideGravityTrigger = false;
     private Transform gravityVector;
     private Transform playerFP;
+    private Vector3 storedObjectForward;
     private Vector3 storedPlayerForward;
-    public float storedPlayerRotation;
+    public Vector3 storedPlayerRotation;
 
     void Start()
     {
@@ -35,22 +36,30 @@ public class Gravity : MonoBehaviour
 
             if (transform.up != gravityVector.up)
             {
+                storedObjectForward = transform.forward;
+                float angle = Vector3.Angle(transform.up, gravityVector.up);
 
                 if (gameObject.CompareTag("Player"))
                 {
                     playerFP = gameObject.transform.Find("First Person View");
                     storedPlayerForward = playerFP.forward;
+                    storedPlayerRotation = playerFP.eulerAngles;
                 }
-                
-                Quaternion rotation = Quaternion.FromToRotation(transform.up, gravityVector.up) * transform.rotation;
 
-                //TODO: mouse movement cannot interupt this, it causes jittering
-                iTween.RotateTo(gameObject, rotation.eulerAngles, 0.5f);
+                Quaternion rotation;
+                if (angle >= 180)
+                {
+                    rotation = Quaternion.LookRotation(storedObjectForward, gravityVector.up);
+                } else
+                {
+                    rotation = Quaternion.FromToRotation(transform.up, gravityVector.up) * transform.rotation;
+                }
+
+                iTween.RotateTo(gameObject, rotation.eulerAngles, 1f);
 
                 if (gameObject.CompareTag("Player"))
                 {
-                    Quaternion rotationFP = Quaternion.FromToRotation(playerFP.forward, storedPlayerForward) * playerFP.rotation;
-                    iTween.RotateTo(playerFP.gameObject, rotation.eulerAngles, 0.5f);
+                    iTween.RotateTo(playerFP.gameObject, rotation.eulerAngles, 1f);
                 }
             }
         }
