@@ -2,8 +2,122 @@ fileFormatVersion: 2
 guid: bcf0615ccbd51fd4c91738ccc2c4f7ed
 ModelImporter:
   serializedVersion: 21100
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 7138199392974408105
+    second: Coffee Table Wide|Coffee Table WideAction
+  - first:
+      74: 5948425393138887310
+    second: Coffee Table Wide|Roof Decoration.002Action
+  - first:
+      74: 4359129111489592909
+    second: Coffee Table Wide|Roof Decoration.016Action
+  - first:
+      74: 489299867923147094
+    second: Roof Decoration.016|Coffee Table WideAction
+  - first:
+      74: -5297657767320146437
+    second: Roof Decoration.016|Roof Decoration.002Action
+  - first:
+      74: 4381991960201358246
+    second: Roof Decoration.016|Roof Decoration.016Action
+  - first:
+      74: 2445035699991463834
+    second: Roof Decoration.017|Coffee Table WideAction
+  - first:
+      74: -2189811783980621785
+    second: Roof Decoration.017|Roof Decoration.002Action
+  - first:
+      74: -6793748014284386561
+    second: Roof Decoration.017|Roof Decoration.016Action
+  - first:
+      74: 7589916751210424496
+    second: Roof Decoration.018|Coffee Table WideAction
+  - first:
+      74: 8334308590818754352
+    second: Roof Decoration.018|Roof Decoration.002Action
+  - first:
+      74: 6322321716238733139
+    second: Roof Decoration.018|Roof Decoration.016Action
+  - first:
+      74: -8391252474740669730
+    second: Roof Decoration.019|Coffee Table WideAction
+  - first:
+      74: 2592726547293757376
+    second: Roof Decoration.019|Roof Decoration.002Action
+  - first:
+      74: -1579215724014512935
+    second: Roof Decoration.019|Roof Decoration.016Action
+  - first:
+      74: 4136780374731790090
+    second: Roof Decoration.002|Coffee Table WideAction
+  - first:
+      74: -3127810305858712469
+    second: Roof Decoration.002|Roof Decoration.002Action
+  - first:
+      74: 5540321567204815234
+    second: Roof Decoration.002|Roof Decoration.016Action
+  - first:
+      74: -189494563370207245
+    second: Roof Decoration.012|Coffee Table WideAction
+  - first:
+      74: 156115729073340535
+    second: Roof Decoration.012|Roof Decoration.002Action
+  - first:
+      74: 1523952594289455007
+    second: Roof Decoration.012|Roof Decoration.016Action
+  - first:
+      74: 3774741083335943739
+    second: Roof Decoration.013|Coffee Table WideAction
+  - first:
+      74: -3579375891796348916
+    second: Roof Decoration.013|Roof Decoration.002Action
+  - first:
+      74: 806017321880735641
+    second: Roof Decoration.013|Roof Decoration.016Action
+  - first:
+      74: 2218618241282132407
+    second: Roof Decoration.014|Coffee Table WideAction
+  - first:
+      74: -2593195085898167301
+    second: Roof Decoration.014|Roof Decoration.002Action
+  - first:
+      74: 2326440017257215711
+    second: Roof Decoration.014|Roof Decoration.016Action
+  - first:
+      74: 6959410249787410175
+    second: Roof Decoration.015|Coffee Table WideAction
+  - first:
+      74: 1516192016730448541
+    second: Roof Decoration.015|Roof Decoration.002Action
+  - first:
+      74: 2823582169027592574
+    second: Roof Decoration.015|Roof Decoration.016Action
+  - first:
+      74: 1505934473015060644
+    second: Coffee Table Wide.001|Coffee Table WideAction
+  - first:
+      74: -2652242235308270223
+    second: Coffee Table Wide.001|Roof Decoration.002Action
+  - first:
+      74: -5493218329512640595
+    second: Coffee Table Wide.001|Roof Decoration.016Action
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bed_And_Bookcase
+    second: {fileID: 2100000, guid: d8bb1f8d2fd354646ae652dd0f1e6bd8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: f5cfb4b6d986c384ca27bc23d4677d89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: 5d926cf2032af964daf3fcdbb9337e46, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -12,8 +126,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Hearth
+    second: {fileID: 2100000, guid: c46b5cced26e67c4898a81d0268bdd3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Level
     second: {fileID: 2100000, guid: 51312bbb95f798f4686ad3e24b20425a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lights_And_Windows
+    second: {fileID: 2100000, guid: e013a942ee9e88541ac6470ae869871d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lights_And_Windows 1
+    second: {fileID: 2100000, guid: 14614c1be87760b4993ec325f7f1f7d7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -22,8 +151,93 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Roof
+    second: {fileID: 2100000, guid: f87bb80f0717a034bb9f4dea102d3627, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Seats_And_Tables
     second: {fileID: 2100000, guid: 3039487f0151a8b4fb38fc4dd9ac4256, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stairs
+    second: {fileID: 2100000, guid: d7fbce111e6675341be4656a38a08c04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tiled_Horizontal
+    second: {fileID: 2100000, guid: eaf0b45d6241ea449a577231b3ac5a85, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall
+    second: {fileID: 2100000, guid: a955f285b39db8041af9cea94cc19b30, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bed_And_Bookcase_Base_Color
+    second: {fileID: 2800000, guid: 1b3df9176e8b1c1478002671129f8b90, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Bed_And_Bookcase_Roughness
+    second: {fileID: 2800000, guid: a6f3fd22bea77b749a940e13f1ce8fc5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Door_Base_Color
+    second: {fileID: 2800000, guid: 8a1ed58a3e0c631489b0b9d2bd1dab6e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Door_Roughness
+    second: {fileID: 2800000, guid: 121ab022bf1c47944ad3f7d2ab758191, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Floor_Base_Color
+    second: {fileID: 2800000, guid: 3dfd8c65804239e41a5ac46c70786b94, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Floor_Roughness
+    second: {fileID: 2800000, guid: d4a9d730fe1d65f48933801345d3af3b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Lights_And_Windows_Base_Color
+    second: {fileID: 2800000, guid: 5065dffd4b88eb046aa4a5aa4b3ba764, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Lights_And_Windows_Emissive
+    second: {fileID: 2800000, guid: a0ea430d058e8054eabd992899d5dd49, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Lights_And_Windows_Metallic
+    second: {fileID: 2800000, guid: 1dcd62c84b1ad954c8601c3abaf05b51, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Lights_And_Windows_Opacity
+    second: {fileID: 2800000, guid: 7babdc22a6f7ccd449861ed15c828f92, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Lights_And_Windows_Roughness
+    second: {fileID: 2800000, guid: 22dcfffeff0b9d04db7a80d7d7b2116b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Roof_Base_Color
+    second: {fileID: 2800000, guid: b66c444a82e393048aea581d043d299f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Roof_Roughness
+    second: {fileID: 2800000, guid: 3014ffdbb913c644d960b1defc4bd47c, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
@@ -32,13 +246,63 @@ ModelImporter:
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
+      name: Seats_And_Tables_Base_Color
+    second: {fileID: 2800000, guid: e340170e19f46cd4d94fc2ea5007ea10, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Seats_And_Tables_Metallic
+    second: {fileID: 2800000, guid: a67bfc4331fd5e944ab4cf11703726f8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Seats_And_Tables_Normal_OpenGL
+    second: {fileID: 2800000, guid: dfe3b6f18b9b9054399507d52e64084c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Seats_And_Tables_Roughness
+    second: {fileID: 2800000, guid: 0e750fdd96ba14e4da632ff477454448, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Stairs_Base_Color
+    second: {fileID: 2800000, guid: 4984612b965e0394d819590e801762a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Stairs_Roughness
+    second: {fileID: 2800000, guid: ec96b6d368e3cfb46a7a34db8af4d953, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tiled_Horizontal_Base_Color
+    second: {fileID: 2800000, guid: 899398cc54301704b82b7f4966c72769, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tiled_Horizontal_Roughness
+    second: {fileID: 2800000, guid: d5bfc4a1eec9eae44ad98cdb614b5788, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
       name: Versailles-Wood_Color
-    second: {fileID: 2800000, guid: 1975b6be1c730d344a2a7c472df16410, type: 3}
+    second: {fileID: 2800000, guid: 7750e4e75e8436248a16eb3fbd2c5653, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Versailles-Wood_Roughness
-    second: {fileID: 2800000, guid: 47696df563c3eea43947a499faa62980, type: 3}
+    second: {fileID: 2800000, guid: f00409559c713324ca42b570254af14f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wall_Base_Color
+    second: {fileID: 2800000, guid: c85afc48e9e378a478259f3af2b7c834, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Wall_Roughness
+    second: {fileID: 2800000, guid: 69bed73c3484e7a44a068fb8455fd3f1, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

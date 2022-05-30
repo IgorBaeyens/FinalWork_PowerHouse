@@ -43,9 +43,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.7705646, b: 0.5235849, a: 1}
-  m_Intensity: 15.6
-  m_Range: 25.54
+  m_Color: {r: 0.9056604, g: 0.5662319, b: 0.49982202, a: 1}
+  m_Intensity: 38.2
+  m_Range: 19.3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
