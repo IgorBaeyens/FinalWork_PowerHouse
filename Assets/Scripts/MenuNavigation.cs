@@ -34,30 +34,11 @@ public class MenuNavigation : MonoBehaviourPunCallbacks
         activeMenu = rooms;
     }
 
-    void Update()
+    public void GoToMenu(string menuName)
     {
-        
-    }
-
-    public void ChangeMenu(GameObject nextMenu)
-    {
+        GameObject nextMenu = gameObject.transform.Find(menuName).gameObject;
         activeMenu.SetActive(false);
         nextMenu.SetActive(true);
         activeMenu = nextMenu;
-    }
-
-    public void PressedCreateRoom()
-    {
-        ChangeMenu(createRoom);
-    }
-
-    public void GoToRoom()
-    {
-        ChangeMenu(room);
-    }
-
-    public void BackToRooms()
-    {
-        ChangeMenu(rooms);
     }
 }

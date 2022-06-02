@@ -4,19 +4,21 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
-public class CreateRoom : MonoBehaviourPunCallbacks
+public class RoomCreate : MonoBehaviourPunCallbacks
 {
     public TMP_InputField roomNameInput;
     public TMP_Dropdown gameMode;
     public TMP_Dropdown map;
     public TMP_Text playerCountText;
 
+    private MenuNavigation menuNav;
     private int playerCount = 2;
 
     private ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
 
     void Start()
     {
+        menuNav = FindObjectOfType<MenuNavigation>();
         playerCountText.text = playerCount.ToString();
     }
 
@@ -39,7 +41,7 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     }
 
     //everytime this function is called create a room with roomname, max players and custom properties
-    public void CreateTheRoom()
+    public void CreateRoom()
     {
         string roomName;
         if (roomNameInput.placeholder.GetComponent<TMP_Text>().enabled)
@@ -54,6 +56,11 @@ public class CreateRoom : MonoBehaviourPunCallbacks
             CustomRoomProperties = customProperties, 
             CustomRoomPropertiesForLobby = new string[] { "gm", "map", "host" },
             });
+    }
+
+    public override void OnCreatedRoom()
+    {
+        menuNav.GoToMenu("---Room---");
     }
 
 }

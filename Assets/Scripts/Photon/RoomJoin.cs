@@ -6,7 +6,7 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
+public class RoomJoin : MonoBehaviourPunCallbacks
 {
     public TMP_Text lobbyTitle;
     public TMP_Text hostName;
@@ -24,14 +24,13 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
     public RoomItem lobbyItemPrefab;
     private Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
 
-    public MenuNavigation menuNav;
-    public string host;
+    private MenuNavigation menuNav;
+    private string host;
 
     private void Start()
     {
-        PhotonNetwork.JoinLobby();
-        PhotonNetwork.AutomaticallySyncScene = true;
         beginButton.SetActive(false);
+        menuNav = FindObjectOfType<MenuNavigation>();
     }
 
     //updates the room info in the room itself
@@ -60,40 +59,15 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         {
             team = teamTwoPlayers;
             teamTwo.Add(player);
-        } else
+        }
+        else
         {
             team = teamOnePlayers;
             teamOne.Add(player);
         }
-        
+
         GameObject playerNameInstance = Instantiate(playerNamePrefab, team.transform);
         playerNameInstance.GetComponent<PlayerNameItem>().SetUp(player);
-    }
-
-    public void beginGame()
-    {
-        PhotonNetwork.LoadLevel("Character Select");
-    }
-
-    public void JoinRoom(string roomName)
-    {
-        PhotonNetwork.JoinRoom(roomName);
-    }
-
-    public void LeaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-    }
-
-    public void disconnect()
-    {
-        PhotonNetwork.Disconnect();
-    }
-
-    //when a room is created update its info and go to that room
-    public override void OnCreatedRoom()
-    {
-        menuNav.GoToRoom();
     }
 
     //when player joins a room
@@ -108,21 +82,12 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         }
 
         UpdateRoomInfo();
-        menuNav.GoToRoom();
+        menuNav.GoToMenu("---Room---");
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         InstantiatePlayerName(newPlayer);
-    }
-
-    //TODO: teams should be stored online
-    //when you specifically leave the room, go to the rooms menu
-    public override void OnLeftRoom()
-    {
-        menuNav.BackToRooms();
-        //teamOne.Clear();
-        //teamTwo.Clear();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -133,19 +98,9 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
             teamTwo.Remove(otherPlayer);
         UpdateRoomInfo();
     }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        GlobalVariables.switchToScene(Scene.mainMenu);
-    }
-
+  
     //When a player leaves or enters a room, or anything at all changes in the roominfo
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    {
-        UpdateRoomList(roomList);
-    }
-
-    void UpdateRoomList(List<RoomInfo> roomList)
     {
         foreach (Transform child in rooms.transform)
         {
@@ -157,7 +112,8 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
             if (!room.RemovedFromList)
             {
                 cachedRoomList[room.Name] = room;
-            } else
+            }
+            else
             {
                 cachedRoomList.Remove(room.Name);
             }
@@ -170,8 +126,4 @@ public class CreateAndJoinRoom : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnConnectedToMaster()
-    {
-        PhotonNetwork.JoinLobby();
-    }
 }

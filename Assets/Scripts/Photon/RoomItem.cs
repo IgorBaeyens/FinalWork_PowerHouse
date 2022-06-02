@@ -12,11 +12,11 @@ public class RoomItem : MonoBehaviour
     public TMP_Text mapName;
     public TMP_Text playerCount;
 
-    private CreateAndJoinRoom roomScript;
+    private GameManager gameManager;
 
     private void Start()
     {
-        roomScript = FindObjectOfType<CreateAndJoinRoom>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     public void SetRoomInfo(RoomInfo room)
@@ -33,6 +33,6 @@ public class RoomItem : MonoBehaviour
 
     public void onClickItem()
     {
-        roomScript.JoinRoom(lobbyName.text);
+        gameManager.JoinRoom(lobbyName.text);
     }
 }

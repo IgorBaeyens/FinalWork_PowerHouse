@@ -10,11 +10,13 @@ public class FlareSecondary : MonoBehaviourPun
     private Quaternion myFPCameraRotation;
 
     public Transform launchingSpot;
+    private Animator launchEffect;
     public GameObject fireBombPrefab;
 
     void Start()
     {
         firstPersonViewId = photonView.ViewID;
+        launchEffect = launchingSpot.GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -30,6 +32,7 @@ public class FlareSecondary : MonoBehaviourPun
     public void CastSecondary()
     {
         photonView.RPC("LogicSecondary", RpcTarget.All, firstPersonViewId, myFPCameraRotation);
+        launchEffect.SetTrigger("Fire");
     }
 
     [PunRPC] 

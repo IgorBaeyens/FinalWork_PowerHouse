@@ -20,9 +20,6 @@ public class CharacterScript : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        //loads a prefab with the selected character name and FP after it in the resource folder
-        //characterPrefabFP = (GameObject)Resources.Load(character.name + "FP", typeof(GameObject));
-
         mainCam = gameObject.transform.Find("Main Camera").gameObject;
         firstPersonView = gameObject.transform.Find("First Person View").gameObject;
 
@@ -36,7 +33,6 @@ public class CharacterScript : MonoBehaviourPunCallbacks
             characterPhotonViewId = instantiatedCharacter.GetPhotonView().ViewID;
             photonView.RPC("ChangeCharacterParent", RpcTarget.AllBuffered, characterPhotonViewId);
 
-            //GameObject instantiatedCharacterFP = Instantiate(characterPrefabFP, transform.position, transform.rotation, firstPersonView.transform);
             instantiatedCharacterFP = PhotonNetwork.Instantiate(character.name + "FP", gameObject.transform.position, Quaternion.identity);
             characterPhotonViewIdFP = instantiatedCharacterFP.GetPhotonView().ViewID;
             photonView.RPC("ChangeCharacterFPParent", RpcTarget.AllBuffered, characterPhotonViewIdFP);
@@ -44,7 +40,6 @@ public class CharacterScript : MonoBehaviourPunCallbacks
             foreach (Transform child in instantiatedCharacter.transform)
             {
                 child.gameObject.SetActive(false);
-                //instantiatedCharacterFP.SetActive(false);
             }
         }
 
