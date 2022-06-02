@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class TimerCharacterSelect : Timer
 {
+    private GameManager gameManager;
+
+    protected override void Start()
+    {
+        base.Start();
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
     public override void Event()
     {
-        GlobalVariables.switchToScene(Scene.inGame);
+        gameManager.LoadLevel("In Game");
     }
 }

@@ -5,10 +5,8 @@ using UnityEngine;
 public class InGameMenuNav : MonoBehaviour
 {
     private InputActions inputActions;
+    private GameObject pauseMenu;
     private bool pressedPause;
-
-    private List<GameObject> menus = new List<GameObject>();
-    private GameObject gameHUD, pauseMenu;
 
     void Start()
     {
@@ -17,25 +15,8 @@ public class InGameMenuNav : MonoBehaviour
         inputActions = new InputActions();
         inputActions.Player.Enable();
 
-        //gets only the first generation children
-        foreach (Transform child in gameObject.transform)
-            menus.Add(child.gameObject);
-
-        //sets menu variables
-        foreach (GameObject menu in menus)
-        {
-            switch (menu.name)
-            {
-                case "---Game HUD---":
-                    gameHUD = menu;
-                    break;
-                case "---Pause Menu---":
-                    pauseMenu = menu;
-                    menu.SetActive(false);
-                    break;
-            }
-        }
-
+        pauseMenu = transform.Find("---Pause Menu---").gameObject;
+        pauseMenu.SetActive(false);
     }
 
     void Update()
@@ -45,16 +26,26 @@ public class InGameMenuNav : MonoBehaviour
         //unpause the game
         if (pressedPause && GlobalVariables.gamePaused)
         {
-            pauseMenu.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
-            GlobalVariables.gamePaused = false;
+            Unpause();
         }
         //pause the game
         else if (pressedPause && !GlobalVariables.gamePaused)
         {
-            pauseMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            GlobalVariables.gamePaused = true;
+            Pause();
         }
+    }
+
+    public void Unpause()
+    {
+        pauseMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        GlobalVariables.gamePaused = false;
+    }
+
+    public void Pause()
+    {
+        pauseMenu.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        GlobalVariables.gamePaused = true;
     }
 }

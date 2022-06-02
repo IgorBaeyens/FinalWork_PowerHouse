@@ -15,10 +15,12 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     public GameObject beginButton;
 
     public GameObject playerNamePrefab;
-    public GameObject teamOnePlayers;
-    private List<Player> teamOne = new List<Player>();
-    public GameObject teamTwoPlayers;
-    private List<Player> teamTwo = new List<Player>();
+    public GameObject blueTeamMembers;
+    public GameObject redTeamMembers;
+
+    private Player[] playersInRoom;
+    private List<Player> blueTeam = new List<Player>();
+    private List<Player> redTeam = new List<Player>();
 
     public GameObject rooms;
     public RoomItem lobbyItemPrefab;
@@ -31,6 +33,11 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     {
         beginButton.SetActive(false);
         menuNav = FindObjectOfType<MenuNavigation>();
+    }
+
+    void GetPlayersInRoom()
+    {
+        playersInRoom = PhotonNetwork.PlayerList;
     }
 
     //updates the room info in the room itself
@@ -55,15 +62,18 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     {
         GameObject team;
 
-        if (teamOne.Count > teamTwo.Count)
+
+
+
+        if (blueTeam.Count > redTeam.Count)
         {
-            team = teamTwoPlayers;
-            teamTwo.Add(player);
+            team = redTeamMembers;
+            redTeam.Add(player);
         }
         else
         {
-            team = teamOnePlayers;
-            teamOne.Add(player);
+            team = blueTeamMembers;
+            blueTeam.Add(player);
         }
 
         GameObject playerNameInstance = Instantiate(playerNamePrefab, team.transform);
@@ -92,10 +102,10 @@ public class RoomJoin : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        if (teamOne.Contains(otherPlayer))
-            teamOne.Remove(otherPlayer);
-        else if (teamTwo.Contains(otherPlayer))
-            teamTwo.Remove(otherPlayer);
+        if (blueTeam.Contains(otherPlayer))
+            blueTeam.Remove(otherPlayer);
+        else if (redTeam.Contains(otherPlayer))
+            redTeam.Remove(otherPlayer);
         UpdateRoomInfo();
     }
   

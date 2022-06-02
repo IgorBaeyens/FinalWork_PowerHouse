@@ -33,5 +33,16 @@ public class SpawnPlayers : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+    }
+
+    //[PunRPC]
+    //void SpawnPlayer()
+    //{
+
+    //}
+
 
 }
