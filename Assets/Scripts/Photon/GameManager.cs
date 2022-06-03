@@ -8,14 +8,14 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    private GameObject eventSystem;
+    private GameObject globalVars;
+
     private PhotonTeamsManager teamsManager;
     private int blueTeamMembersCount;
     private int redTeamMembersCount;
     public Player[] blueTeamMembers;
     public Player[] redTeamMembers;
-
-    private MenuNavigation menuNav;
-    Scene currentScene;
 
     private void Awake()
     {
@@ -23,15 +23,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
 
         teamsManager = GetComponent<PhotonTeamsManager>();
-        menuNav = FindObjectOfType<MenuNavigation>();
+        
     }
 
     private void Start()
     {
-        PhotonTeamsManager.PlayerJoinedTeam -= OnPlayerJoinedTeam;
-        PhotonTeamsManager.PlayerLeftTeam -= OnPlayerLeftTeam;
-        PhotonTeamsManager.PlayerJoinedTeam += OnPlayerJoinedTeam;
-        PhotonTeamsManager.PlayerLeftTeam += OnPlayerLeftTeam;
+        eventSystem = GameObject.Find("EventSystem").gameObject;
+        globalVars = GameObject.Find("GLOBAL_VARIABLES").gameObject;
     }
 
     /////////////
@@ -51,7 +49,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.LeaveCurrentTeam();
         PhotonNetwork.LeaveRoom();
     }
-    public void disconnect()
+    public void LeaveLobby()
+    {
+        PhotonNetwork.LeaveLobby();
+    }
+    public void Disconnect()
     {
         PhotonNetwork.Disconnect();
     }
@@ -73,21 +75,21 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        PhotonTeamsManager.PlayerJoinedTeam += OnPlayerJoinedTeam;
+        PhotonTeamsManager.PlayerLeftTeam += OnPlayerLeftTeam;
+
         if (PhotonNetwork.LocalPlayer.IsMasterClient)
             PhotonNetwork.LocalPlayer.JoinTeam("Blue");
     }
     public override void OnLeftRoom()
     {
-        currentScene = SceneManager.GetActiveScene();
-        if(currentScene.name != "Lobby")
-        {
-            GlobalVariables.switchToScene(SceneCustom.lobby);
-            Destroy(gameObject);
-        } else
-        {
-            //GlobalVariables.switchToScene(SceneCustom.loading);
-            menuNav.GoToMenu("---Rooms---");
-        }
+        GlobalVariables.switchToScene(SceneCustom.loading);
+        Destroy(gameObject);
+
+    }
+    public override void OnLeftLobby()
+    {
+        Disconnect();
     }
     public override void OnPlayerEnteredRoom(Player other)
     {
@@ -116,19 +118,20 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     private void OnPlayerLeftTeam(Player other, PhotonTeam team)
     {
+        
+        if (other == PhotonNetwork.LocalPlayer)
+        {
+            PhotonTeamsManager.PlayerJoinedTeam -= OnPlayerJoinedTeam;
+            PhotonTeamsManager.PlayerLeftTeam -= OnPlayerLeftTeam;
+            Debug.Log("gameManager: actions have been deleted");
+        }
         UpdateTeams();
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Destroy(GameObject.Find("EventSystem").gameObject);
         GlobalVariables.switchToScene(SceneCustom.mainMenu);
+        Destroy(eventSystem);
+        Destroy(globalVars);
+        Destroy(gameObject);
     }
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("connected to master");
-        if (!PhotonNetwork.InLobby)
-            PhotonNetwork.JoinLobby();
-    }
-
-
 }

@@ -5,6 +5,7 @@ using Photon.Pun;
 
 public class MenuNavigation : MonoBehaviourPunCallbacks
 {
+
     private List<GameObject> menus = new List<GameObject>();
     public GameObject activeMenu;
 
@@ -25,4 +26,5 @@ public class MenuNavigation : MonoBehaviourPunCallbacks
         nextMenu.SetActive(true);
         activeMenu = nextMenu;
     }
+
 }

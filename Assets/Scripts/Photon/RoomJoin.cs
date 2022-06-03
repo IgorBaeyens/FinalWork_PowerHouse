@@ -16,8 +16,8 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     public GameObject beginButton;
 
     public GameObject playerNamePrefab;
-    public GameObject blueTeamMembersObject;
-    public GameObject redTeamMembersObject;
+    private GameObject blueTeamMembersObject;
+    private GameObject redTeamMembersObject;
 
     public GameObject rooms;
     public RoomItem lobbyItemPrefab;
@@ -31,10 +31,7 @@ public class RoomJoin : MonoBehaviourPunCallbacks
         beginButton.SetActive(false);
         menuNav = FindObjectOfType<MenuNavigation>();
 
-        PhotonTeamsManager.PlayerJoinedTeam -= OnPlayerJoinedTeam;
-        PhotonTeamsManager.PlayerLeftTeam -= OnPlayerLeftTeam;
-        PhotonTeamsManager.PlayerJoinedTeam += OnPlayerJoinedTeam;
-        PhotonTeamsManager.PlayerLeftTeam += OnPlayerLeftTeam;
+        
     }
 
     /////////////
@@ -59,6 +56,9 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     }
     void AddPlayerName(Player player, PhotonTeam team)
     {
+        blueTeamMembersObject = GameObject.Find("Blue Team Members");
+        redTeamMembersObject = GameObject.Find("Red Team Members");
+
         if (team.Name == "Blue")
         {
             GameObject playerNameInstance = Instantiate(playerNamePrefab, blueTeamMembersObject.transform);
@@ -78,6 +78,12 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         cachedRoomList.Clear();
+
+        menuNav.GoToMenu("---Room---");
+
+        PhotonTeamsManager.PlayerJoinedTeam += OnPlayerJoinedTeam;
+        PhotonTeamsManager.PlayerLeftTeam += OnPlayerLeftTeam;
+
         Player[] playerList = PhotonNetwork.PlayerList;
         foreach (Player player in playerList)
         {
@@ -85,7 +91,6 @@ public class RoomJoin : MonoBehaviourPunCallbacks
                 AddPlayerName(player, player.GetPhotonTeam());
         }
         UpdateRoomInfo();
-        menuNav.GoToMenu("---Room---");
     }
     private void OnPlayerJoinedTeam(Player joinedPlayer, PhotonTeam team)
     {
@@ -93,7 +98,11 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     }
     private void OnPlayerLeftTeam(Player player, PhotonTeam team)
     {
-
+        if (player == PhotonNetwork.LocalPlayer)
+        {
+            PhotonTeamsManager.PlayerJoinedTeam -= OnPlayerJoinedTeam;
+            PhotonTeamsManager.PlayerLeftTeam -= OnPlayerLeftTeam;
+        }
     }
     public override void OnPlayerEnteredRoom(Player other)
     {

@@ -1661,7 +1661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3379720887718431372, guid: a6a3e7e0762cb8347b0b22dea3b45943, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LeaveRoom
+      value: Disconnect
       objectReference: {fileID: 0}
     - target: {fileID: 3379720887718431372, guid: a6a3e7e0762cb8347b0b22dea3b45943, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
