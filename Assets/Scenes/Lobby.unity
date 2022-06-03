@@ -566,7 +566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &154179700
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1196,8 +1196,8 @@ MonoBehaviour:
   map: {fileID: 1142987234}
   beginButton: {fileID: 1844168716}
   playerNamePrefab: {fileID: 4707758237039579764, guid: 66195ad8569a9f4459dcf1824ca5e3a2, type: 3}
-  blueTeamMembers: {fileID: 6290851276416308377}
-  redTeamMembers: {fileID: 1839528191}
+  blueTeamMembersObject: {fileID: 6290851276416308377}
+  redTeamMembersObject: {fileID: 1839528191}
   rooms: {fileID: 1264374453}
   lobbyItemPrefab: {fileID: 5883255203205671895, guid: d5c92da72e57740479d546557bf2c8e2, type: 3}
 --- !u!1 &534752689

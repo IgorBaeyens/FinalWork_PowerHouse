@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 //script with important variables that are frequently needed, they can be used everywhere
 
-public enum Scene { mainMenu, loading, lobby, characterSelect, inGame };
+public enum SceneCustom { mainMenu, loading, lobby, characterSelect, inGame };
 
 public class GlobalVariables : MonoBehaviour
 {
@@ -17,36 +17,37 @@ public class GlobalVariables : MonoBehaviour
 
     public static bool gamePaused = false;
 
-    //depending on which scene is selected, load that scene
-    public static void switchToScene(Scene scene)
-    {
-        switch (scene)
-        {
-            case Scene.mainMenu:
-                SceneManager.LoadSceneAsync("Main Menu");
-                break;
-            case Scene.loading:
-                SceneManager.LoadSceneAsync("Loading");
-                break;
-            case Scene.lobby:
-                SceneManager.LoadSceneAsync("Lobby");
-                break;
-            case Scene.characterSelect:
-                SceneManager.LoadSceneAsync("Character Select");
-                break;
-            case Scene.inGame:
-                SceneManager.LoadSceneAsync("In Game");
-                break;
-        }
-    }
-
     public static string playerName;
 
+    private GameObject eventSystem;
     private void Start()
     {
-        DontDestroyOnLoad(GameObject.Find("EventSystem").gameObject);
+        eventSystem = GameObject.Find("EventSystem").gameObject;
+        DontDestroyOnLoad(eventSystem);
         DontDestroyOnLoad(gameObject);
         selectedCharacter = (Character)Resources.Load("Characters/Flare/Flare", typeof(Character));
     }
 
+    //depending on which scene is selected, load that scene
+    public static void switchToScene(SceneCustom scene)
+    {
+        switch (scene)
+        {
+            case SceneCustom.mainMenu:
+                SceneManager.LoadSceneAsync("Main Menu");
+                break;
+            case SceneCustom.loading:
+                SceneManager.LoadSceneAsync("Loading");
+                break;
+            case SceneCustom.lobby:
+                SceneManager.LoadSceneAsync("Lobby");
+                break;
+            case SceneCustom.characterSelect:
+                SceneManager.LoadSceneAsync("Character Select");
+                break;
+            case SceneCustom.inGame:
+                SceneManager.LoadSceneAsync("In Game");
+                break;
+        }
+    }
 }

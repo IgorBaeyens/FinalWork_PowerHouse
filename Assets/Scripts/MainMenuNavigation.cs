@@ -103,7 +103,7 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void pressedPlay()
     {
-        GlobalVariables.switchToScene(Scene.loading);
+        GlobalVariables.switchToScene(SceneCustom.loading);
     }
 
     public void pressedEnter()

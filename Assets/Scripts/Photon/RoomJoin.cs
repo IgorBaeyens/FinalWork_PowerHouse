@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 
 public class RoomJoin : MonoBehaviourPunCallbacks
@@ -15,12 +16,8 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     public GameObject beginButton;
 
     public GameObject playerNamePrefab;
-    public GameObject blueTeamMembers;
-    public GameObject redTeamMembers;
-
-    private Player[] playersInRoom;
-    private List<Player> blueTeam = new List<Player>();
-    private List<Player> redTeam = new List<Player>();
+    public GameObject blueTeamMembersObject;
+    public GameObject redTeamMembersObject;
 
     public GameObject rooms;
     public RoomItem lobbyItemPrefab;
@@ -33,14 +30,17 @@ public class RoomJoin : MonoBehaviourPunCallbacks
     {
         beginButton.SetActive(false);
         menuNav = FindObjectOfType<MenuNavigation>();
+
+        PhotonTeamsManager.PlayerJoinedTeam -= OnPlayerJoinedTeam;
+        PhotonTeamsManager.PlayerLeftTeam -= OnPlayerLeftTeam;
+        PhotonTeamsManager.PlayerJoinedTeam += OnPlayerJoinedTeam;
+        PhotonTeamsManager.PlayerLeftTeam += OnPlayerLeftTeam;
     }
 
-    void GetPlayersInRoom()
-    {
-        playersInRoom = PhotonNetwork.PlayerList;
-    }
+    /////////////
+    // functions
+    /////////////
 
-    //updates the room info in the room itself
     void UpdateRoomInfo()
     {
         foreach (Player player in PhotonNetwork.PlayerList)
@@ -57,76 +57,63 @@ public class RoomJoin : MonoBehaviourPunCallbacks
         gameMode.text = PhotonNetwork.CurrentRoom.CustomProperties["gm"].ToString();
         map.text = PhotonNetwork.CurrentRoom.CustomProperties["map"].ToString();
     }
-
-    void InstantiatePlayerName(Player player)
+    void AddPlayerName(Player player, PhotonTeam team)
     {
-        GameObject team;
-
-
-
-
-        if (blueTeam.Count > redTeam.Count)
+        if (team.Name == "Blue")
         {
-            team = redTeamMembers;
-            redTeam.Add(player);
+            GameObject playerNameInstance = Instantiate(playerNamePrefab, blueTeamMembersObject.transform);
+            playerNameInstance.GetComponent<PlayerNameItem>().SetUp(player);
         }
-        else
+        else if (team.Name == "Red")
         {
-            team = blueTeamMembers;
-            blueTeam.Add(player);
+            GameObject playerNameInstance = Instantiate(playerNamePrefab, redTeamMembersObject.transform);
+            playerNameInstance.GetComponent<PlayerNameItem>().SetUp(player);
         }
-
-        GameObject playerNameInstance = Instantiate(playerNamePrefab, team.transform);
-        playerNameInstance.GetComponent<PlayerNameItem>().SetUp(player);
     }
 
-    //when player joins a room
+    /////////////
+    // callbacks
+    /////////////
+
     public override void OnJoinedRoom()
     {
         cachedRoomList.Clear();
-
         Player[] playerList = PhotonNetwork.PlayerList;
         foreach (Player player in playerList)
         {
-            InstantiatePlayerName(player);
+            if (player != PhotonNetwork.LocalPlayer)
+                AddPlayerName(player, player.GetPhotonTeam());
         }
-
         UpdateRoomInfo();
         menuNav.GoToMenu("---Room---");
     }
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    private void OnPlayerJoinedTeam(Player joinedPlayer, PhotonTeam team)
     {
-        InstantiatePlayerName(newPlayer);
+        AddPlayerName(joinedPlayer, team);
     }
-
-    public override void OnPlayerLeftRoom(Player otherPlayer)
+    private void OnPlayerLeftTeam(Player player, PhotonTeam team)
     {
-        if (blueTeam.Contains(otherPlayer))
-            blueTeam.Remove(otherPlayer);
-        else if (redTeam.Contains(otherPlayer))
-            redTeam.Remove(otherPlayer);
+
+    }
+    public override void OnPlayerEnteredRoom(Player other)
+    {
+        
+    }
+    public override void OnPlayerLeftRoom(Player other)
+    {
         UpdateRoomInfo();
     }
-  
-    //When a player leaves or enters a room, or anything at all changes in the roominfo
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         foreach (Transform child in rooms.transform)
-        {
             Destroy(child.gameObject);
-        }
 
         foreach (RoomInfo room in roomList)
         {
             if (!room.RemovedFromList)
-            {
                 cachedRoomList[room.Name] = room;
-            }
             else
-            {
                 cachedRoomList.Remove(room.Name);
-            }
         }
 
         foreach (KeyValuePair<string, RoomInfo> cachedRoom in cachedRoomList)
@@ -135,5 +122,4 @@ public class RoomJoin : MonoBehaviourPunCallbacks
             newRoomItem.SetRoomInfo(cachedRoom.Value);
         }
     }
-
 }
