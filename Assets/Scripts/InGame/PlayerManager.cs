@@ -27,7 +27,6 @@ public class PlayerManager : MonoBehaviourPun
         Player player = playerPhotonView.Owner;
         PlayerManager playerManager = playerPhotonView.GetComponent<PlayerManager>();
         gameManager = FindObjectOfType<GameManager>();
-        //Debug.Log(player.NickName + " " + gameManager);
         switch (gameManager.GetPlayerTeam(player))
         {
             case "1":
@@ -37,7 +36,6 @@ public class PlayerManager : MonoBehaviourPun
                 playerManager.playerTeam = "Red";
                 break;
         }
-        //Debug.Log(playerManager.playerTeam);
     }
 
     public string getPlayerTeam()

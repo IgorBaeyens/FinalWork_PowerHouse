@@ -13,24 +13,31 @@ using Photon.Pun.UtilityScripts;
 public class HealthManager : MonoBehaviourPun
 {
     private SpawnPlayers spawnPlayers;
+    private RagdollManager ragdollManager;
+    private PlayerMovement playerMovement;
+    private AbilityHolder playerAbilities;
     private CharacterScript characterScript;
     private Character character;
+    private SkinnedMeshRenderer[] firstPersonMesh;
+    private SkinnedMeshRenderer[] thirdPersonMesh;
 
     private float maxHealth;
     private float currentHealth = 1f;
-    private float respawnTime = 1f;
+    private float respawnTime = 8f;
     private bool isDead = false;
 
     private TMP_Text healthBarText;
     private Image healthBarLight;
     private Image healthBarDark;
-    
+
     void Start()
     {
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             spawnPlayers = GameObject.Find("SPAWN_PLAYERS").GetComponent<SpawnPlayers>();
             characterScript = GetComponent<CharacterScript>();
+            playerMovement = GetComponent<PlayerMovement>();
+            playerAbilities = GetComponent<AbilityHolder>();
             character = characterScript.getCharacter();
 
             maxHealth = character.maxHealth;
@@ -45,6 +52,7 @@ public class HealthManager : MonoBehaviourPun
             healthBarLight.fillAmount = getHealthFromOneToZero(currentHealth);
             healthBarDark.fillAmount = getHealthFromOneToZero(currentHealth);
         }
+
     }
 
     private void Update()
@@ -74,23 +82,60 @@ public class HealthManager : MonoBehaviourPun
         }
     }
 
-    //[PunRPC]
-    //void UpdateHealthRPC(int playerViewId, float health)
-    //{
-    //    HealthManager healthManager = PhotonView.Find(playerViewId).GetComponent<HealthManager>();
-    //    healthManager.currentHealth = 0;
-    //}
+    [PunRPC]
+    void UpdateHealthRPC(int playerViewId, float currentHealth)
+    {
+        HealthManager healthManager = PhotonView.Find(playerViewId).GetComponent<HealthManager>();
+        healthManager.currentHealth = currentHealth;
+    }
 
     void Die()
     {
-        Debug.Log("death logic");
+        ragdollManager = GetComponentInChildren<RagdollManager>();
+        if (photonView.IsMine)
+        {
+            firstPersonMesh = characterScript.getFirstPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
+            thirdPersonMesh = characterScript.getThirdPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
+
+            foreach (SkinnedMeshRenderer renderer in firstPersonMesh)
+                renderer.enabled = false;
+            foreach (SkinnedMeshRenderer renderer in thirdPersonMesh)
+            {
+                Debug.Log(renderer);
+                renderer.renderingLayerMask = 1;
+            }
+
+            characterScript.getThirdPerson().transform.parent = null;
+            playerMovement.SetPlayerCanMove(false);
+            playerAbilities.SetPlayerCanShoot(false);
+
+            photonView.RPC("UpdateHealthRPC", RpcTarget.Others, photonView.ViewID, currentHealth);
+        }
+        ragdollManager.TurnOnRagdoll();
     }
 
     void Respawn()
     {
-        spawnPlayers.Respawn(gameObject);
-        ResetHealth();
-        UpdateHealthGraphic(currentHealth, currentHealth);
+        ragdollManager.TurnOffRagdoll();
+        if (photonView.IsMine)
+        {
+            firstPersonMesh = characterScript.getFirstPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
+            thirdPersonMesh = characterScript.getThirdPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach (SkinnedMeshRenderer renderer in firstPersonMesh)
+                renderer.enabled = true;
+            foreach (SkinnedMeshRenderer renderer in thirdPersonMesh)
+                renderer.renderingLayerMask -= 1;
+
+            characterScript.getThirdPerson().transform.SetParent(gameObject.transform);
+            
+            playerMovement.SetPlayerCanMove(true);
+            playerAbilities.SetPlayerCanShoot(true);
+            spawnPlayers.Respawn(gameObject);
+            ResetHealth();
+            photonView.RPC("UpdateHealthRPC", RpcTarget.Others, photonView.ViewID, currentHealth);
+            UpdateHealthGraphic(currentHealth, currentHealth);
+        }
+        
         isDead = false;
     }
 

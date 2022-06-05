@@ -12,6 +12,7 @@ public class AbilityHolder : MonoBehaviour
     public bool primaryPressed;
     public bool secondaryPressed;
     public bool ultimatePressed;
+    private bool playerCanShoot = true;
 
     void Start()
     {
@@ -27,7 +28,8 @@ public class AbilityHolder : MonoBehaviour
 
     private void Secondary_performed(InputAction.CallbackContext context)
     {
-        secondaryPressed = true;
+        if (playerCanShoot)
+            secondaryPressed = true;
     }
 
     private void Secondary_canceled(InputAction.CallbackContext context)
@@ -37,11 +39,17 @@ public class AbilityHolder : MonoBehaviour
 
     private void Primary_performed(InputAction.CallbackContext context)
     {
-        primaryPressed = true;
+        if (playerCanShoot)
+            primaryPressed = true;
     }
 
     private void Primary_canceled(InputAction.CallbackContext context)
     {
         primaryPressed = false;
+    }
+
+    public void SetPlayerCanShoot(bool onOrOff)
+    {
+        playerCanShoot = onOrOff;
     }
 }

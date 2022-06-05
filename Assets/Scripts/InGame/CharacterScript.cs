@@ -39,7 +39,8 @@ public class CharacterScript : MonoBehaviourPunCallbacks
             // disable third person model
             foreach (Transform child in instantiatedCharacter.transform)
             {
-                child.gameObject.SetActive(false);
+                if (child.name != "rig")
+                    child.gameObject.GetComponent<SkinnedMeshRenderer>().renderingLayerMask -= 1;
             }
         }
     }
@@ -47,6 +48,15 @@ public class CharacterScript : MonoBehaviourPunCallbacks
     public Character getCharacter()
     {
         return character;
+    }
+    public GameObject getThirdPerson()
+    {
+        Debug.Log(instantiatedCharacter);
+        return instantiatedCharacter;
+    }
+    public GameObject getFirstPerson()
+    {
+        return instantiatedCharacterFP;
     }
 
     [PunRPC] void ChangeCharacterParent(int characterPhotonViewId)

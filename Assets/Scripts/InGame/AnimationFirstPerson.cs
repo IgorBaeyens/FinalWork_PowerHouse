@@ -8,6 +8,7 @@ public class AnimationFirstPerson : MonoBehaviour
     private Animator characterAnimator;
     private PlayerMovement movementScript;
     private AbilityHolder abilityScript;
+    private InGameMenuNav inGameMenuNav;
     public Image reticle;
 
     //LeanTween problem
@@ -18,6 +19,7 @@ public class AnimationFirstPerson : MonoBehaviour
         characterAnimator = GetComponent<Animator>();
         movementScript = GetComponentInParent<PlayerMovement>();
         abilityScript = GetComponentInParent<AbilityHolder>();
+        inGameMenuNav = transform.parent.parent.GetComponent<InGameMenuNav>();
         reticle = GameObject.Find("Outer Circle").GetComponent<Image>();
         
     }
@@ -44,13 +46,13 @@ public class AnimationFirstPerson : MonoBehaviour
             characterAnimator.SetBool("IsGrounded", false);
 
         //primary
-        if (abilityScript.primaryPressed && !GlobalVariables.gamePaused)
+        if (abilityScript.primaryPressed)
             characterAnimator.SetBool("IsPrimaryOn", true);
         else
             characterAnimator.SetBool("IsPrimaryOn", false);
 
         //secondary
-        if (abilityScript.secondaryPressed && !GlobalVariables.gamePaused)
+        if (abilityScript.secondaryPressed)
             characterAnimator.SetBool("IsSecondaryOn", true);
         else
             characterAnimator.SetBool("IsSecondaryOn", false);

@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private InputActions inputActions;
     private GameObject firstPersonView;
     public CharacterController controller;
+    private InGameMenuNav ingameMenuNav;
     private Rigidbody playerRigidbody;
 
     public Vector2 movementValue;
@@ -28,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
     public float lookY;
     public bool jumped;
     public bool isGrounded;
+    private bool playerCanMove = true;
+    private bool playerCanLook = true;
+    private bool pressedPause;
     
     private float DistanceToTheGround;
 
@@ -41,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         inputActions.Player.Enable();
 
         firstPersonView = gameObject.transform.Find("First Person View").gameObject;
+        //ingameMenuNav = GameObject.Find("Canvas").GetComponent<InGameMenuNav>();
 
         photonView = GetComponent<PhotonView>();
     }
@@ -49,10 +54,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (photonView.IsMine)
         {
-            if (!GlobalVariables.gamePaused)
+            if (playerCanMove)
             {
                 jumped = inputActions.Player.Jump.triggered;
                 movementValue = inputActions.Player.Movement.ReadValue<Vector2>();
+            }
+            if (playerCanLook)
+            {
                 lookValue = inputActions.Player.Look.ReadValue<Vector2>();
             }
 
@@ -84,4 +92,13 @@ public class PlayerMovement : MonoBehaviour
             firstPersonView.transform.Rotate(Vector3.right * lookY);
         }
     }  
+
+    public void SetPlayerCanMove(bool onOrOff)
+    {
+        playerCanMove = onOrOff;
+    }
+    public void SetPlayerCanLook(bool onOrOff)
+    {
+        playerCanLook = onOrOff;
+    }
 }

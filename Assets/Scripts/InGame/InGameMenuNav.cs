@@ -6,7 +6,10 @@ public class InGameMenuNav : MonoBehaviour
 {
     private InputActions inputActions;
     private GameObject pauseMenu;
+    private PlayerMovement playerMovement;
+    private AbilityHolder playerAbilities;
     private bool pressedPause;
+    public bool gamePaused;
 
     void Start()
     {
@@ -15,7 +18,9 @@ public class InGameMenuNav : MonoBehaviour
         inputActions = new InputActions();
         inputActions.Player.Enable();
 
-        pauseMenu = transform.Find("---Pause Menu---").gameObject;
+        pauseMenu = GameObject.Find("Canvas").transform.Find("---Pause Menu---").gameObject;
+        playerMovement = GetComponent<PlayerMovement>();
+        playerAbilities = GetComponent<AbilityHolder>();
         pauseMenu.SetActive(false);
     }
 
@@ -23,13 +28,11 @@ public class InGameMenuNav : MonoBehaviour
     {
         pressedPause = inputActions.Player.Pause.triggered;
         
-        //unpause the game
-        if (pressedPause && GlobalVariables.gamePaused)
+        if (pressedPause && gamePaused)
         {
             Unpause();
         }
-        //pause the game
-        else if (pressedPause && !GlobalVariables.gamePaused)
+        else if (pressedPause && !gamePaused)
         {
             Pause();
         }
@@ -39,13 +42,19 @@ public class InGameMenuNav : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
-        GlobalVariables.gamePaused = false;
+        gamePaused = false;
+        playerMovement.SetPlayerCanMove(true);
+        playerMovement.SetPlayerCanLook(true);
+        playerAbilities.SetPlayerCanShoot(true);
     }
 
     public void Pause()
     {
         pauseMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
-        GlobalVariables.gamePaused = true;
+        gamePaused = true;
+        playerMovement.SetPlayerCanMove(false);
+        playerMovement.SetPlayerCanLook(false);
+        playerAbilities.SetPlayerCanShoot(false);
     }
 }
