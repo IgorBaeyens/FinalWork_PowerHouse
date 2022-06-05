@@ -29,7 +29,6 @@ public class RoomCreate : MonoBehaviourPunCallbacks
             playerCount--;
             playerCountText.text = playerCount.ToString();
         }
-        
     }
     public void IncreasePlayerCount()
     {
@@ -51,10 +50,11 @@ public class RoomCreate : MonoBehaviourPunCallbacks
         customProperties["gm"] = gameMode.captionText.text;
         customProperties["map"] = map.captionText.text;
         customProperties["host"] = PhotonNetwork.NickName;
+        customProperties["inGame"] = false;
         PhotonNetwork.CreateRoom(roomName, new Photon.Realtime.RoomOptions() { 
             MaxPlayers = (byte)playerCount, 
             CustomRoomProperties = customProperties, 
-            CustomRoomPropertiesForLobby = new string[] { "gm", "map", "host" },
+            CustomRoomPropertiesForLobby = new string[] { "gm", "map", "host", "inGame" },
             });
     }
 

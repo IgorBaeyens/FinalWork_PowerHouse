@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1534130397353742809}
   - component: {fileID: 8937054683924125558}
   - component: {fileID: 3035391358658073624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TESTCAM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 6784670863184229640}
   - component: {fileID: 6784670863184229636}
   - component: {fileID: 6784670863184229641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 6784670863209399544}
   - component: {fileID: 6784670863209399547}
   - component: {fileID: 2768106355585057192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: First Person View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6784670863508358398}
   - component: {fileID: 6784670863508358397}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,15 +409,17 @@ GameObject:
   m_Component:
   - component: {fileID: 6784670863612506671}
   - component: {fileID: 6784670863612506668}
+  - component: {fileID: -4761131032027471223}
   - component: {fileID: 6067710651587294807}
   - component: {fileID: 6784670863612506669}
+  - component: {fileID: 1772776208446348220}
+  - component: {fileID: -9085837154481364034}
   - component: {fileID: 6784670863612506666}
   - component: {fileID: 8897619264257944114}
   - component: {fileID: 6784670864737071328}
   - component: {fileID: 6580559932471767324}
   - component: {fileID: 8770175753697301443}
-  - component: {fileID: 1772776208446348220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -453,7 +455,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d831019791c96214991168a8860b1433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 919132149155446097, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
+  character: {fileID: 0}
+--- !u!114 &-4761131032027471223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784670863612506670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 068d71029f9eb814e9a698a97176e08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTeam: 
 --- !u!114 &6067710651587294807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,6 +506,32 @@ MonoBehaviour:
   lookY: 0
   jumped: 0
   isGrounded: 0
+--- !u!114 &1772776208446348220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784670863612506670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b6ab1a0122233d4482286c71af67dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  insideGravityTrigger: 0
+  storedPlayerRotation: {x: 0, y: 0, z: 0}
+--- !u!114 &-9085837154481364034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6784670863612506670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86484b913220f342865cdbbe60028a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6784670863612506666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,20 +692,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &1772776208446348220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6784670863612506670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6ab1a0122233d4482286c71af67dc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  insideGravityTrigger: 0
-  storedPlayerRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &7805575413179020131
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +704,7 @@ GameObject:
   - component: {fileID: 7006877769646017690}
   - component: {fileID: 1848842217397582039}
   - component: {fileID: 8646064195726024234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: First Person Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

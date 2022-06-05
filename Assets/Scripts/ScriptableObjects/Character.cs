@@ -9,7 +9,7 @@ public class Character : ScriptableObject
 {
     public new string name;
     public int speed;
-    public int health;
+    public int maxHealth;
 
     public GameObject model;
     public Sprite icon;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Flare
   speed: 110
-  health: 90
+  maxHealth: 900
   model: {fileID: 919132149155446097, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
   icon: {fileID: 21300000, guid: 527593f071b594744a4652a1b790c904, type: 3}
   primary: {fileID: 11400000, guid: aef2af7025b4c5e4cb4954304096c917, type: 2}

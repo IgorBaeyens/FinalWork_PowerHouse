@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - GravityTrigger
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -12,8 +13,8 @@ TagManager:
   - First Person Model
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Fire Bomb
   - 
   - 
   - 

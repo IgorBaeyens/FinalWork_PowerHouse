@@ -42,6 +42,12 @@ MonoBehaviour:
   - AbilityLogic
   - LogicSecondary
   - ChangeCharacterFPParent
+  - BulletHit
+  - SetPlayerTeam
+  - ReduceHealth
+  - UpdateHealthToZero
+  - UpdateHealth
+  - UpdateHealthRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

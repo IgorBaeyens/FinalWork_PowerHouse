@@ -83,6 +83,7 @@ public class RoomJoin : MonoBehaviourPunCallbacks
 
         PhotonTeamsManager.PlayerJoinedTeam += OnPlayerJoinedTeam;
         PhotonTeamsManager.PlayerLeftTeam += OnPlayerLeftTeam;
+        Debug.Log("roomJoin: actions have been created");
 
         Player[] playerList = PhotonNetwork.PlayerList;
         foreach (Player player in playerList)
@@ -90,7 +91,7 @@ public class RoomJoin : MonoBehaviourPunCallbacks
             if (player != PhotonNetwork.LocalPlayer)
                 AddPlayerName(player, player.GetPhotonTeam());
         }
-        UpdateRoomInfo();
+        UpdateRoomInfo();    
     }
     private void OnPlayerJoinedTeam(Player joinedPlayer, PhotonTeam team)
     {
@@ -102,6 +103,7 @@ public class RoomJoin : MonoBehaviourPunCallbacks
         {
             PhotonTeamsManager.PlayerJoinedTeam -= OnPlayerJoinedTeam;
             PhotonTeamsManager.PlayerLeftTeam -= OnPlayerLeftTeam;
+            Debug.Log("roomJoin: actions have been deleted");
         }
     }
     public override void OnPlayerEnteredRoom(Player other)
@@ -127,6 +129,7 @@ public class RoomJoin : MonoBehaviourPunCallbacks
 
         foreach (KeyValuePair<string, RoomInfo> cachedRoom in cachedRoomList)
         {
+            
             RoomItem newRoomItem = Instantiate(lobbyItemPrefab, rooms.transform);
             newRoomItem.SetRoomInfo(cachedRoom.Value);
         }

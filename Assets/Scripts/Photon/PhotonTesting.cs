@@ -24,16 +24,19 @@ public class PhotonTesting : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("joined" + PhotonNetwork.CurrentRoom);
 
-        teamAPosition = gameObject.transform.Find("Team A").transform.position;
 
-        float randomX = Random.Range(teamAPosition.x - range, teamAPosition.x + range);
-        float randomZ = Random.Range(teamAPosition.z - range, teamAPosition.z + range);
 
-        Vector3 teamASpawnpoint = new Vector3(randomX, teamAPosition.y, randomZ);
+        //Debug.Log("joined" + PhotonNetwork.CurrentRoom);
 
-        GameObject newPlayer = PhotonNetwork.Instantiate(player.name, teamASpawnpoint, Quaternion.identity);
+        //teamAPosition = gameObject.transform.Find("Team A").transform.position;
+
+        //float randomX = Random.Range(teamAPosition.x - range, teamAPosition.x + range);
+        //float randomZ = Random.Range(teamAPosition.z - range, teamAPosition.z + range);
+
+        //Vector3 teamASpawnpoint = new Vector3(randomX, teamAPosition.y, randomZ);
+
+        //GameObject newPlayer = PhotonNetwork.Instantiate(player.name, teamASpawnpoint, Quaternion.identity);
     }
 
   

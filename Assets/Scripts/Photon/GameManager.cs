@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
-
 public class GameManager : MonoBehaviourPunCallbacks
 {
     private GameObject eventSystem;
@@ -23,7 +22,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
 
         teamsManager = GetComponent<PhotonTeamsManager>();
-        
     }
 
     private void Start()
@@ -31,7 +29,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         eventSystem = GameObject.Find("EventSystem").gameObject;
         globalVars = GameObject.Find("GLOBAL_VARIABLES").gameObject;
     }
-
     /////////////
     // functions
     /////////////
@@ -39,6 +36,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void LoadLevel(string levelName)
     {
         PhotonNetwork.LoadLevel(levelName);
+        PhotonNetwork.CurrentRoom.CustomProperties["inGame"] = true;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
     }
     public void JoinRoom(string roomName)
     {
@@ -77,6 +76,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         PhotonTeamsManager.PlayerJoinedTeam += OnPlayerJoinedTeam;
         PhotonTeamsManager.PlayerLeftTeam += OnPlayerLeftTeam;
+        Debug.Log("gameManager: actions have been created");
 
         if (PhotonNetwork.LocalPlayer.IsMasterClient)
             PhotonNetwork.LocalPlayer.JoinTeam("Blue");

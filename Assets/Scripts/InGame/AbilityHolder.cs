@@ -8,13 +8,6 @@ using Photon.Pun;
 
 public class AbilityHolder : MonoBehaviour
 {
-    private PhotonView photonView;
-
-    //private Character character;
-    //private Ability primary;
-    //private Ability secondary;
-    //private Ability ultimate;
-
     private InputActions inputActions;
     public bool primaryPressed;
     public bool secondaryPressed;
@@ -22,13 +15,6 @@ public class AbilityHolder : MonoBehaviour
 
     void Start()
     {
-        photonView = GetComponent<PhotonView>();
-
-        //character = GlobalVariables.selectedCharacter;
-        //primary = character.primary;
-        //secondary = character.secondary;
-        //ultimate = character.ultimate;
-
         inputActions = new InputActions();
         inputActions.Player.Enable();
 
@@ -57,10 +43,5 @@ public class AbilityHolder : MonoBehaviour
     private void Primary_canceled(InputAction.CallbackContext context)
     {
         primaryPressed = false;
-    }
-
-    void Update()
-    {
-
     }
 }
