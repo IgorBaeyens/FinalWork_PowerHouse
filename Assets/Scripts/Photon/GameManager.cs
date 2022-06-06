@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void LoadLevel(string levelName)
     {
-        PhotonNetwork.LoadLevel(levelName);
+        if (PhotonNetwork.OfflineMode)
+            GlobalVariables.switchToScene(SceneCustom.inGame);
+        else
+            PhotonNetwork.LoadLevel(levelName);
         PhotonNetwork.CurrentRoom.CustomProperties["inGame"] = true;
         PhotonNetwork.CurrentRoom.IsVisible = false;
     }

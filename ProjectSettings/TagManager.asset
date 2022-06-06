@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GravityTrigger
   - Bullet
+  - Kill Barrier
   layers:
   - Default
   - TransparentFX

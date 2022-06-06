@@ -1,0 +1,459 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &20000000
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NewShaderVariants
+  m_Shaders:
+  - first: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS LIGHTPROBE_SH UNITY_HDR_ON _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS LIGHTPROBE_SH UNITY_HDR_ON _DEPTH_NO_MSAA
+          _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT
+        passType: 0
+      - keywords: UNITY_UI_CLIP_RECT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_UI_CLIP_RECT _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS LIGHTPROBE_SH UNITY_HDR_ON UNITY_UI_CLIP_RECT
+          _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT
+        passType: 0
+      - keywords: UNITY_UI_ALPHACLIP
+        passType: 0
+  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: SHADOWS_DEPTH
+        passType: 8
+  - first: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: BILLBOARD_FACE_CAMERA_POS _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: _SUNDISK_SIMPLE
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA _SUNDISK_SIMPLE
+        passType: 0
+  - first: {fileID: 9000, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9002, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9003, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9004, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9007, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9103, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _ADDITIONAL_LIGHTS _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _ADDITIONAL_LIGHTS _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 15100, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: BILLBOARD_FACE_CAMERA_POS _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 15102, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: BILLBOARD_FACE_CAMERA_POS _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 4800000, guid: c17132b1f77d20942aa75f8429c0f8bc, type: 3}
+    second:
+      variants:
+      - keywords: BILLBOARD_FACE_CAMERA_POS _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS
+          _ADDITIONAL_LIGHT_SHADOWS _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 4800000, guid: d6dae50ee9e1bfa4db75f19f99355220, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 4800000, guid: 65df88701913c224d95fc554db28381a, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 4800000, guid: e7857e9d0c934dc4f83f270f8447b006, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _BLOOM_LQ _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _BLOOM_LQ _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _BLOOM_LQ _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 4800000, guid: 1121bb4e615ca3c48b214e79e841e823, type: 3}
+    second:
+      variants:
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 4800000, guid: 5f1864addb451f54bae8c86d230f736e, type: 3}
+    second:
+      variants:
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: 4800000, guid: c49e63ed1bbcb334780a3bd19dfed403, type: 3}
+    second:
+      variants:
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA _FXAA
+        passType: 0
+  - first: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: _CASTING_PUNCTUAL_LIGHT_SHADOW
+        passType: 8
+      - keywords: BILLBOARD_FACE_CAMERA_POS _ADDITIONAL_LIGHTS _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 8
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_HDR_ON _ADDITIONAL_LIGHTS _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 8
+      - keywords: _NORMALMAP
+        passType: 8
+      - keywords: _EMISSION
+        passType: 8
+      - keywords: _EMISSION _NORMALMAP
+        passType: 8
+      - keywords: _METALLICSPECGLOSSMAP
+        passType: 8
+      - keywords: _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        passType: 8
+      - keywords: 
+        passType: 11
+      - keywords: 
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON
+        passType: 13
+      - keywords: FOG_EXP
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON _ADDITIONAL_LIGHTS
+        passType: 13
+      - keywords: SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS
+        passType: 13
+      - keywords: FOG_EXP _ADDITIONAL_LIGHTS
+        passType: 13
+      - keywords: _MAIN_LIGHT_SHADOWS_CASCADE
+        passType: 13
+      - keywords: _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _SHADOWS_SOFT
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _SHADOWS_SOFT
+        passType: 13
+      - keywords: SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _SHADOWS_SOFT
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED LIGHTMAP_ON SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS
+          _ADDITIONAL_LIGHT_SHADOWS _SHADOWS_SOFT
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON
+          _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 13
+      - keywords: _NORMALMAP
+        passType: 13
+      - keywords: FOG_EXP _NORMALMAP
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON _NORMALMAP
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _NORMALMAP
+        passType: 13
+      - keywords: SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS _NORMALMAP
+        passType: 13
+      - keywords: _MAIN_LIGHT_SHADOWS_CASCADE _NORMALMAP
+        passType: 13
+      - keywords: _MAIN_LIGHT_SHADOWS_CASCADE _NORMALMAP _SHADOWS_SOFT
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _NORMALMAP _SHADOWS_SOFT
+        passType: 13
+      - keywords: SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _NORMALMAP _SHADOWS_SOFT
+        passType: 13
+      - keywords: FOG_EXP _RECEIVE_SHADOWS_OFF
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON _RECEIVE_SHADOWS_OFF
+        passType: 13
+      - keywords: FOG_EXP _ADDITIONAL_LIGHTS _RECEIVE_SHADOWS_OFF
+        passType: 13
+      - keywords: _EMISSION
+        passType: 13
+      - keywords: FOG_EXP _EMISSION
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _EMISSION
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION _SHADOWS_SOFT
+        passType: 13
+      - keywords: SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _EMISSION _SHADOWS_SOFT
+        passType: 13
+      - keywords: FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION
+          _SHADOWS_SOFT
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _EMISSION _SHADOWS_SOFT
+        passType: 13
+      - keywords: _EMISSION _NORMALMAP
+        passType: 13
+      - keywords: FOG_EXP _EMISSION _NORMALMAP
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _EMISSION _NORMALMAP
+        passType: 13
+      - keywords: _EMISSION _MAIN_LIGHT_SHADOWS_CASCADE _NORMALMAP _SHADOWS_SOFT
+        passType: 13
+      - keywords: _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION _NORMALMAP
+          _SHADOWS_SOFT
+        passType: 13
+      - keywords: SHADOWS_SHADOWMASK _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _EMISSION _NORMALMAP _SHADOWS_SOFT
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON _METALLICSPECGLOSSMAP
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON
+          _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA _METALLICSPECGLOSSMAP _SHADOWS_SOFT
+        passType: 13
+      - keywords: _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON _METALLICSPECGLOSSMAP
+          _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON
+          _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA _METALLICSPECGLOSSMAP _SHADOWS_SOFT _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON _METALLICSPECGLOSSMAP
+          _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON
+          _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA _METALLICSPECGLOSSMAP _NORMALMAP _SHADOWS_SOFT _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+        passType: 13
+      - keywords: FOG_EXP _EMISSION _ENVIRONMENTREFLECTIONS_OFF _METALLICSPECGLOSSMAP
+          _RECEIVE_SHADOWS_OFF _SPECULARHIGHLIGHTS_OFF
+        passType: 13
+      - keywords: DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON _EMISSION _ENVIRONMENTREFLECTIONS_OFF
+          _METALLICSPECGLOSSMAP _RECEIVE_SHADOWS_OFF _SPECULARHIGHLIGHTS_OFF
+        passType: 13
+      - keywords: FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _EMISSION
+          _ENVIRONMENTREFLECTIONS_OFF _METALLICSPECGLOSSMAP _RECEIVE_SHADOWS_OFF
+          _SHADOWS_SOFT _SPECULARHIGHLIGHTS_OFF
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS DIRLIGHTMAP_COMBINED FOG_EXP LIGHTMAP_ON
+          _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA _EMISSION _ENVIRONMENTREFLECTIONS_OFF _METALLICSPECGLOSSMAP
+          _RECEIVE_SHADOWS_OFF _SHADOWS_SOFT _SPECULARHIGHLIGHTS_OFF
+        passType: 13
+  - first: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS LIGHTPROBE_SH UNITY_HDR_ON _DEPTH_NO_MSAA
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS LIGHTPROBE_SH UNITY_HDR_ON _DEPTH_NO_MSAA
+          _MAIN_LIGHT_SHADOWS_CASCADE _SHADOWS_SOFT
+        passType: 0
+      - keywords: UNDERLAY_ON
+        passType: 0
+      - keywords: UNITY_UI_CLIP_RECT
+        passType: 0
+      - keywords: BILLBOARD_FACE_CAMERA_POS UNITY_UI_CLIP_RECT _DEPTH_NO_MSAA _MAIN_LIGHT_SHADOWS_CASCADE
+          _SHADOWS_SOFT
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: e8a62aac58fb21549b8ee2861aeb0f4d, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP LIGHTPROBE_SH _ADDITIONAL_LIGHTS
+          _ADDITIONAL_LIGHT_SHADOWS _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA
+          _SHADOWS_SOFT
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: 1ae18f0996ede7a4b944be2e3212cf9e, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _SHADOWS_SOFT
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: 33d33899fd4454e4aa277a343318b496, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP LIGHTPROBE_SH _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: 1ca270a64531e9540be1fc4a7ae76303, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _DEPTH_NO_MSAA
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _CASTING_PUNCTUAL_LIGHT_SHADOW
+          _DEPTH_NO_MSAA
+        passType: 13
+      - keywords: FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS _SHADOWS_SOFT
+        passType: 13
+      - keywords: BILLBOARD_FACE_CAMERA_POS FOG_EXP _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
+          _CASTING_PUNCTUAL_LIGHT_SHADOW _DEPTH_NO_MSAA _SHADOWS_SOFT
+        passType: 13
+  - first: {fileID: 4800000, guid: 1ba2594c892d06f478f8c95c3ce28875, type: 3}
+    second:
+      variants:
+      - keywords: FOG_EXP
+        passType: 13

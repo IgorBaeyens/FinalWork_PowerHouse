@@ -56,7 +56,6 @@ public class CharacterScript : MonoBehaviourPunCallbacks
     }
     public GameObject getThirdPerson()
     {
-        Debug.Log(instantiatedCharacter);
         return instantiatedCharacter;
     }
     public GameObject getFirstPerson()

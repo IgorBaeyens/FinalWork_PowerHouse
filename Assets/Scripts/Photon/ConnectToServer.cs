@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
@@ -16,4 +17,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         GlobalVariables.switchToScene(SceneCustom.lobby);
     }
+
+    //public override void OnDisconnected(DisconnectCause cause)
+    //{
+    //    Debug.Log("COULD NOT CONNECT - OFFLINE MODE STARTED");
+    //    PhotonNetwork.OfflineMode = true;
+    //}
 }

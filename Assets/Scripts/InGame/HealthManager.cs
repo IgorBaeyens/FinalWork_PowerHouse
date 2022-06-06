@@ -12,6 +12,9 @@ using Photon.Pun.UtilityScripts;
 
 public class HealthManager : MonoBehaviourPun
 {
+    private GameObject messagePrefab;
+    private ScoreManager scoreManager;
+    private ChatManager chatManager;
     private SpawnPlayers spawnPlayers;
     private RagdollManager ragdollManager;
     private PlayerMovement playerMovement;
@@ -34,6 +37,9 @@ public class HealthManager : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            //messagePrefab = Resources.Load("Message", GameObject) as GameObject;
+            messagePrefab = (GameObject)Resources.Load("Message", typeof(GameObject));
+            chatManager = FindObjectOfType<ChatManager>();
             spawnPlayers = GameObject.Find("SPAWN_PLAYERS").GetComponent<SpawnPlayers>();
             characterScript = GetComponent<CharacterScript>();
             playerMovement = GetComponent<PlayerMovement>();
@@ -71,17 +77,40 @@ public class HealthManager : MonoBehaviourPun
         {
             GameObject bullet = other.transform.parent.gameObject;
             BulletManager bulletManager = bullet.GetComponent<BulletManager>();
-            if (GetComponent<PlayerManager>().getPlayerTeam() != bulletManager.getOwnerTeam())
+            PlayerManager playerManager = GetComponent<PlayerManager>();
+            if (playerManager.getPlayerTeam() != bulletManager.getOwnerTeam())
             {
                 bulletManager.Explode();
                 if(photonView.IsMine)
                 {
                     TakeDamage(bulletManager.getDamage());
+                    if (currentHealth <= 0)
+                    {
+                        string killerName = bulletManager.getOwnerName();
+                        string killerTeam = bulletManager.getOwnerTeam();
+                        string victimName = playerManager.getPlayerName();
+                        string victimTeam = playerManager.getPlayerTeam();
+                        string chatMessage = $"{killerName}has killed {victimName}";
+                        photonView.RPC("LogDeath", RpcTarget.All, chatMessage);
+                    }
                 }
             }
         }
+        if (other.CompareTag("Kill Barrier"))
+        {
+            TakeDamage(currentHealth);
+        }
     }
 
+    [PunRPC]
+    void LogDeath(string chatMessage)
+    {
+        GameObject log = GameObject.Find("Log");
+        GameObject messageInstance = PhotonNetwork.Instantiate("Message", log.transform.position, Quaternion.identity);
+        messageInstance.transform.SetParent(log.transform);
+        //GameObject messageInstance = Instantiate(messagePrefab, log.transform);
+        messageInstance.GetComponent<TMP_Text>().text = chatMessage;
+    }
     [PunRPC]
     void UpdateHealthRPC(int playerViewId, float currentHealth)
     {

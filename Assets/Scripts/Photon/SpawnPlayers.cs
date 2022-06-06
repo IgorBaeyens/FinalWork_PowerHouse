@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class SpawnPlayers : MonoBehaviour
+public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
     public GameObject player;
     public List<Character> characters = new List<Character>();
@@ -13,6 +13,7 @@ public class SpawnPlayers : MonoBehaviour
     private Transform teamRedPosition;
     private List<Transform> respawnPositions = new List<Transform>();
 
+    private bool spawnedPlayers = false;
     private Vector3 playerSpawnPoint;
     private Quaternion playerSpawnRotation;
     private int range = 2;
@@ -21,21 +22,53 @@ public class SpawnPlayers : MonoBehaviour
 
     private void Awake()
     {
-        
+        gameManager = FindObjectOfType<GameManager>();
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            Invoke("InitialSpawn", 2f);
+        }
+        else
+        {
+            InitialSpawn();
+        }
     }
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        
         foreach (Transform child in GameObject.Find("SPAWN_PLAYERS").transform)
         {
             respawnPositions.Add(child);
         }
 
-        initialSpawn();
+        
     }
 
-    void initialSpawn()
+    //private void Update()
+    //{
+    //    if (PhotonNetwork.LocalPlayer.IsMasterClient && spawnedPlayers == false)
+    //    {
+    //        int playersReady = 0;
+
+    //        Player[] playerList = PhotonNetwork.PlayerList;
+    //        foreach (Player player in playerList)
+    //        {
+    //            if (player.)
+    //            {
+    //                playersReady++;
+    //            }
+
+    //        }
+    //        if (playersReady == playerList.Length)
+    //        {
+    //            foreach (Player player in playerList)
+    //                initialSpawn();
+    //            spawnedPlayers = true;
+    //        }
+    //    }
+    //}
+
+    void InitialSpawn()
     {
         teamBluePosition = gameObject.transform.Find("Team Blue").transform;
         teamRedPosition = gameObject.transform.Find("Team Red").transform;
@@ -78,5 +111,6 @@ public class SpawnPlayers : MonoBehaviour
         Vector3 playerSpawnPoint = new Vector3(randomX, teamPosition.y, randomZ);
         return playerSpawnPoint;
     }
+
 
 }

@@ -71,13 +71,13 @@ public class MainMenuNavigation : MonoBehaviour
                     changeState(1);
                     break;
                 case "Characters":
-                    changeState(3);
+                    changeState(2);
                     break;
                 case "Options":
-
+                    changeState(3);
                     break;
                 case "Quit Game":
-
+                    changeState(4);
                     break;
             }
         }    

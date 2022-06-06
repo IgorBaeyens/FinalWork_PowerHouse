@@ -9,12 +9,14 @@ public class PlayerManager : MonoBehaviourPun
     private GameManager gameManager;
 
     public string playerTeam;
+    private string playerName;
 
     void Start()
     {
         if (photonView.IsMine)
         {
             gameManager = FindObjectOfType<GameManager>();
+            playerName = PhotonNetwork.LocalPlayer.NickName;
 
             photonView.RPC("SetPlayerTeam", RpcTarget.All, photonView.ViewID);
         }
@@ -46,5 +48,9 @@ public class PlayerManager : MonoBehaviourPun
     public string getPlayerTeam()
     {
         return playerTeam;
+    }
+    public string getPlayerName()
+    {
+        return playerName;
     }
 }
