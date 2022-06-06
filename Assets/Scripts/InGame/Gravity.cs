@@ -34,10 +34,11 @@ public class Gravity : MonoBehaviour
         {
             gravityVector = other.transform.Find("Gravity Vector");
 
-            if (transform.up != gravityVector.up)
+            float angle = Vector3.Angle(transform.up, gravityVector.up);
+            if (angle > 5)
             {
                 storedObjectForward = transform.forward;
-                float angle = Vector3.Angle(transform.up, gravityVector.up);
+                
 
                 if (gameObject.CompareTag("Player"))
                 {

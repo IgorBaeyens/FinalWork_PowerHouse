@@ -78,7 +78,8 @@ public class PlayerMovement : MonoBehaviour
                     playerRigidbody.AddRelativeForce(new Vector3(0, jumpHeight, 0), ForceMode.Impulse);
             }
 
-            playerRigidbody.position += move * speed * Time.deltaTime;
+            //playerRigidbody.position += move * speed * Time.deltaTime;
+            playerRigidbody.MovePosition(playerRigidbody.position + move * speed * Time.deltaTime);
 
 
             //look

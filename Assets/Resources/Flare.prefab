@@ -258,7 +258,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: -3712423147401242153, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
   m_Bones:
@@ -973,7 +973,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!144 &6378271066719899950
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1186,7 +1186,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: -5017437812508297076, guid: f204e53f30aad8540b1593bccf1ed3f8, type: 3}
   m_Bones:
@@ -1416,7 +1416,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!144 &5988604162693232938
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1619,7 +1619,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1 &2711161715295224766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,7 +1805,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!144 &1953245701475355056
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2189,7 +2189,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!144 &1683885397325744006
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -2299,7 +2299,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!144 &4343652599301053725
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -3665,7 +3665,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!144 &4084819522601174842
 CharacterJoint:
   m_ObjectHideFlags: 0

@@ -100,10 +100,7 @@ public class HealthManager : MonoBehaviourPun
             foreach (SkinnedMeshRenderer renderer in firstPersonMesh)
                 renderer.enabled = false;
             foreach (SkinnedMeshRenderer renderer in thirdPersonMesh)
-            {
-                Debug.Log(renderer);
                 renderer.renderingLayerMask = 1;
-            }
 
             characterScript.getThirdPerson().transform.parent = null;
             playerMovement.SetPlayerCanMove(false);
@@ -172,7 +169,6 @@ public class HealthManager : MonoBehaviourPun
             "delay", delay,
             "onupdatetarget", gameObject,
             "onupdate", callBackFunction,
-            //"oncomplete", "",
             "easetype", easing
             )
         );

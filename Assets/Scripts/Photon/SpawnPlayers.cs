@@ -19,10 +19,15 @@ public class SpawnPlayers : MonoBehaviour
 
     private GameManager gameManager;
 
+    private void Awake()
+    {
+        
+    }
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        foreach(Transform child in GameObject.Find("SPAWN_PLAYERS").transform)
+        foreach (Transform child in GameObject.Find("SPAWN_PLAYERS").transform)
         {
             respawnPositions.Add(child);
         }

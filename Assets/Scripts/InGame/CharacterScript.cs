@@ -17,6 +17,11 @@ public class CharacterScript : MonoBehaviourPunCallbacks
     private GameObject mainCam;
     private GameObject firstPersonView;
 
+    private void Awake()
+    {
+        
+    }
+
     void Start()
     {
         mainCam = gameObject.transform.Find("Main Camera").gameObject;
@@ -36,10 +41,10 @@ public class CharacterScript : MonoBehaviourPunCallbacks
             characterPhotonViewIdFP = instantiatedCharacterFP.GetPhotonView().ViewID;
             photonView.RPC("ChangeCharacterFPParent", RpcTarget.AllBuffered, characterPhotonViewIdFP);
 
-            // disable third person model
+            // hide third person model
             foreach (Transform child in instantiatedCharacter.transform)
             {
-                if (child.name != "rig")
+                if (child.gameObject.GetComponent<SkinnedMeshRenderer>())
                     child.gameObject.GetComponent<SkinnedMeshRenderer>().renderingLayerMask -= 1;
             }
         }
