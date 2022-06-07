@@ -6,7 +6,7 @@ using Photon.Pun;
 
 //https://answers.unity.com/questions/1777133/laggy-camera-attached-to-rigid-body-player-i-have.html camera jitter with rigidbody
 //https://forum.unity.com/threads/mouse-delta-input.646606/ mouse delta jittering
-//https://youtu.be/_QajrabyTJc movement
+//https://www.unity3dtips.com/unity-fix-movement-stutter/ rigidbody jittering
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     private bool playerCanMove = true;
     private bool playerCanLook = true;
-    private bool pressedPause;
     
     private float DistanceToTheGround;
 
@@ -45,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
         inputActions.Player.Enable();
 
         firstPersonView = gameObject.transform.Find("First Person View").gameObject;
-        //ingameMenuNav = GameObject.Find("Canvas").GetComponent<InGameMenuNav>();
 
         photonView = GetComponent<PhotonView>();
     }
@@ -54,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (photonView.IsMine)
         {
+            //controls
             if (playerCanMove)
             {
                 jumped = inputActions.Player.Jump.triggered;
@@ -64,23 +63,13 @@ public class PlayerMovement : MonoBehaviour
                 lookValue = inputActions.Player.Look.ReadValue<Vector2>();
             }
 
-            //movement
-            float moveX = movementValue.x;
-            float moveZ = movementValue.y;
-            Vector3 move = transform.right * moveX + transform.forward * moveZ;
-            moveSpeed = new Vector2(moveX, moveZ).magnitude;
-
             //jump
             isGrounded = Physics.Raycast(transform.position, -transform.up, DistanceToTheGround + 0.1f);
-            if(isGrounded)
+            if (isGrounded)
             {
-                if(jumped)
+                if (jumped)
                     playerRigidbody.AddRelativeForce(new Vector3(0, jumpHeight, 0), ForceMode.Impulse);
             }
-
-            //playerRigidbody.position += move * speed * Time.deltaTime;
-            playerRigidbody.MovePosition(playerRigidbody.position + move * speed * Time.deltaTime);
-
 
             //look
             lookValue *= 0.5f;
@@ -92,7 +81,21 @@ public class PlayerMovement : MonoBehaviour
             playerRigidbody.transform.Rotate(Vector3.up * lookX);
             firstPersonView.transform.Rotate(Vector3.right * lookY);
         }
-    }  
+    }
+
+    private void FixedUpdate()
+    {
+        if (photonView.IsMine)
+        {
+            //movement
+            float moveX = movementValue.x;
+            float moveZ = movementValue.y;
+            Vector3 move = transform.right * moveX + transform.forward * moveZ;
+            moveSpeed = new Vector2(moveX, moveZ).magnitude;
+
+            playerRigidbody.MovePosition(playerRigidbody.position + move * speed * Time.deltaTime);
+        }
+    }
 
     public void SetPlayerCanMove(bool onOrOff)
     {

@@ -35,12 +35,13 @@ public class CharacterScript : MonoBehaviourPunCallbacks
 
             instantiatedCharacter = PhotonNetwork.Instantiate(character.name, gameObject.transform.position + new Vector3(0, -0.05f, 0), gameObject.transform.rotation);
             characterPhotonViewId = instantiatedCharacter.GetPhotonView().ViewID;
-            photonView.RPC("ChangeCharacterParent", RpcTarget.AllBuffered, characterPhotonViewId);
 
             instantiatedCharacterFP = PhotonNetwork.Instantiate(character.name + "FP", gameObject.transform.position, gameObject.transform.rotation);
             characterPhotonViewIdFP = instantiatedCharacterFP.GetPhotonView().ViewID;
-            photonView.RPC("ChangeCharacterFPParent", RpcTarget.AllBuffered, characterPhotonViewIdFP);
 
+            photonView.RPC("ChangeCharacterParent", RpcTarget.AllBuffered, characterPhotonViewId, characterPhotonViewIdFP);
+
+            
             // hide third person model
             foreach (Transform child in instantiatedCharacter.transform)
             {
@@ -63,16 +64,18 @@ public class CharacterScript : MonoBehaviourPunCallbacks
         return instantiatedCharacterFP;
     }
 
-    [PunRPC] void ChangeCharacterParent(int characterPhotonViewId)
+    [PunRPC] void ChangeCharacterParent(int characterPhotonViewId, int characterFPPhotonViewId)
     {
         Transform character = PhotonView.Find(characterPhotonViewId).transform;
         character.transform.SetParent(photonView.transform);
+        Transform characterFP = PhotonView.Find(characterFPPhotonViewId).transform;
+        characterFP.transform.SetParent(photonView.transform.Find("First Person View").transform);
     }
 
-    [PunRPC]
-    void ChangeCharacterFPParent(int characterPhotonViewId)
-    {
-        Transform character = PhotonView.Find(characterPhotonViewId).transform;
-        character.transform.SetParent(photonView.transform.Find("First Person View").transform);
-    }
+    //[PunRPC]
+    //void ChangeCharacterFPParent(int characterPhotonViewId)
+    //{
+    //    Transform character = PhotonView.Find(characterPhotonViewId).transform;
+    //    character.transform.SetParent(photonView.transform.Find("First Person View").transform);
+    //}
 }

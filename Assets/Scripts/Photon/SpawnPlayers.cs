@@ -1,90 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
+using TMPro;
+
+//player would sometimes be invisible, or extra characters would spawn. This was because i did the code in start() instead of OnLevelFinishedLoading()
+//https://answers.unity.com/questions/1174255/since-onlevelwasloaded-is-deprecated-in-540b15-wha.html
 
 public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
     public GameObject player;
+    private GameObject newPlayer;
     public List<Character> characters = new List<Character>();
 
     private Transform teamBluePosition;
     private Transform teamRedPosition;
     private List<Transform> respawnPositions = new List<Transform>();
 
-    private bool spawnedPlayers = false;
     private Vector3 playerSpawnPoint;
     private Quaternion playerSpawnRotation;
     private int range = 2;
 
     private GameManager gameManager;
 
-    private void Awake()
+
+
+    [PunRPC]
+    void LogMessage(string chatMessage)
     {
-        gameManager = FindObjectOfType<GameManager>();
-        if (PhotonNetwork.LocalPlayer.IsMasterClient)
-        {
-            Invoke("InitialSpawn", 2f);
-        }
-        else
-        {
-            InitialSpawn();
-        }
+        GameObject log = GameObject.Find("Log");
+        GameObject messageInstance = PhotonNetwork.Instantiate("Message", log.transform.position, Quaternion.identity);
+        messageInstance.transform.SetParent(log.transform);
+        messageInstance.GetComponent<TMP_Text>().text = chatMessage;
     }
 
     void Start()
     {
-        
+        gameManager = FindObjectOfType<GameManager>();
         foreach (Transform child in GameObject.Find("SPAWN_PLAYERS").transform)
         {
             respawnPositions.Add(child);
         }
 
-        
+        string chatMessage = $"{newPlayer.GetPhotonView().Owner.NickName} has entered the room";
+        photonView.RPC("LogMessage", RpcTarget.All, chatMessage);
     }
-
-    //private void Update()
-    //{
-    //    if (PhotonNetwork.LocalPlayer.IsMasterClient && spawnedPlayers == false)
-    //    {
-    //        int playersReady = 0;
-
-    //        Player[] playerList = PhotonNetwork.PlayerList;
-    //        foreach (Player player in playerList)
-    //        {
-    //            if (player.)
-    //            {
-    //                playersReady++;
-    //            }
-
-    //        }
-    //        if (playersReady == playerList.Length)
-    //        {
-    //            foreach (Player player in playerList)
-    //                initialSpawn();
-    //            spawnedPlayers = true;
-    //        }
-    //    }
-    //}
 
     void InitialSpawn()
     {
         teamBluePosition = gameObject.transform.Find("Team Blue").transform;
         teamRedPosition = gameObject.transform.Find("Team Red").transform;
-
-        if (gameManager.GetPlayerTeam(PhotonNetwork.LocalPlayer) == "1")
+        if (PhotonNetwork.LocalPlayer.GetPhotonTeam().Name == "Blue")
         {
             playerSpawnPoint = RandomizeSpawnPoint(teamBluePosition.position);
             playerSpawnRotation = teamBluePosition.rotation;
         }
-        else if (gameManager.GetPlayerTeam(PhotonNetwork.LocalPlayer) == "2")
+        else if (PhotonNetwork.LocalPlayer.GetPhotonTeam().Name == "Red")
         {
             playerSpawnPoint = RandomizeSpawnPoint(teamRedPosition.position);
             playerSpawnRotation = teamRedPosition.rotation;
         }
 
-        GameObject newPlayer = PhotonNetwork.Instantiate(player.name, playerSpawnPoint, playerSpawnRotation);
+        newPlayer = PhotonNetwork.Instantiate(player.name, playerSpawnPoint, playerSpawnRotation);
 
         foreach (Character character in characters)
         {
@@ -112,5 +92,24 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
         return playerSpawnPoint;
     }
 
+    //
+    //callbacks
+    //
 
+    public override void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+    public override void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+    private void OnLevelFinishedLoading(Scene arg0, LoadSceneMode arg1)
+    {
+        InitialSpawn();
+    }
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        
+    }
 }

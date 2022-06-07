@@ -44,6 +44,9 @@ public class RagdollManager : MonoBehaviour
         thirdPersonAnimator.enabled = true;
         playerCollider.enabled = true;
         playerCollider.attachedRigidbody.isKinematic = false;
+        playerCollider.attachedRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        playerCollider.attachedRigidbody.velocity = Vector3.zero;
+
     }
 
     public void TurnOnRagdoll()
@@ -51,6 +54,8 @@ public class RagdollManager : MonoBehaviour
         playerGravity.enabled = false;
         thirdPersonAnimator.enabled = false;
         playerCollider.attachedRigidbody.isKinematic = true;
+        playerCollider.attachedRigidbody.velocity = Vector3.zero;
+        playerCollider.attachedRigidbody.constraints = RigidbodyConstraints.FreezeAll;
         playerCollider.enabled = false;
 
         foreach (Collider collider in ragdollColliders)

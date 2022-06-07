@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
@@ -35,10 +36,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void LoadLevel(string levelName)
     {
-        if (PhotonNetwork.OfflineMode)
-            GlobalVariables.switchToScene(SceneCustom.inGame);
-        else
+        if (PhotonNetwork.IsMasterClient)
+        {
             PhotonNetwork.LoadLevel(levelName);
+        }
         PhotonNetwork.CurrentRoom.CustomProperties["inGame"] = true;
         PhotonNetwork.CurrentRoom.IsVisible = false;
     }
@@ -114,6 +115,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player other)
     {
         Debug.Log(other.NickName + " left the room");
+        if (SceneManager.GetActiveScene().name == "In Game")
+        {
+            GameObject log = GameObject.Find("Log");
+            GameObject messageInstance = PhotonNetwork.Instantiate("Message", log.transform.position, Quaternion.identity);
+            messageInstance.transform.SetParent(log.transform);
+            string chatMessage = $"{other.NickName} has left the room";
+            messageInstance.GetComponent<TMP_Text>().text = chatMessage;
+        }
     }
     public void OnPlayerJoinedTeam(Player other, PhotonTeam team)
     {

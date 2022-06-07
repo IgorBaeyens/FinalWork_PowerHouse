@@ -338,6 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 31916522}
   - component: {fileID: 31916521}
+  - component: {fileID: 31916523}
   m_Layer: 0
   m_Name: SPAWN_PLAYERS
   m_TagString: Untagged
@@ -381,6 +382,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &31916523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31916520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 6
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &41743276
 GameObject:
   m_ObjectHideFlags: 0
@@ -9060,7 +9083,7 @@ GameObject:
   - component: {fileID: 1366314079}
   - component: {fileID: 1366314078}
   m_Layer: 5
-  m_Name: Team Two Score
+  m_Name: Team Red Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11592,8 +11615,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58e89fbbf5f5edf43ab944e6bb8e0219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  log: {fileID: 41743276}
-  messagePrefab: {fileID: 2670193204836309538, guid: 2779aee511c56bc40840af9d782d2860, type: 3}
 --- !u!1001 &1955202368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12331,7 +12352,7 @@ GameObject:
   - component: {fileID: 2111713389}
   - component: {fileID: 2111713388}
   m_Layer: 5
-  m_Name: Team One Score
+  m_Name: Team Blue Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12841,6 +12862,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 41743277}
     m_Modifications:
+    - target: {fileID: 2484175518953120966, guid: 2779aee511c56bc40840af9d782d2860, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2670193204836309538, guid: 2779aee511c56bc40840af9d782d2860, type: 3}
       propertyPath: m_Name
       value: Message
