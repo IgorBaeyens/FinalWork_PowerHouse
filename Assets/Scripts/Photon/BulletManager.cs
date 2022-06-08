@@ -6,8 +6,6 @@ using UnityEngine.VFX;
 public class BulletManager : MonoBehaviour
 {
     private int ownerId;
-    private string ownerTeam;
-    private string ownerName;
     private float damage = 150;
     public bool activateExplosion = false;
 
@@ -37,26 +35,10 @@ public class BulletManager : MonoBehaviour
     {
         return ownerId = newOwnerId;
     }
-    public string setOwnerTeam(string newOwnerTeam)
-    {
-        return ownerTeam = newOwnerTeam;
-    }
-    public string setOwnerName(string newOwnerName)
-    {
-        return ownerName = newOwnerName;
-    }
 
-    public float getOwnerId()
+    public int getOwnerId()
     {
         return ownerId;
-    }
-    public string getOwnerTeam()
-    {
-        return ownerTeam;
-    }
-    public string getOwnerName()
-    {
-        return ownerName;
     }
     public float getDamage()
     {

@@ -6,6 +6,7 @@ public class RagdollManager : MonoBehaviour
 {
     private Collider[] ragdollColliders;
     public Animator thirdPersonAnimator;
+    private PlayerMovement playerMovement;
     private GameObject playerObject;
     private Gravity playerGravity;
     private Collider playerCollider;
@@ -15,6 +16,7 @@ public class RagdollManager : MonoBehaviour
         ragdollColliders = GetComponentsInChildren<Collider>();
         thirdPersonAnimator = GetComponent<Animator>();
         playerObject = transform.parent.gameObject;
+        playerMovement = playerObject.GetComponent<PlayerMovement>();
         playerGravity = playerObject.GetComponent<Gravity>();
         playerCollider = playerObject.GetComponent<Collider>();
 
@@ -43,7 +45,6 @@ public class RagdollManager : MonoBehaviour
         playerGravity.enabled = true;
         thirdPersonAnimator.enabled = true;
         playerCollider.enabled = true;
-        playerCollider.attachedRigidbody.isKinematic = false;
         playerCollider.attachedRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         playerCollider.attachedRigidbody.velocity = Vector3.zero;
 
@@ -53,7 +54,6 @@ public class RagdollManager : MonoBehaviour
     {
         playerGravity.enabled = false;
         thirdPersonAnimator.enabled = false;
-        playerCollider.attachedRigidbody.isKinematic = true;
         playerCollider.attachedRigidbody.velocity = Vector3.zero;
         playerCollider.attachedRigidbody.constraints = RigidbodyConstraints.FreezeAll;
         playerCollider.enabled = false;

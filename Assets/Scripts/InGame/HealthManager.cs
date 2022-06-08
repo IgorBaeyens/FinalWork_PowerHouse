@@ -25,7 +25,7 @@ public class HealthManager : MonoBehaviourPun
     private SkinnedMeshRenderer[] thirdPersonMesh;
 
     private float maxHealth;
-    private float currentHealth = 1f;
+    public float currentHealth = 1f;
     private float respawnTime = 8f;
     private bool isDead = false;
 
@@ -37,8 +37,8 @@ public class HealthManager : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            //messagePrefab = Resources.Load("Message", GameObject) as GameObject;
             messagePrefab = (GameObject)Resources.Load("Message", typeof(GameObject));
+            scoreManager = FindObjectOfType<ScoreManager>();
             chatManager = FindObjectOfType<ChatManager>();
             spawnPlayers = GameObject.Find("SPAWN_PLAYERS").GetComponent<SpawnPlayers>();
             characterScript = GetComponent<CharacterScript>();
@@ -76,12 +76,14 @@ public class HealthManager : MonoBehaviourPun
         PlayerManager playerManager = GetComponent<PlayerManager>();
         string victimName = playerManager.getPlayerName();
         string victimTeam = playerManager.getPlayerTeam();
+        string victimColor = playerManager.getPlayerTeamColorHEX();
 
         if (other.CompareTag("Bullet"))
         {
             GameObject bullet = other.transform.parent.gameObject;
             BulletManager bulletManager = bullet.GetComponent<BulletManager>();
-            if (playerManager.getPlayerTeam() != bulletManager.getOwnerTeam())
+            PlayerManager bulletOwner = PhotonView.Find(bulletManager.getOwnerId()).GetComponent<PlayerManager>();
+            if (playerManager.getPlayerTeam() != bulletOwner.getPlayerTeam())
             {
                 bulletManager.Explode();
                 if(photonView.IsMine)
@@ -89,10 +91,12 @@ public class HealthManager : MonoBehaviourPun
                     TakeDamage(bulletManager.getDamage());
                     if (currentHealth <= 0)
                     {
-                        string killerName = bulletManager.getOwnerName();
-                        string killerTeam = bulletManager.getOwnerTeam();
-                        string chatMessage = $"{killerName}has killed {victimName}";
+                        string killerName = bulletOwner.getPlayerName();
+                        string killerTeam = bulletOwner.getPlayerTeam();
+                        string killerColor = bulletOwner.getPlayerTeamColorHEX();
+                        string chatMessage = $"<color=#{killerColor}>{killerName}</color> has killed <color=#{victimColor}>{victimName}</color>";
                         photonView.RPC("LogDeath", RpcTarget.All, chatMessage);
+                        scoreManager.IncreaseScore(killerTeam);
                     }
                 }
             }
@@ -102,7 +106,7 @@ public class HealthManager : MonoBehaviourPun
             if (photonView.IsMine)
             {
                 TakeDamage(currentHealth);
-                string chatMessage = $"{victimName} fell through the map";
+                string chatMessage = $"<color=#{victimColor}>{victimName}</color> fell through the map";
                 photonView.RPC("LogDeath", RpcTarget.All, chatMessage);
             }
             

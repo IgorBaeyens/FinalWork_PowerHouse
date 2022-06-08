@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
   
     private InputActions inputActions;
+    private HealthManager healthManager;
     private GameObject firstPersonView;
     public CharacterController controller;
     private InGameMenuNav ingameMenuNav;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 movementValue;
     public Vector2 lookValue;
+    public Vector3 movement;
     public float lookX;
     public float lookY;
     public bool jumped;
@@ -37,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
-
+        healthManager = GetComponent<HealthManager>();
         DistanceToTheGround = GetComponent<Collider>().bounds.extents.y;
 
         inputActions = new InputActions();
@@ -90,10 +92,13 @@ public class PlayerMovement : MonoBehaviour
             //movement
             float moveX = movementValue.x;
             float moveZ = movementValue.y;
-            Vector3 move = transform.right * moveX + transform.forward * moveZ;
+            movement = transform.right * moveX + transform.forward * moveZ;
             moveSpeed = new Vector2(moveX, moveZ).magnitude;
 
-            playerRigidbody.MovePosition(playerRigidbody.position + move * speed * Time.deltaTime);
+            if (healthManager.currentHealth > 0)
+            {
+                playerRigidbody.MovePosition(playerRigidbody.position + movement * speed * Time.deltaTime);
+            }
         }
     }
 

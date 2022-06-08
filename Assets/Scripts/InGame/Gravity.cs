@@ -25,12 +25,12 @@ public class Gravity : MonoBehaviour
 
     void Update()
     {
-        //rigidbody.AddRelativeForce(new Vector3(0, -15, 0));
+        rigidbody.AddRelativeForce(new Vector3(0, -15, 0));
     }
 
     private void FixedUpdate()
     {
-        rigidbody.AddRelativeForce(new Vector3(0, -19, 0));
+        //rigidbody.AddRelativeForce(new Vector3(0, -22.5f, 0));
     }
 
     private void OnTriggerEnter(Collider other)

@@ -9,8 +9,6 @@ using Photon.Pun;
 public class FlareSecondary : MonoBehaviourPun
 {
     private int playerId;
-    private string playerTeam;
-    private string playerName;
     private int firstPersonViewId;
     private Quaternion myFPCameraRotation;
 
@@ -23,8 +21,6 @@ public class FlareSecondary : MonoBehaviourPun
     {
         playerObject = transform.parent.parent.gameObject;
         playerId = playerObject.GetPhotonView().ViewID;
-        playerName = PhotonView.Find(playerId).Owner.NickName;
-        //playerTeam = playerObject.GetComponent<PlayerManager>().getPlayerTeam();
         firstPersonViewId = photonView.ViewID;
         launchEffect = launchingSpot.GetComponentInChildren<Animator>();
     }
@@ -42,15 +38,14 @@ public class FlareSecondary : MonoBehaviourPun
         if (photonView.IsMine)
         {
             GameObject fireBomb = PhotonNetwork.Instantiate("Fire Bomb", launchingSpot.position, gameObject.transform.parent.parent.rotation);
-            playerTeam = playerObject.GetComponent<PlayerManager>().getPlayerTeam();
-            photonView.RPC("LogicSecondary", RpcTarget.All, firstPersonViewId, myFPCameraRotation, fireBomb.GetPhotonView().ViewID, playerTeam, playerName);
+            photonView.RPC("LogicSecondary", RpcTarget.All, firstPersonViewId, myFPCameraRotation, fireBomb.GetPhotonView().ViewID, playerId);
             launchEffect.SetTrigger("Fire");
         }
         
     }
 
     [PunRPC] 
-    void LogicSecondary(int firstPersonViewId, Quaternion cameraRotation, int firebombId, string playerTeam, string playerName)
+    void LogicSecondary(int firstPersonViewId, Quaternion cameraRotation, int firebombId, int playerId)
     {
         GameObject firstPersonCamera = PhotonView.Find(firstPersonViewId).transform.gameObject;
         firstPersonCamera.transform.rotation = cameraRotation;
@@ -58,8 +53,6 @@ public class FlareSecondary : MonoBehaviourPun
         GameObject fireBomb = PhotonView.Find(firebombId).gameObject;
         BulletManager bulletManager = fireBomb.GetComponent<BulletManager>();
         bulletManager.setOwnerId(playerId);
-        bulletManager.setOwnerTeam(playerTeam);
-        bulletManager.setOwnerName(playerName);
         Rigidbody fireBombRigidbody = fireBomb.GetComponent<Rigidbody>();
         fireBombRigidbody.AddForce(transform.forward * 34 + transform.up * 0.5f, ForceMode.Impulse);
     }

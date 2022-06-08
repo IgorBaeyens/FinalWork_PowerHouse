@@ -8,8 +8,10 @@ public class PlayerManager : MonoBehaviourPun
 {
     private GameManager gameManager;
 
-    public string playerTeam;
     private string playerName;
+    public string playerTeam;
+    private Color playerTeamColorRGBA;
+    private string playerTeamColorHEX;
 
     void Start()
     {
@@ -18,39 +20,50 @@ public class PlayerManager : MonoBehaviourPun
             gameManager = FindObjectOfType<GameManager>();
             playerName = PhotonNetwork.LocalPlayer.NickName;
 
-            photonView.RPC("SetPlayerTeam", RpcTarget.All, photonView.ViewID);
+            photonView.RPC("SetPlayerInfo", RpcTarget.All, photonView.ViewID);
         }
     }
 
     [PunRPC]
-    void SetPlayerTeam(int playerId)
+    void SetPlayerInfo(int playerId)
     {
         PhotonView playerPhotonView = PhotonView.Find(playerId);
         Player player = playerPhotonView.Owner;
         PlayerManager playerManager = playerPhotonView.GetComponent<PlayerManager>();
+        playerManager.playerName = player.NickName;
         Light teamLight = playerPhotonView.transform.Find("Team Light").GetComponent<Light>();
         gameManager = FindObjectOfType<GameManager>();
         switch (gameManager.GetPlayerTeam(player))
         {
             case "1":
                 playerManager.playerTeam = "Blue";
-                //289DFF
-                teamLight.color = new Color32(4, 130, 255, 255);
+                playerManager.playerTeamColorRGBA = new Color32(4, 130, 255, 255);
+                playerManager.playerTeamColorHEX = "0482FF";
+                teamLight.color = playerManager.getPlayerTeamColorRGBA();
                 break;
             case "2":
                 playerManager.playerTeam = "Red";
-                //FF282A
-                teamLight.color = new Color32(233, 0, 52, 255);
+                playerManager.playerTeamColorRGBA = new Color32(233, 0, 52, 255);
+                playerManager.playerTeamColorHEX = "E90048";
+                teamLight.color = playerManager.getPlayerTeamColorRGBA();
                 break;
         }
     }
 
+    public string getPlayerName()
+    {
+        return playerName;
+    }
     public string getPlayerTeam()
     {
         return playerTeam;
     }
-    public string getPlayerName()
+    public Color getPlayerTeamColorRGBA()
     {
-        return playerName;
+        return playerTeamColorRGBA;
+    }
+    public string getPlayerTeamColorHEX()
+    {
+        return playerTeamColorHEX;
     }
 }
