@@ -15,7 +15,8 @@ MonoBehaviour:
   type: 1
   name: Fire Bomb
   icon: {fileID: 21300000, guid: 69179853a2d12804491c40e491488a25, type: 3}
-  damage: 60
+  damage: 200
   description: Flare throws a fiery projectile towards the enemy. Upon landing the
     projectile explodes for (damage)
-  updatedDescription: 
+  updatedDescription: Flare throws a fiery projectile towards the enemy. Upon landing
+    the projectile explodes for 60 damage

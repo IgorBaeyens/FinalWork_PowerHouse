@@ -8,18 +8,18 @@ using Photon.Realtime;
 
 public class ScoreManager : MonoBehaviourPun
 {
-    private float maxScore = 5;
+    private float maxScore = 30;
+    private bool gameEnded = false;
 
     private float blueTeamScore = 0;
-    private bool blueVictory = false;
     private Image blueScoreBar;
     private TMP_Text blueScoreText;
 
     private float redTeamScore = 0;
-    private bool redVictory = false;
     private Image redScoreBar;
     private TMP_Text redScoreText;
 
+    private GameStateManager gameStateManager;
 
     void Start()
     {
@@ -32,14 +32,22 @@ public class ScoreManager : MonoBehaviourPun
         redScoreBar.fillAmount = redTeamScore;
         blueScoreText.text = blueTeamScore.ToString();
         redScoreText.text = redTeamScore.ToString();
+
+        gameStateManager = GetComponent<GameStateManager>();
     }
 
     private void Update()
     {
-        if (blueTeamScore >= maxScore)
-            blueVictory = true;
-        else if (redTeamScore >= maxScore)
-            redVictory = true;
+        if (blueTeamScore >= maxScore && !gameEnded)
+        {
+            gameStateManager.EndGame("Blue", new Color32(4, 130, 255, 255));
+            gameEnded = true;
+        }
+        else if (redTeamScore >= maxScore && !gameEnded)
+        {
+            gameStateManager.EndGame("Red", new Color32(233, 0, 52, 255));
+            gameEnded = true;
+        }
     }
 
     [PunRPC]
@@ -69,5 +77,14 @@ public class ScoreManager : MonoBehaviourPun
         float redScoreFromOneToZero = redTeamScore / maxScore;
         redScoreBar.fillAmount = redScoreFromOneToZero;
         redScoreText.text = redTeamScore.ToString();
+    }
+
+    public float GetBlueTeamScore()
+    {
+        return blueTeamScore;
+    }
+    public float GetRedTeamScore()
+    {
+        return redTeamScore;
     }
 }

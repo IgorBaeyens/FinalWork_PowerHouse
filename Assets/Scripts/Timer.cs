@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 using TMPro;
 
 //timer
@@ -26,6 +27,7 @@ public class Timer : MonoBehaviour
             int seconds = Mathf.FloorToInt(timer - minutes * 60);
             string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
 
+            //timer -= PhotonNetwork.Time;
             timer -= Time.deltaTime;
             timerContent.text = niceTime;
         } else
@@ -36,6 +38,12 @@ public class Timer : MonoBehaviour
                 Event();
             }
         }
+    }
+
+    [PunRPC]
+    void updateTimer()
+    {
+
     }
 
     public virtual void Event()

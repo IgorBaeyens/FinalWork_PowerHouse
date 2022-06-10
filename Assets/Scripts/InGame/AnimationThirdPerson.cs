@@ -10,12 +10,14 @@ public class AnimationThirdPerson : MonoBehaviour
 {
     private Animator characterAnimator;
     private PlayerMovement movementScript;
+    private PlayerControls playerControls;
 
     
     void Start()
     {
         characterAnimator = GetComponent<Animator>();
         movementScript = GetComponentInParent<PlayerMovement>();
+        playerControls = GetComponentInParent<PlayerControls>();
 
         InvokeRepeating("Blink", 0, 4);
     }
@@ -24,11 +26,11 @@ public class AnimationThirdPerson : MonoBehaviour
     {
         //run
         characterAnimator.SetFloat("Speed", movementScript.moveSpeed, 0.2f, Time.deltaTime * 4);
-        characterAnimator.SetFloat("X", movementScript.movementValue.x, 0.4f, Time.deltaTime * 4);
-        characterAnimator.SetFloat("Y", movementScript.movementValue.y, 0.4f, Time.deltaTime * 4);
+        characterAnimator.SetFloat("X", playerControls.movementValue.x, 0.4f, Time.deltaTime * 4);
+        characterAnimator.SetFloat("Y", playerControls.movementValue.y, 0.4f, Time.deltaTime * 4);
 
         //jump
-        if (movementScript.jumped)
+        if (playerControls.pressedJump)
             characterAnimator.SetBool("PressedJump", true);
         else
             characterAnimator.SetBool("PressedJump", false);

@@ -7,8 +7,8 @@ public class AnimationFirstPerson : MonoBehaviour
 {
     private Animator characterAnimator;
     private PlayerMovement movementScript;
-    private AbilityHolder abilityScript;
-    private InGameMenuNav inGameMenuNav;
+    private PlayerControls playerControls;
+    //private InGameMenuNav inGameMenuNav;
     public Image reticle;
 
     //LeanTween problem
@@ -18,8 +18,7 @@ public class AnimationFirstPerson : MonoBehaviour
     {
         characterAnimator = GetComponent<Animator>();
         movementScript = GetComponentInParent<PlayerMovement>();
-        abilityScript = GetComponentInParent<AbilityHolder>();
-        inGameMenuNav = transform.parent.parent.GetComponent<InGameMenuNav>();
+        playerControls = GetComponentInParent<PlayerControls>();
         reticle = GameObject.Find("Outer Circle").GetComponent<Image>();
         
     }
@@ -30,11 +29,11 @@ public class AnimationFirstPerson : MonoBehaviour
         characterAnimator.SetFloat("Speed", movementScript.moveSpeed);
         
         //roll and lead
-        characterAnimator.SetFloat("X", movementScript.lookValue.x, 3f, Time.deltaTime * 4);
-        characterAnimator.SetFloat("Y", movementScript.lookValue.y, 3f, Time.deltaTime * 4);
+        characterAnimator.SetFloat("X", playerControls.lookValue.x, 3f, Time.deltaTime * 4);
+        characterAnimator.SetFloat("Y", playerControls.lookValue.y, 3f, Time.deltaTime * 4);
 
         //jump
-        if (movementScript.jumped)
+        if (playerControls.pressedJump)
             characterAnimator.SetBool("PressedJump", true);
         else
             characterAnimator.SetBool("PressedJump", false);
@@ -46,13 +45,13 @@ public class AnimationFirstPerson : MonoBehaviour
             characterAnimator.SetBool("IsGrounded", false);
 
         //primary
-        if (abilityScript.primaryPressed)
+        if (playerControls.pressedPrimary)
             characterAnimator.SetBool("IsPrimaryOn", true);
         else
             characterAnimator.SetBool("IsPrimaryOn", false);
 
         //secondary
-        if (abilityScript.secondaryPressed)
+        if (playerControls.pressedSecondary)
             characterAnimator.SetBool("IsSecondaryOn", true);
         else
             characterAnimator.SetBool("IsSecondaryOn", false);

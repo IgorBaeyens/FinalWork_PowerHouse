@@ -15,7 +15,8 @@ MonoBehaviour:
   type: 2
   name: Napalm
   icon: {fileID: 21300000, guid: fb7366ffc14671a439c2313987959809, type: 3}
-  damage: 100
+  damage: 1000
   description: Flare snaps her fingers, unleashing a huge fiery blast. The blast
     deals (damage)
-  updatedDescription: 
+  updatedDescription: Flare snaps her fingers, unleashing a huge fiery blast. The
+    blast deals 100 damage

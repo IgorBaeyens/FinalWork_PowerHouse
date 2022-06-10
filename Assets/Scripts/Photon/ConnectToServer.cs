@@ -6,21 +6,14 @@ using Photon.Realtime;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
+
+    // Release builds cannot connect to the same region as the unity editor, the unity editor and development builds have their own region called "development region"
+
     void Start()
     {
         PhotonNetwork.NickName = GlobalVariables.playerName;
         PhotonNetwork.ConnectUsingSettings();
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        PhotonNetwork.JoinLobby();
         GlobalVariables.switchToScene(SceneCustom.lobby);
     }
 
-    //public override void OnDisconnected(DisconnectCause cause)
-    //{
-    //    Debug.Log("COULD NOT CONNECT - OFFLINE MODE STARTED");
-    //    PhotonNetwork.OfflineMode = true;
-    //}
 }

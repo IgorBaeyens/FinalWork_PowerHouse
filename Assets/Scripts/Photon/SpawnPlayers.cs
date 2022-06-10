@@ -8,6 +8,7 @@ using Photon.Pun.UtilityScripts;
 using TMPro;
 
 //player would sometimes be invisible, or extra characters would spawn. This was because i did the code in start() instead of OnLevelFinishedLoading()
+//loadlevel was called by everyone aswel, it should only be done by master
 //https://answers.unity.com/questions/1174255/since-onlevelwasloaded-is-deprecated-in-540b15-wha.html
 
 public class SpawnPlayers : MonoBehaviourPunCallbacks
@@ -24,10 +25,6 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
     private Quaternion playerSpawnRotation;
     private int range = 2;
 
-    private GameManager gameManager;
-
-
-
     [PunRPC]
     void LogMessage(string chatMessage)
     {
@@ -39,10 +36,10 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
         foreach (Transform child in GameObject.Find("SPAWN_PLAYERS").transform)
         {
-            respawnPositions.Add(child);
+            if (child.gameObject.activeSelf)
+                respawnPositions.Add(child);
         }
 
         string chatMessage = $"{newPlayer.GetPhotonView().Owner.NickName} has entered the room";
@@ -79,16 +76,16 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
     {
         int randomIndex = Random.Range(0, respawnPositions.Count);
         Transform respawnPoint = respawnPositions[randomIndex];
-        player.transform.position = respawnPoint.position;
+        player.transform.position = RandomizeSpawnPoint(respawnPoint.position);
         player.transform.rotation = respawnPoint.rotation;
     }
 
-    Vector3 RandomizeSpawnPoint(Vector3 teamPosition)
+    Vector3 RandomizeSpawnPoint(Vector3 position)
     {
-        float randomX = Random.Range(teamPosition.x - range, teamPosition.x + range);
-        float randomZ = Random.Range(teamPosition.z - range, teamPosition.z + range);
+        float randomX = Random.Range(position.x - range, position.x + range);
+        float randomZ = Random.Range(position.z - range, position.z + range);
 
-        Vector3 playerSpawnPoint = new Vector3(randomX, teamPosition.y, randomZ);
+        Vector3 playerSpawnPoint = new Vector3(randomX, position.y, randomZ);
         return playerSpawnPoint;
     }
 

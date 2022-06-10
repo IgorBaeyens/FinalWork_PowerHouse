@@ -19,25 +19,21 @@ public class PlayerMovement : MonoBehaviour
   
     private InputActions inputActions;
     private HealthManager healthManager;
+    private PlayerControls playerControls;
     private GameObject firstPersonView;
     public CharacterController controller;
-    private InGameMenuNav ingameMenuNav;
     private Rigidbody playerRigidbody;
 
-    public Vector2 movementValue;
-    public Vector2 lookValue;
     public Vector3 movement;
     public float lookX;
     public float lookY;
-    public bool jumped;
     public bool isGrounded;
-    private bool playerCanMove = true;
-    private bool playerCanLook = true;
     
     private float DistanceToTheGround;
 
     void Start()
     {
+        playerControls = GetComponent<PlayerControls>();
         playerRigidbody = GetComponent<Rigidbody>();
         healthManager = GetComponent<HealthManager>();
         DistanceToTheGround = GetComponent<Collider>().bounds.extents.y;
@@ -54,26 +50,27 @@ public class PlayerMovement : MonoBehaviour
     {
         if (photonView.IsMine)
         {
-            //controls
-            if (playerCanMove)
+            //movement
+            float moveX = playerControls.movementValue.x;
+            float moveZ = playerControls.movementValue.y;
+            movement = transform.right * moveX + transform.forward * moveZ;
+            moveSpeed = new Vector2(moveX, moveZ).magnitude;
+
+            if (healthManager.currentHealth > 0)
             {
-                jumped = inputActions.Player.Jump.triggered;
-                movementValue = inputActions.Player.Movement.ReadValue<Vector2>();
-            }
-            if (playerCanLook)
-            {
-                lookValue = inputActions.Player.Look.ReadValue<Vector2>();
+                playerRigidbody.MovePosition(playerRigidbody.position + movement * speed * Time.deltaTime);
             }
 
             //jump
             isGrounded = Physics.Raycast(transform.position, -transform.up, DistanceToTheGround + 0.1f);
             if (isGrounded)
             {
-                if (jumped)
+                if (playerControls.pressedJump)
                     playerRigidbody.AddRelativeForce(new Vector3(0, jumpHeight, 0), ForceMode.Impulse);
             }
 
             //look
+            Vector2 lookValue = playerControls.lookValue;
             lookValue *= 0.5f;
             lookValue *= 0.1f;
             lookX = lookValue.x * sensitivity;
@@ -83,31 +80,5 @@ public class PlayerMovement : MonoBehaviour
             playerRigidbody.transform.Rotate(Vector3.up * lookX);
             firstPersonView.transform.Rotate(Vector3.right * lookY);
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (photonView.IsMine)
-        {
-            //movement
-            float moveX = movementValue.x;
-            float moveZ = movementValue.y;
-            movement = transform.right * moveX + transform.forward * moveZ;
-            moveSpeed = new Vector2(moveX, moveZ).magnitude;
-
-            if (healthManager.currentHealth > 0)
-            {
-                playerRigidbody.MovePosition(playerRigidbody.position + movement * speed * Time.deltaTime);
-            }
-        }
-    }
-
-    public void SetPlayerCanMove(bool onOrOff)
-    {
-        playerCanMove = onOrOff;
-    }
-    public void SetPlayerCanLook(bool onOrOff)
-    {
-        playerCanLook = onOrOff;
     }
 }

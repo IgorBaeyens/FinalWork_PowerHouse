@@ -12,13 +12,10 @@ using Photon.Pun.UtilityScripts;
 
 public class HealthManager : MonoBehaviourPun
 {
-    private GameObject messagePrefab;
     private ScoreManager scoreManager;
-    private ChatManager chatManager;
     private SpawnPlayers spawnPlayers;
     private RagdollManager ragdollManager;
-    private PlayerMovement playerMovement;
-    private AbilityHolder playerAbilities;
+    private PlayerControls playerControls;
     private CharacterScript characterScript;
     private Character character;
     private SkinnedMeshRenderer[] firstPersonMesh;
@@ -28,6 +25,7 @@ public class HealthManager : MonoBehaviourPun
     public float currentHealth = 1f;
     private float respawnTime = 8f;
     private bool isDead = false;
+    private bool respawned = false;
 
     private TMP_Text healthBarText;
     private Image healthBarLight;
@@ -37,13 +35,10 @@ public class HealthManager : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            messagePrefab = (GameObject)Resources.Load("Message", typeof(GameObject));
             scoreManager = FindObjectOfType<ScoreManager>();
-            chatManager = FindObjectOfType<ChatManager>();
             spawnPlayers = GameObject.Find("SPAWN_PLAYERS").GetComponent<SpawnPlayers>();
             characterScript = GetComponent<CharacterScript>();
-            playerMovement = GetComponent<PlayerMovement>();
-            playerAbilities = GetComponent<AbilityHolder>();
+            playerControls = GetComponent<PlayerControls>();
             character = characterScript.getCharacter();
 
             maxHealth = character.maxHealth;
@@ -66,8 +61,20 @@ public class HealthManager : MonoBehaviourPun
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
-            Die();
+            ragdollManager = GetComponentInChildren<RagdollManager>();
+            ragdollManager.TurnOnRagdoll();
+            if (photonView.IsMine)
+            {
+                Die();
+            }
             Invoke("Respawn", respawnTime);
+        }
+
+        if (isDead && respawned)
+        {
+            isDead = false;
+            respawned = false;
+            ragdollManager.TurnOffRagdoll();
         }
     }
 
@@ -113,47 +120,33 @@ public class HealthManager : MonoBehaviourPun
         }
     }
 
-    [PunRPC]
-    void LogDeath(string chatMessage)
-    {
-        GameObject log = GameObject.Find("Log");
-        GameObject messageInstance = PhotonNetwork.Instantiate("Message", log.transform.position, Quaternion.identity);
-        messageInstance.transform.SetParent(log.transform);
-        messageInstance.GetComponent<TMP_Text>().text = chatMessage;
-    }
-    [PunRPC]
-    void UpdateHealthRPC(int playerViewId, float currentHealth)
-    {
-        HealthManager healthManager = PhotonView.Find(playerViewId).GetComponent<HealthManager>();
-        healthManager.currentHealth = currentHealth;
-    }
+
 
     void Die()
     {
-        ragdollManager = GetComponentInChildren<RagdollManager>();
-        if (photonView.IsMine)
-        {
-            firstPersonMesh = characterScript.getFirstPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
-            thirdPersonMesh = characterScript.getThirdPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
 
-            foreach (SkinnedMeshRenderer renderer in firstPersonMesh)
-                renderer.enabled = false;
-            foreach (SkinnedMeshRenderer renderer in thirdPersonMesh)
-                renderer.renderingLayerMask = 1;
+        photonView.RPC("UpdateHealthRPC", RpcTarget.Others, photonView.ViewID, currentHealth);
 
-            characterScript.getThirdPerson().transform.parent = null;
-            playerMovement.SetPlayerCanMove(false);
-            playerAbilities.SetPlayerCanShoot(false);
+        firstPersonMesh = characterScript.getFirstPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
+        thirdPersonMesh = characterScript.getThirdPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
 
-            photonView.RPC("UpdateHealthRPC", RpcTarget.Others, photonView.ViewID, currentHealth);
-        }
-        ragdollManager.TurnOnRagdoll();
+        foreach (SkinnedMeshRenderer renderer in firstPersonMesh)
+            renderer.enabled = false;
+        foreach (SkinnedMeshRenderer renderer in thirdPersonMesh)
+            renderer.renderingLayerMask = 1;
+
+        //stop rotation after death
+        photonView.RPC("RotationSync", RpcTarget.Others, photonView.ViewID);
+        characterScript.getThirdPerson().transform.parent = null;
+
+        playerControls.SetPlayerCanMove(false);
+        playerControls.SetPlayerCanShoot(false);
+
     }
 
     void Respawn()
     {
-        ragdollManager.TurnOffRagdoll();
-        if (photonView.IsMine)
+        if(photonView.IsMine)
         {
             firstPersonMesh = characterScript.getFirstPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
             thirdPersonMesh = characterScript.getThirdPerson().GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -162,17 +155,22 @@ public class HealthManager : MonoBehaviourPun
             foreach (SkinnedMeshRenderer renderer in thirdPersonMesh)
                 renderer.renderingLayerMask -= 1;
 
+            photonView.RPC("RotationSync", RpcTarget.Others, photonView.ViewID);
             characterScript.getThirdPerson().transform.SetParent(gameObject.transform);
-            
-            playerMovement.SetPlayerCanMove(true);
-            playerAbilities.SetPlayerCanShoot(true);
-            spawnPlayers.Respawn(gameObject);
+
+            playerControls.SetPlayerCanMove(true);
+            playerControls.SetPlayerCanShoot(true);
+
             ResetHealth();
+            spawnPlayers.Respawn(gameObject);
             photonView.RPC("UpdateHealthRPC", RpcTarget.Others, photonView.ViewID, currentHealth);
             UpdateHealthGraphic(currentHealth, currentHealth);
+            photonView.RPC("UpdatePlayerState", RpcTarget.All, photonView.ViewID, true);
         }
-        
-        isDead = false;
+       
+
+
+
     }
 
     void TakeDamage(float damage)
@@ -212,7 +210,6 @@ public class HealthManager : MonoBehaviourPun
             )
         );
     }
-
     void EaseHealthBarLight(float newValue)
     {
         healthBarLight.fillAmount = newValue;
@@ -224,6 +221,40 @@ public class HealthManager : MonoBehaviourPun
     void EaseHealthBarText(float newValue)
     {
         healthBarText.text = Mathf.Round(newValue).ToString();
+    }
+
+    [PunRPC]
+    void UpdatePlayerState(int playerId, bool playerState)
+    {
+        GameObject player = PhotonView.Find(playerId).gameObject;
+        HealthManager healthManager = player.GetComponent<HealthManager>();
+        healthManager.respawned = playerState;
+    }
+    [PunRPC]
+    void LogDeath(string chatMessage)
+    {
+        GameObject log = GameObject.Find("Log");
+        GameObject messageInstance = PhotonNetwork.Instantiate("Message", log.transform.position, Quaternion.identity);
+        messageInstance.transform.SetParent(log.transform);
+        messageInstance.GetComponent<TMP_Text>().text = chatMessage;
+    }
+    [PunRPC]
+    void UpdateHealthRPC(int playerId, float currentHealth)
+    {
+        HealthManager healthManager = PhotonView.Find(playerId).GetComponent<HealthManager>();
+        healthManager.currentHealth = currentHealth;
+    }
+    [PunRPC]
+    void RotationSync(int playerId)
+    {
+        GameObject player = PhotonView.Find(playerId).gameObject;
+        PhotonTransformView photonTransform = player.GetComponent<PhotonTransformView>();
+        Debug.Log(photonTransform.m_SynchronizeRotation);
+
+        if (photonTransform.m_SynchronizeRotation)
+            photonTransform.m_SynchronizeRotation = false;
+        else
+            photonTransform.m_SynchronizeRotation = true;
     }
 
     float getHealthFromOneToZero(float healthOrDamage)

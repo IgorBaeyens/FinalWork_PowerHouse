@@ -139,6 +139,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         UpdateTeams();
     }
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinLobby();
+    }
     public override void OnDisconnected(DisconnectCause cause)
     {
         GlobalVariables.switchToScene(SceneCustom.mainMenu);

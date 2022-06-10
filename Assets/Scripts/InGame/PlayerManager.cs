@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
+            gameObject.name = "Local Player";
             gameManager = FindObjectOfType<GameManager>();
             playerName = PhotonNetwork.LocalPlayer.NickName;
 

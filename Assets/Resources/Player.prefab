@@ -387,8 +387,7 @@ GameObject:
   - component: {fileID: 6784670863612506671}
   - component: {fileID: 6784670863612506668}
   - component: {fileID: -4761131032027471223}
-  - component: {fileID: 4994606137585166944}
-  - component: {fileID: 6067710651587294807}
+  - component: {fileID: 6977271652224019911}
   - component: {fileID: 6784670863612506669}
   - component: {fileID: 1772776208446348220}
   - component: {fileID: -9085837154481364034}
@@ -448,7 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTeam: 
---- !u!114 &4994606137585166944
+--- !u!114 &6977271652224019911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -457,25 +456,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6784670863612506670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f94513703baa1429d161761acf4612, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eff5b8463505804e8d928b07649ae52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePaused: 0
---- !u!114 &6067710651587294807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6784670863612506670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f28a399303f27a841af89ea388e15a65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  primaryPressed: 0
-  secondaryPressed: 0
-  ultimatePressed: 0
+  pressedPause: 0
+  pressedJump: 0
+  pressedPrimary: 0
+  pressedSecondary: 0
+  movementValue: {x: 0, y: 0}
+  lookValue: {x: 0, y: 0}
 --- !u!114 &6784670863612506669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,12 +481,9 @@ MonoBehaviour:
   speed: 10
   moveSpeed: 0
   controller: {fileID: 0}
-  movementValue: {x: 0, y: 0}
-  lookValue: {x: 0, y: 0}
   movement: {x: 0, y: 0, z: 0}
   lookX: 0
   lookY: 0
-  jumped: 0
   isGrounded: 0
 --- !u!114 &1772776208446348220
 MonoBehaviour:

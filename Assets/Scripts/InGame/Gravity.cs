@@ -28,11 +28,6 @@ public class Gravity : MonoBehaviour
         rigidbody.AddRelativeForce(new Vector3(0, -15, 0));
     }
 
-    private void FixedUpdate()
-    {
-        //rigidbody.AddRelativeForce(new Vector3(0, -22.5f, 0));
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("GravityTrigger"))
@@ -42,7 +37,6 @@ public class Gravity : MonoBehaviour
             float angle = Vector3.Angle(transform.up, gravityVector.up);
             if (angle > 5)
             {
-                storedObjectForward = transform.forward;
                 
 
                 if (gameObject.CompareTag("Player"))
@@ -52,20 +46,33 @@ public class Gravity : MonoBehaviour
                     storedPlayerRotation = playerFP.eulerAngles;
                 }
 
+                storedObjectForward = transform.forward;
+
                 Quaternion rotation;
                 if (angle >= 180)
                 {
                     rotation = Quaternion.LookRotation(storedObjectForward, gravityVector.up);
-                } else
+                }
+                else
                 {
                     rotation = Quaternion.FromToRotation(transform.up, gravityVector.up) * transform.rotation;
-                }
+                };
 
                 iTween.RotateTo(gameObject, rotation.eulerAngles, 1f);
 
                 if (gameObject.CompareTag("Player"))
                 {
-                    iTween.RotateTo(playerFP.gameObject, rotation.eulerAngles, 1f);
+                    Quaternion firstPersonRotation;
+                    if (angle >= 180)
+                    {
+                        firstPersonRotation = Quaternion.LookRotation(storedPlayerForward, gravityVector.up);
+                    }
+                    else
+                    {
+                        firstPersonRotation = Quaternion.FromToRotation(transform.up, gravityVector.up) * transform.rotation;
+                    };
+                    iTween.RotateTo(playerFP.gameObject, firstPersonRotation.eulerAngles, 1f);
+
                 }
             }
         }
