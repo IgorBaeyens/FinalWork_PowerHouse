@@ -29,8 +29,8 @@ public class AnimationFirstPerson : MonoBehaviour
         characterAnimator.SetFloat("Speed", movementScript.moveSpeed);
         
         //roll and lead
-        characterAnimator.SetFloat("X", playerControls.lookValue.x, 3f, Time.deltaTime * 4);
-        characterAnimator.SetFloat("Y", playerControls.lookValue.y, 3f, Time.deltaTime * 4);
+        characterAnimator.SetFloat("X", playerControls.lookValue.x / 15, 0.1f, Time.deltaTime);
+        characterAnimator.SetFloat("Y", playerControls.lookValue.y / 15, 0.1f, Time.deltaTime);
 
         //jump
         if (playerControls.pressedJump)

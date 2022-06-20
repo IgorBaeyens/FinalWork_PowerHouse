@@ -7,6 +7,8 @@ TagManager:
   - GravityTrigger
   - Bullet
   - Kill Barrier
+  - Level
+  - Button
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - UI
   - Player
   - Fire Bomb
-  - 
+  - Level
   - 
   - 
   - 

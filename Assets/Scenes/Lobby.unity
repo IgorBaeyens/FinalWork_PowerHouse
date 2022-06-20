@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 88699860}
   m_Layer: 5
   m_Name: Dropdown
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -602,7 +602,7 @@ GameObject:
   - component: {fileID: 211124704}
   m_Layer: 5
   m_Name: Create Room Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -868,6 +868,7 @@ GameObject:
   - component: {fileID: 360839182}
   - component: {fileID: 360839181}
   - component: {fileID: 360839186}
+  - component: {fileID: 360839187}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -983,6 +984,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeMenu: {fileID: 1447484465}
+--- !u!114 &360839187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360839180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d07622562a17644a20633b904c99ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &393962600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1172,7 @@ GameObject:
   - component: {fileID: 534752691}
   m_Layer: 5
   m_Name: Input Field
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1767,7 +1780,7 @@ GameObject:
   - component: {fileID: 657120815}
   m_Layer: 5
   m_Name: Back Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2086,7 +2099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &689609754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2462,7 +2475,7 @@ GameObject:
   - component: {fileID: 971377341}
   m_Layer: 5
   m_Name: Arrow Decrease
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2863,7 +2876,7 @@ GameObject:
   - component: {fileID: 1050146644}
   m_Layer: 5
   m_Name: Dropdown
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3723,7 +3736,7 @@ GameObject:
   - component: {fileID: 1338026498}
   m_Layer: 5
   m_Name: Arrow Increase
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3855,7 +3868,7 @@ GameObject:
   - component: {fileID: 1346343521}
   m_Layer: 5
   m_Name: Back Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5624,7 +5637,7 @@ GameObject:
   - component: {fileID: 1801205884}
   m_Layer: 5
   m_Name: Back Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6139,7 +6152,7 @@ GameObject:
   - component: {fileID: 1844168718}
   m_Layer: 5
   m_Name: Begin Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6887,7 +6900,7 @@ GameObject:
   - component: {fileID: 2142886481}
   m_Layer: 5
   m_Name: Create Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

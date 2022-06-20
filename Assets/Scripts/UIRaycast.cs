@@ -26,9 +26,11 @@ public class UIRaycast : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         raycaster.Raycast(pointerEventData, results);
 
-        foreach (RaycastResult result in results)
-            GlobalVariables.hoveredElement = result.gameObject;
+        //foreach (RaycastResult result in results)
+
         if (results.Count == 0)
             GlobalVariables.hoveredElement = null;
+        else
+            GlobalVariables.hoveredElement = results[0].gameObject;
     }
 }

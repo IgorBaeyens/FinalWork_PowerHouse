@@ -24,11 +24,14 @@ public class MainMenuNavigation : MonoBehaviour
     public Animator flareAnimator;
 
     private GameObject hoveredElement;
+    private GameObject storedHoveredElement;
     private TMP_InputField nameInput;
     public TMP_Text playerNameText;
 
     void Start()
-    {        
+    {
+        
+
         //gets only the first generation children
         foreach(Transform child in gameObject.transform)
             menus.Add(child.gameObject);
@@ -80,7 +83,7 @@ public class MainMenuNavigation : MonoBehaviour
                     changeState(4);
                     break;
             }
-        }    
+        }
     }
 
     //turns off previous active menu, turns on given menu and set it as active menu. If a camera state is given, change to that state
@@ -108,12 +111,7 @@ public class MainMenuNavigation : MonoBehaviour
 
     public void pressedEnter()
     {
-        if(nameInput.placeholder.GetComponent<TMP_Text>().enabled)
-        {
-            GlobalVariables.playerName = nameInput.placeholder.GetComponent<TMP_Text>().text;
-            changeMenu(mainMenu, 1);
-            playerNameText.text = GlobalVariables.playerName;
-        } else if (!nameInput.text.Contains(" ") && nameInput.text != "" && nameInput.text.Length < 12)
+        if (!nameInput.text.Contains(" ") && nameInput.text != "" && nameInput.text.Length < 12)
         {
             GlobalVariables.playerName = nameInput.text;
             changeMenu(mainMenu, 1);

@@ -56,13 +56,13 @@ public class PlayerMovement : MonoBehaviour
             movement = transform.right * moveX + transform.forward * moveZ;
             moveSpeed = new Vector2(moveX, moveZ).magnitude;
 
-            if (healthManager.currentHealth > 0)
-            {
-                playerRigidbody.MovePosition(playerRigidbody.position + movement * speed * Time.deltaTime);
-            }
+            //if (healthManager.currentHealth > 0)
+            //{
+            //    playerRigidbody.MovePosition(playerRigidbody.position + movement * speed * Time.deltaTime);
+            //}
 
             //jump
-            isGrounded = Physics.Raycast(transform.position, -transform.up, DistanceToTheGround + 0.1f);
+            //isGrounded = Physics.Raycast(transform.position, -transform.up, DistanceToTheGround + 0.1f);
             if (isGrounded)
             {
                 if (playerControls.pressedJump)
@@ -79,6 +79,25 @@ public class PlayerMovement : MonoBehaviour
 
             playerRigidbody.transform.Rotate(Vector3.up * lookX);
             firstPersonView.transform.Rotate(Vector3.right * lookY);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Level"))
+            isGrounded = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Level"))
+            isGrounded = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (healthManager.currentHealth > 0)
+        {
+            playerRigidbody.MovePosition(playerRigidbody.position + movement * speed * Time.deltaTime);
         }
     }
 }
